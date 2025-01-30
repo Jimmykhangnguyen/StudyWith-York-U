@@ -1,2 +1,2 @@
 # yorklicious
-A simple guide to cheap eats on and around YorkU Campus!
+A simple guide to study spaces on YorkU Keele Campus!

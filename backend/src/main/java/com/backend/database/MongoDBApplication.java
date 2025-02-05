@@ -1,13 +1,13 @@
-package com.backend.backend;
+package com.backend.database;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class BackendApplication {
+public class MongoDBApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BackendApplication.class, args);
+		SpringApplication.run(MongoDBApplication.class, args);
 	}
 
 }

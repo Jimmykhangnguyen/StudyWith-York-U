@@ -1,8 +1,16 @@
 LOG
 
-February 3, 9:30 - 10:40, 50 minutes,  2025
+February 3, 9:30 - 10:40, 50 minutes, 2025
 
-- We allocated a user story to each member. 
-- We decided on the technology stack: Frontend: Angular, Backend: Java Spring Boot, Database: MongoDB. 
-- Made a list of all the study spaces in York-U we plan to include in It1. 
-- Discussed more details about each user story and how they interconnect with each other. 
+- We allocated a user story to each member.
+- We decided on the technology stack: Frontend: Angular, Backend: Java Spring Boot, Database: MongoDB.
+- Made a list of all the study spaces in York-U we plan to include in It1.
+- Discussed more details about each user story and how they interconnect with each other.
+
+February 3, X:XX - X:XX, XX minutes, 2025
+
+- Configured codebase boilerplates for both front and backend.
+
+Feburary 5, X:XX - X:XX, XX minutes, 2025
+
+- Set up database for future usage.

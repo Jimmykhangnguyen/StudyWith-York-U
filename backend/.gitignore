@@ -31,3 +31,11 @@ build/
 
 ### VS Code ###
 .vscode/
+###file system###
+.DS_Store
+
+###Eclipse files###
+.project
+
+###compiled java files###
+backend/src/bin/

@@ -7,18 +7,42 @@ public class StudyAreaRequest {
 	private boolean chargingOutlets; 
 	private int cleanlinessRating; //1-5 scale from student ratings
 	private boolean accessible; 
-	private String loudness; //"Quiet", "Moderate", "Loud" scale from student ratings
+	private int loudness; //1-5 scale from student ratings
+	private Location location;
 
+	//Location static nested class for longitude and latitude request
+	public static class Location {
+        private float longitude; 
+        private float latitude; 
+        
+        //constructors
+        public Location(float longitude, float latitude) {
+        	this.longitude = longitude;
+        	this.latitude = latitude;
+        }
+        
+        //Getters for location 
+        public float getLongitude() {
+        	return longitude;
+        }
+        
+        public float getLatitude() {
+        	return latitude; 
+        }
+      
+    }
+	
 	//Constructors 
 	public StudyAreaRequest() {
 		
 	}
-	public StudyAreaRequest(String name, boolean chargingOutlets, int cleanlinessRating, boolean accessible, String loudness) {
+	public StudyAreaRequest(String name, boolean chargingOutlets, int cleanlinessRating, boolean accessible, int loudness, Location location) {
 		this.name = name;
 		this.chargingOutlets = chargingOutlets;
 		this.cleanlinessRating = cleanlinessRating;
 		this.accessible = accessible;
 		this.loudness = loudness;
+		this.location = location;
 	}
 	
 	//getters
@@ -41,10 +65,12 @@ public class StudyAreaRequest {
 		return accessible;
 	}
 	
-
-	
-	public String getLoudness() {
+	public int getLoudness() {
 		return loudness;
+	}
+	
+	public Location getLocation() {
+		return location;
 	}
 
 	

@@ -35,7 +35,10 @@ public class StudyAreaController {
 	            studyAreaRequest.getChargingOutlets(),
 	            studyAreaRequest.getCleanlinessRating(),
 	            studyAreaRequest.getAccessible(),
-	            studyAreaRequest.getLoudness()
+	            studyAreaRequest.getLoudness(),
+	            new StudyArea.Location(studyAreaRequest.getLocation().getLongitude(), studyAreaRequest.getLocation().getLatitude())
+	            
+	            
 	        );
 		
 		return ResponseEntity.status(201).body(this.studyAreaRepository.save(studyArea));

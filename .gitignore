@@ -1,0 +1,6 @@
+###file systems###
+.DS_Store
+.project
+
+###complied java files###
+backend/src/bin/

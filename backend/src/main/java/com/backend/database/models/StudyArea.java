@@ -61,6 +61,7 @@ public class StudyArea {
 		this.location = location;
 		this.openingTime = openingTime;
 		this.closingTime = closingTime; 
+		this.business = this.getBusiness(); 
 	}
 	
 	//getters and setters
@@ -156,6 +157,14 @@ public class StudyArea {
 	}
 	return this.business; 
 	
+}
+
+public int getOpening(){
+	return this.openingTime;
+}
+
+public int getClosing(){
+	return this.closingTime; 
 }
 	
 }

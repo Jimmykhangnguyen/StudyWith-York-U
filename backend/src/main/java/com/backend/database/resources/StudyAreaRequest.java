@@ -9,6 +9,9 @@ public class StudyAreaRequest {
 	private boolean accessible; 
 	private int loudness; //1-5 scale from student ratings
 	private Location location;
+	private int openingTime;
+	private int closingTime; 
+	private int business; 
 
 	//Location static nested class for longitude and latitude request
 	public static class Location {
@@ -36,13 +39,16 @@ public class StudyAreaRequest {
 	public StudyAreaRequest() {
 		
 	}
-	public StudyAreaRequest(String name, boolean chargingOutlets, int cleanlinessRating, boolean accessible, int loudness, Location location) {
+	public StudyAreaRequest(String name, boolean chargingOutlets, int cleanlinessRating, boolean accessible, int loudness, Location location, int openingTime, int closingTime, int business) {
 		this.name = name;
 		this.chargingOutlets = chargingOutlets;
 		this.cleanlinessRating = cleanlinessRating;
 		this.accessible = accessible;
 		this.loudness = loudness;
 		this.location = location;
+		this.openingTime = openingTime;
+		this.closingTime = closingTime; 
+		this.business = business; 
 	}
 	
 	//getters
@@ -73,7 +79,17 @@ public class StudyAreaRequest {
 		return location;
 	}
 
+	public int getOpening(){
+		return this.openingTime;
+	}
 	
+	public int getClosing(){
+		return this.closingTime; 
+	}
+
+	public int getBusiness(){
+		return this.business; 
+	}
 
 	
 	

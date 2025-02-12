@@ -36,6 +36,8 @@ public class StudyAreaController {
 	            studyAreaRequest.getCleanlinessRating(),
 	            studyAreaRequest.getAccessible(),
 	            studyAreaRequest.getLoudness(),
+				studyAreaRequest.getOpening(),
+				studyAreaRequest.getClosing(),
 	            new StudyArea.Location(studyAreaRequest.getLocation().getLongitude(), studyAreaRequest.getLocation().getLatitude())
 	            
 	            

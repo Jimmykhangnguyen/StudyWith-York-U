@@ -128,13 +128,13 @@ public class StudyArea {
 	if (this.loudness <= 3){
 		if (hour < this.openingTime){
 			this.business = 0; 
-		} else if (hour <= 10){ // Early morning, before 10 AM
+		} else if (hour <= 10 && hour < this.closingTime){ // Early morning, before 10 AM
 			this.business = 1; 
-		} else if (hour <= 13){ //Lunchtime, between 11 AM and 1 PM
+		} else if (hour <= 13 && hour < this.closingTime){ //Lunchtime, between 11 AM and 1 PM
 			this.business = 3;
-		} else if (hour <= 18){ // Afternoon, between 2 and 6 PM
+		} else if (hour <= 18 && hour < this.closingTime){ // Afternoon, between 2 and 6 PM
 			this.business = 5; 
-		} else if (hour <= this.closingTime){ // Evening, between 7PM and close
+		} else if (hour <= 21 && hour < this.closingTime){ // Evening, between 7PM and close
 			this.business = 3; 
 		} else{
 			this.business = 0; 
@@ -142,13 +142,13 @@ public class StudyArea {
 	} else {
 		if (hour < this.openingTime){
 			this.business = 0; 
-		} else if (hour <= 10){ //Early morning, before 10 AM
+		} else if (hour <= 10 && hour < this.closingTime){ //Early morning, before 10 AM
 			this.business = 2; 
-		} else if (hour <= 13){ //Lunchtime, between 11 AM and 1 PM
+		} else if (hour <= 13 && hour < this.closingTime){ //Lunchtime, between 11 AM and 1 PM
 			this.business = 5;
-		} else if (hour <= 18){ //Afternoon, between 2 and 6 PM
+		} else if (hour <= 18 && hour < this.closingTime){ //Afternoon, between 2 and 6 PM
 			this.business = 4; 
-		} else if (hour <= this.closingTime){ //Evening, between 7 PM and closing time
+		} else if (hour <= 21 && hour < this.closingTime){ //Evening, between 7 PM and closing time
 			this.business = 2; 
 		} else{
 			this.business = 0; 

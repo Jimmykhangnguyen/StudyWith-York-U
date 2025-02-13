@@ -166,5 +166,11 @@ public int getOpening(){
 public int getClosing(){
 	return this.closingTime; 
 }
+public void setOpening(int opening){
+	this.openingTime = opening; 
+}
+public void setClosing(int closing){
+	this.closingTime = closing; 
+}
 	
 }

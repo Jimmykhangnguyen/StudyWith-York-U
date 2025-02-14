@@ -1,0 +1,8 @@
+/* Ensure the app-root and its children take up the full screen */
+:host {
+    display: block;
+    height: 100vh; /* Full viewport height */
+    width: 100vw; /* Full viewport width */
+    margin: 0;
+    padding: 0;
+}

@@ -1,5 +1,7 @@
 package com.backend.database.resources;
 
+import com.backend.database.resources.StudyAreaRequest.Location;
+
 public class StudyAreaRequest {
 //this class is used to prevent exposing and to validate StudyArea class
 	private String id;
@@ -12,6 +14,8 @@ public class StudyAreaRequest {
 	private int openingTime;
 	private int closingTime; 
 	private int business; 
+	private Integer userRatings;
+	
 
 	//Location static nested class for longitude and latitude request
 	public static class Location {
@@ -32,14 +36,13 @@ public class StudyAreaRequest {
         public float getLatitude() {
         	return latitude; 
         }
-      
     }
 	
 	//Constructors 
 	public StudyAreaRequest() {
 		
 	}
-	public StudyAreaRequest(String name, boolean chargingOutlets, int cleanlinessRating, boolean accessible, int loudness, Location location, int openingTime, int closingTime, int business) {
+	public StudyAreaRequest(String name, boolean chargingOutlets, int cleanlinessRating, boolean accessible, int loudness, Location location, int openingTime, int closingTime, int business, Integer userRatings) {
 		this.name = name;
 		this.chargingOutlets = chargingOutlets;
 		this.cleanlinessRating = cleanlinessRating;
@@ -49,6 +52,8 @@ public class StudyAreaRequest {
 		this.openingTime = openingTime;
 		this.closingTime = closingTime; 
 		this.business = business; 
+        this.userRatings = userRatings;
+
 	}
 	
 	//getters
@@ -90,7 +95,10 @@ public class StudyAreaRequest {
 	public int getBusiness(){
 		return this.business; 
 	}
-
+	
+	public Integer getUserRating(){
+        return this.userRatings;
+    }
 	
 	
 }

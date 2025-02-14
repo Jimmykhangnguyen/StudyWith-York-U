@@ -18,6 +18,8 @@ public class StudyArea {
 	private int openingTime; 
 	private int closingTime; 
 	private Location location; //will store the longitude and latitude of each study area
+	private int totalRatingSum;  // Sum of all ratings given
+    private int totalRatingCount; // Number of ratings given
 
 	//Nested static class for location, to access the location  longitude and latitude to avoid creating an instance of location class
 	public static class Location {
@@ -158,6 +160,21 @@ public class StudyArea {
 	return this.business; 
 	
 }
+	
+	public void addUserRating(int rating) {
+		if(rating>=1 && rating<=5) {
+			totalRatingSum += rating;
+	        totalRatingCount++;
+		}
+	}
+	
+	public double getAverageUserRating() {
+		if(totalRatingCount==0) {
+			return 0.0;
+		}
+		return (double) totalRatingSum/totalRatingCount ;	//calculate avg of ratings as new ones are added by the users 
+
+	}
 
 public int getOpening(){
 	return this.openingTime;

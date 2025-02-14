@@ -1,0 +1,25 @@
+
+.study-area {
+    width: 19.5%;
+    float: right;
+    border-right: 2px solid #ffffff;
+    color: #ffffff;
+    font-size: 20px;
+    background-color: #d81f1f;
+  }
+  
+  .display-studyArea-amenities {
+    width: 40%;
+    float: right;
+    padding: 30px;
+    border: 1px solid #ffffff;
+    background-color: #ffffff;
+  }
+  
+  li {
+    cursor: pointer;
+    margin: 95px 0;
+  }
+  
+  
+  

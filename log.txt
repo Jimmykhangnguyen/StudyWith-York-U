@@ -14,3 +14,36 @@ February 3, X:XX - X:XX, XX minutes, 2025
 Feburary 5, X:XX - X:XX, XX minutes, 2025
 
 - Set up database for future usage.
+
+February 10, 9:30 - 10:40, 50 minutes, 2025
+
+- Began learning framework and began coding the project
+- Completed front end and back end of map
+
+February 11, X:XX - X:XX, XX minutes, 2025
+
+- Began working on StudyAreas class
+- Added amenities, longitude and latitude (location).
+
+February 12, X:XX - X:XX, XX minutes, 2025
+
+- Continued work on StudyAreas class
+- Added business ratings, opening and closing time. 
+- Began adding directions to the map (front end and back end)
+
+February 13, X:XX - X:XX, XX minutes, 2025
+
+- Finished adding directions to the map
+- Began working on the rating system back end
+- Added the front end for the amenities and the business ratings
+
+February 14, 11:59 pm, 2025
+
+- ITR1 is due 
+- Committed final updates for ITR1 to GitHub and tagged the files
+
+February 24, 9:30 - 10:40, 50 minutes, 2025
+
+- First meeting since Reading Week
+- Discussed the beginning of ITR2, rubric for Deliverable 1
+- Tied up some remaining loose ends from ITR1

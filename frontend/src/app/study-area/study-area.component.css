@@ -10,8 +10,8 @@
   
   .display-studyArea-amenities {
     width: 40%;
-    float: right;
-    padding: 30px;
+    position: absolute;
+    padding-left: 40%;
     border: 1px solid #ffffff;
     background-color: #ffffff;
   }

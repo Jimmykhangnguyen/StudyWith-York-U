@@ -1,5 +1,6 @@
 .study-area {
   position: absolute;
+  z-index: 2;
   width: 19.5%;
   right: 0;
   background-color: #d81f1f;
@@ -47,6 +48,7 @@ ul {
 
 .display-studyArea-amenities {
   width: 20%;
+  z-index: 1;
   position: absolute;
   left: 59.5%;
   padding-left: 10px;
@@ -54,6 +56,10 @@ ul {
   border: 1px solid #ffffff;
   background-color: #ffffff;
   animation: slideIn 0.5s ease-out;
+}
+
+.display-studyArea-amenities.slide-out {
+  animation: slideOut 0.5s ease-in;
 }
 
 @keyframes slideIn {
@@ -64,5 +70,16 @@ ul {
   to {
     transform: translateX(0);
     opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
   }
 }

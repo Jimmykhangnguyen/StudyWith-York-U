@@ -1,20 +1,35 @@
 <div class="study-area">
-  <h2>YorkU</h2>
-    <h2>Study Areas</h2>
-    <ul>
-      <li *ngFor="let area of studyAreas" (click)="onSelectStudyArea(area)">
-        {{ area.name }}
-      </li>
-    </ul>
-  </div>
-  
-  <div *ngIf="selectedStudyArea" class="display-studyArea-amenities">
-    <h3>{{ selectedStudyArea.name }}</h3>
-    <p><strong>Charging Outlets:</strong> {{ selectedStudyArea.chargingOutlets ? 'Yes' : 'No' }}</p>
-    <p><strong>Cleanliness Rating:</strong> {{ selectedStudyArea.cleanlinessRating }}</p>
-    <p><strong>Accessible:</strong> {{ selectedStudyArea.accessible ? 'Yes' : 'No' }}</p>
-    <p><strong>Loudness:</strong> {{ selectedStudyArea.loudness }}</p>
-    <p><strong>Business Rating:</strong> {{ selectedStudyArea.business }}</p>
-    <p><strong>Opening-Closing Hours:</strong> {{ selectedStudyArea.opening }}:00 to {{ selectedStudyArea.closing }}:00</p>
-  </div>
-  
+  <form>
+    <input
+      type="text"
+      placeholder="Search for study areas..."
+      id="searchBar"
+      name="searchTerm"
+      [(ngModel)]="searchTerm"
+      (input)="filterStudyAreas()"
+    />
+  </form>
+  <ul>
+    <button
+      class="studyPlacesButton"
+      *ngFor="let area of filteredStudyAreas"
+      (click)="onSelectStudyArea(area)"
+    >
+      {{ area.name }}
+    </button>
+  </ul>
+</div>
+
+<div
+  *ngIf="selectedStudyArea"
+  class="display-studyArea-amenities"
+  [class.slide-out]="isSlidingOut"
+>
+  <h3>{{ selectedStudyArea.name }}</h3>
+  <p><strong>Charging Outlets:</strong> {{ selectedStudyArea.chargingOutlets ? 'Yes' : 'No' }}</p>
+  <p><strong>Cleanliness Rating:</strong> {{ selectedStudyArea.cleanlinessRating }}</p>
+  <p><strong>Accessible:</strong> {{ selectedStudyArea.accessible ? 'Yes' : 'No' }}</p>
+  <p><strong>Loudness:</strong> {{ selectedStudyArea.loudness }}</p>
+  <p><strong>Business Rating:</strong> {{ selectedStudyArea.business }}</p>
+  <p><strong>Opening-Closing Hours:</strong> {{ selectedStudyArea.opening }}:00 to {{ selectedStudyArea.closing }}:00</p>
+</div>

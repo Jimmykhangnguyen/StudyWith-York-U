@@ -46,9 +46,23 @@ ul {
 }
 
 .display-studyArea-amenities {
-  width: 40%;
+  width: 20%;
   position: absolute;
-  padding-left: 40%;
+  left: 59.5%;
+  padding-left: 10px;
+  border-radius: 5px;
   border: 1px solid #ffffff;
   background-color: #ffffff;
+  animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }

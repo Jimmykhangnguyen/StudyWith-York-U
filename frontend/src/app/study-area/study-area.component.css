@@ -1,25 +1,54 @@
-
 .study-area {
-    width: 19.5%;
-    float: right;
-    border-right: 2px solid #ffffff;
-    color: #ffffff;
-    font-size: 20px;
-    background-color: #d81f1f;
-  }
-  
-  .display-studyArea-amenities {
-    width: 40%;
-    position: absolute;
-    padding-left: 40%;
-    border: 1px solid #ffffff;
-    background-color: #ffffff;
-  }
-  
-  li {
-    cursor: pointer;
-    margin: 95px 0;
-  }
-  
-  
-  
+  position: absolute;
+  width: 19.5%;
+  right: 0;
+  background-color: #d81f1f;
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+}
+
+#searchBar {
+  height: 40px;
+  background-color: #ffffff;
+  color: #000000;
+  font-size: 20px;
+  border-radius: 10px;
+  margin-top: 5%;
+}
+
+ul {
+  display: inline-block;
+  padding-left: 0px;
+  width: 100%;
+  height: 100%;
+}
+
+.studyPlacesButton {
+  background: linear-gradient(to left, #ffffff 50%, gold 50%) right;
+  background-size: 200% 100%;
+  transition:all 1.5s ease;
+  color: #000000;
+  font-size: 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 5%;
+  width: 90%;
+  height: 60px;
+  text-align: center;
+}
+
+.studyPlacesButton:hover {
+  background-position: left
+}
+
+.display-studyArea-amenities {
+  width: 40%;
+  position: absolute;
+  padding-left: 40%;
+  border: 1px solid #ffffff;
+  background-color: #ffffff;
+}

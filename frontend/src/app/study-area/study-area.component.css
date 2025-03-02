@@ -28,6 +28,11 @@ ul {
   height: 100%;
 }
 
+.filter{
+  margin-top: 25px;
+  margin-bottom: -25px;
+}
+
 .studyPlacesButton {
   background: linear-gradient(to left, #ffffff 50%, gold 50%) right;
   background-size: 200% 100%;

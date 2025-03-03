@@ -55,6 +55,15 @@ public class StudyArea {
 		
 	}
 	public StudyArea(String name, boolean chargingOutlets, int cleanlinessRating, boolean accessible, int loudness, Location location, int openingTime, int closingTime) {
+		//if cleanliness and loudness fall out of rating range throw an exception
+		if(cleanlinessRating < 1 || cleanlinessRating > 5) {
+			throw new IllegalArgumentException("Cleanliness rating must be between 1 and 5");
+		}
+		
+		if(loudness < 1 || loudness > 5) {
+			throw new IllegalArgumentException("loudness rating must be between 1 and 5");
+		}
+		
 		this.name = name;
 		this.chargingOutlets = chargingOutlets;
 		this.cleanlinessRating = cleanlinessRating;

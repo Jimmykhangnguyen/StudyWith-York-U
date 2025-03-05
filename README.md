@@ -3,10 +3,10 @@ A simple guide to study spaces on YorkU Keele Campus!
 
 By: Team 6
 
-Emma Accardi
-Kimberly Bonilla
-Jericho Marc Mendoza
-Ngoc Nguyen
+Emma Accardi,
+Kimberly Bonilla,
+Jericho Marc Mendoza,
+Ngoc Nguyen,
 Ashley Thong
 
 # Starting the Project

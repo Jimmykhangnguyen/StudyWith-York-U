@@ -15,7 +15,7 @@ Ashley Thong
 3. Run frontend through your terminal as an Angular project using the following commands: npm install, then ng serve --open
 
 # App Features
-1. Study Space Information: Get information about each study space on campus. Includes details such as charging outlet avaliblilty, loudness level, business level, opening/closing time and more!
+1. Study Space Information: Get information about each study space on campus. Includes details such as charging outlet availability, loudness level, business level, opening/closing time and more!
 2. Map of Campus with Directions: Find the nearest study space to you and find out how to walk there.
 3. Filter study areas based on your preferences: Get a list of which spaces have any feature you like.
 

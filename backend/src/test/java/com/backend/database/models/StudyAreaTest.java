@@ -1,6 +1,7 @@
 package com.backend.database.models;
 
 import static org.junit.jupiter.api.Assertions.*;
+import java.util.Calendar; 
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -68,4 +69,43 @@ class StudyAreaTest {
 		assertEquals(-79.50184694563765f, studyArea.getLocation().getLatitude(), "Latitude should be 56.78");
 	}
 
+	@Test
+	void testBusiness(){
+		//Tests if the business value is correct based on the time
+		Calendar cal = Calendar.getInstance(); 
+		int time = cal.get(Calendar.HOUR_OF_DAY);
+
+		assertEquals(cal.get(Calendar.HOUR_OF_DAY), time); 
+
+		if (studyArea.getLoudness() <= 3){
+			if (time < studyArea.getOpening()){
+				assertEquals(0, studyArea.getBusiness());
+			} else if (time <= 10 && time < studyArea.getClosing()){ // Early morning, before 10 AM
+				assertEquals(1, studyArea.getBusiness());
+			} else if (time <= 13 && time < studyArea.getClosing()){ //Lunchtime, between 11 AM and 1 PM
+				assertEquals(4, studyArea.getBusiness());
+			}  else if (time <= 18 && time < studyArea.getClosing()){ // Afternoon, between 2 and 6 PM
+				assertEquals(5, studyArea.getBusiness());
+			}else if (time <= 21 && time < studyArea.getClosing()){ // Evening, between 7PM and close
+				assertEquals(3, studyArea.getBusiness());
+			} else{
+				assertEquals(0, studyArea.getBusiness());
+			}
+		} else {
+			if (time < studyArea.getOpening()){
+				assertEquals(0, studyArea.getBusiness());
+			} else if (time <= 10 && time < studyArea.getClosing()){ // Early morning, before 10 AM
+				assertEquals(2, studyArea.getBusiness());
+			} else if (time <= 13 && time < studyArea.getClosing()){ //Lunchtime, between 11 AM and 1 PM
+				assertEquals(5, studyArea.getBusiness());
+			}  else if (time <= 18 && time < studyArea.getClosing()){ // Afternoon, between 2 and 6 PM
+				assertEquals(4, studyArea.getBusiness());
+			}else if (time <= 21 && time < studyArea.getClosing()){ // Evening, between 7PM and close
+				assertEquals(2, studyArea.getBusiness());
+			} else{
+				assertEquals(0, studyArea.getBusiness());
+			}
+	}
+
+}
 }

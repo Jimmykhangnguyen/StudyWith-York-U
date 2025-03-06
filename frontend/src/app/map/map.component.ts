@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { environment } from './../../environments/environment';
 import { StudyMapService } from '../study-map-service/study-map-service';
 import * as mapboxgl from 'mapbox-gl';
-import { start } from 'repl';
 
 @Component({
   selector: 'app-map',
@@ -14,88 +13,89 @@ import { start } from 'repl';
 })
 
 export class MapComponent implements OnInit {
+  map: any;
   showDirections = false;
-  
+  points = new Map<string, any>([
+    ['start', []],
+    ['end', []]
+  ]);
+  pointColours = new Map<string, string>([
+    ['start', '#3887be'],
+    ['end', '#f30']
+  ]);
+
   constructor(private studyMapService: StudyMapService) {}
 
   ngOnInit() {
-    const map = new mapboxgl.Map({
+    this.map = new mapboxgl.Map({
       accessToken: environment.accessToken,
       container: 'map',
       style: 'mapbox://styles/jimmykhang/cm701v76n007w01qu16uy4vvu',
       zoom: 9,
       maxBounds: [[-79.51440, 43.76300], [-79.49500, 43.78147]],
     });
-    
-    var startCoords: number[] = [];
-    var endCoords: number[] = [];
-
-    function configPointData(coords: number[]): GeoJSON.GeoJSON | null {
-      if (coords.length == 0) {
-        return null;
-      }
-      return {
-        type: 'FeatureCollection',
-        features: [
-          {
-            type: 'Feature',
-            properties: {},
-            geometry: {
-              type: 'Point',
-              coordinates: coords
-            }
-          }
-        ]
-      };
-    }
-
-    function updatePoint(pointId: string, pointData: GeoJSON.GeoJSON | null, colour: string) {
-      if (pointData == null) {
-        map.removeLayer(pointId);
-        map.removeSource(pointId);
-        return;
-      }
-      if (map.getLayer(pointId)) {
-        (map.getSource(pointId) as mapboxgl.GeoJSONSource).setData(pointData);
-      } else {
-        map.addLayer({
-          id: pointId,
-          type: 'circle',
-          source: {
-            type: 'geojson',
-            data: pointData
-          },
-          paint: {
-            'circle-radius': 10,
-            'circle-color': colour
-          }
-        });
-      }
-    }
 
     this.studyMapService.currentCoords.subscribe(studyAreaCoords => {
-      endCoords = studyAreaCoords;
-      updatePoint('end', configPointData(endCoords), '#f30');
-      this.updateRoute(map, startCoords, endCoords);
+      this.points.set('end', studyAreaCoords);
+      this.updatePoint('end');
+      this.updateRoute();
     });
 
-    map.on('click', (event) => {
-      const distFromStart = Math.hypot((startCoords[0] - event.lngLat.lng), (startCoords[1] - event.lngLat.lat));
+    this.map.on('click', (event: any) => {
+      const distFromStart = Math.hypot((this.points.get('start')[0] - event.lngLat.lng), (this.points.get('start')[1] - event.lngLat.lat));
       if (distFromStart < 0.0001) {
-        startCoords = [];
+        this.points.set('start', []);
       } else {
-        startCoords = [event.lngLat.lng, event.lngLat.lat];
+        this.points.set('start', [event.lngLat.lng, event.lngLat.lat]);
       }
-      updatePoint('start', configPointData(startCoords), '#3887be');
-      this.updateRoute(map, startCoords, endCoords);
+      this.updatePoint('start');
+      this.updateRoute();
     });
   }
 
-  async updateRoute(map: any, startCoords: number[], endCoords: number[]) {
+  updatePoint(pointId: string) {
+    const pointCoords = this.points.get(pointId);
+    if (pointCoords.length == 0) {
+      this.map.removeLayer(pointId);
+      this.map.removeSource(pointId);
+      return;
+    }
+    const pointData: GeoJSON.GeoJSON = {
+      type: 'FeatureCollection',
+      features: [
+        {
+          type: 'Feature',
+          properties: {},
+          geometry: {
+            type: 'Point',
+            coordinates: pointCoords
+          }
+        }
+      ]
+    };
+    if (this.map.getLayer(pointId)) {
+      (this.map.getSource(pointId) as mapboxgl.GeoJSONSource).setData(pointData);
+    } else {
+      this.map.addLayer({
+        id: pointId,
+        type: 'circle',
+        source: {
+          type: 'geojson',
+          data: pointData
+        },
+        paint: {
+          'circle-radius': 10,
+          'circle-color': this.pointColours.get(pointId)
+        }
+      });
+    }
+  }
+
+  async updateRoute() {
     // Guard case for invalid routes
-    if (!map.getLayer('end') || !map.getLayer('start')) {
-      map.removeLayer('route');
-      map.removeSource('route');
+    if (!this.map.getLayer('end') || !this.map.getLayer('start')) {
+      this.map.removeLayer('route');
+      this.map.removeSource('route');
       this.showDirections = false;
       return;
     }
@@ -103,14 +103,14 @@ export class MapComponent implements OnInit {
     // Format route data
     const query = await fetch(
       `https://api.mapbox.com/directions/v5/mapbox/walking/
-      ${startCoords[0]},${startCoords[1]};${endCoords[0]},${endCoords[1]}
+      ${this.points.get('start')[0]},${this.points.get('start')[1]};${this.points.get('end')[0]},${this.points.get('end')[1]}
       ?steps=true&geometries=geojson&access_token=${environment.accessToken}`,
       { method: 'GET' }
     );
     const json = await query.json();
     const data = json.routes[0];
     const routeCoords = data.geometry.coordinates;
-    const route: GeoJSON.GeoJSON = {
+    const routeData: GeoJSON.GeoJSON = {
       type: 'Feature',
       properties: {},
       geometry: {
@@ -119,16 +119,16 @@ export class MapComponent implements OnInit {
       }
     };
     // Draw route lines
-    if (map.getSource('route')) {
-      (map.getSource('route') as mapboxgl.GeoJSONSource).setData(route);
+    if (this.map.getSource('route')) {
+      (this.map.getSource('route') as mapboxgl.GeoJSONSource).setData(routeData);
     }
     else {
-      map.addLayer({
+      this.map.addLayer({
         id: 'route',
         type: 'line',
         source: {
           type: 'geojson',
-          data: route
+          data: routeData
         },
         layout: {
           'line-join': 'round',

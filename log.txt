@@ -51,6 +51,13 @@ February 24, 9:30 - 10:40, 50 minutes, 2025
 March 3, 9:30 - 10:40, 50 minutes, 2025
 
 - Discussed plans for ITR2
+- Began working on an improved user interface
+- Added some J-Unit Tests for ITR1
+
+March 4,  X:XX - X:XX, XX minutes, 2025
+
+- Updated the ReadMe to include how to run the program and the app features from ITR1
+- Added more J-Unit tests
 - Began working on an improved user interface for filtering and map displays
 - added basic GUI for filtering front end
 - Added some J-Unit Tests for ITR1

@@ -15,7 +15,7 @@ interface filterCaterogy {
 @Component({
   selector: 'app-study-area',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatFormFieldModule, MatSelectModule, MatInputModule], // Add FormsModule here
+  imports: [CommonModule, FormsModule, MatFormFieldModule, MatSelectModule, MatInputModule],
   templateUrl: './study-area.component.html',
   styleUrls: ['./study-area.component.css']
 })

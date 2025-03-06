@@ -1,16 +1,21 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { environment } from './../../environments/environment';
 import { StudyMapService } from '../study-map-service/study-map-service';
 import * as mapboxgl from 'mapbox-gl';
+import { start } from 'repl';
 
 @Component({
   selector: 'app-map',
   standalone: true,
+  imports: [CommonModule],
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css'],
 })
 
 export class MapComponent implements OnInit {
+  showDirections = false;
+  
   constructor(private studyMapService: StudyMapService) {}
 
   ngOnInit() {
@@ -68,78 +73,85 @@ export class MapComponent implements OnInit {
       }
     }
 
-    async function updateRoute() {
-      // Guard case for invalid routes
-      if (!map.getLayer('end') || !map.getLayer('start')) {
-        map.removeLayer('route');
-        map.removeSource('route');
-        return;
-      }
-      // Format route data
-      const query = await fetch(
-        `https://api.mapbox.com/directions/v5/mapbox/walking/
-        ${startCoords[0]},${startCoords[1]};${endCoords[0]},${endCoords[1]}
-        ?steps=true&geometries=geojson&access_token=${environment.accessToken}`,
-        { method: 'GET' }
-      );
-      const json = await query.json();
-      const data = json.routes[0];
-      const routeCoords = data.geometry.coordinates;
-      const route: GeoJSON.GeoJSON = {
-        type: 'Feature',
-        properties: {},
-        geometry: {
-          type: 'LineString',
-          coordinates: routeCoords
-        }
-      };
-      // Draw route lines
-      if (map.getSource('route')) {
-        (map.getSource('route') as mapboxgl.GeoJSONSource).setData(route);
-      }
-      else {
-        map.addLayer({
-          id: 'route',
-          type: 'line',
-          source: {
-            type: 'geojson',
-            data: route
-          },
-          layout: {
-            'line-join': 'round',
-            'line-cap': 'round'
-          },
-          paint: {
-            'line-color': '#3887be',
-            'line-width': 5,
-            'line-opacity': 0.75
-          }
-        });
-      }
-      // Write route instructions
-      const instructions = document.getElementById('instructions');
-      const steps = data.legs[0].steps;
-      let tripInstructions = '';
-      for (const step of steps) {
-        tripInstructions += `<li>${step.maneuver.instruction}</li>`;
-      }
-      if (instructions != null) {
-        instructions.innerHTML = `<p><strong>Walking Time 🚶: ${Math.floor(
-          data.duration / 60
-        )} min</strong></p><ol>${tripInstructions}</ol>`;
-      }
-    }
-
     this.studyMapService.currentCoords.subscribe(studyAreaCoords => {
       endCoords = studyAreaCoords;
       updatePoint('end', configPointData(endCoords), '#f30');
-      updateRoute();
+      this.updateRoute(map, startCoords, endCoords);
     });
 
     map.on('click', (event) => {
-      startCoords = [event.lngLat.lng, event.lngLat.lat];
+      const distFromStart = Math.hypot((startCoords[0] - event.lngLat.lng), (startCoords[1] - event.lngLat.lat));
+      if (distFromStart < 0.0001) {
+        startCoords = [];
+      } else {
+        startCoords = [event.lngLat.lng, event.lngLat.lat];
+      }
       updatePoint('start', configPointData(startCoords), '#3887be');
-      updateRoute();
+      this.updateRoute(map, startCoords, endCoords);
     });
+  }
+
+  async updateRoute(map: any, startCoords: number[], endCoords: number[]) {
+    // Guard case for invalid routes
+    if (!map.getLayer('end') || !map.getLayer('start')) {
+      map.removeLayer('route');
+      map.removeSource('route');
+      this.showDirections = false;
+      return;
+    }
+    this.showDirections = true;
+    // Format route data
+    const query = await fetch(
+      `https://api.mapbox.com/directions/v5/mapbox/walking/
+      ${startCoords[0]},${startCoords[1]};${endCoords[0]},${endCoords[1]}
+      ?steps=true&geometries=geojson&access_token=${environment.accessToken}`,
+      { method: 'GET' }
+    );
+    const json = await query.json();
+    const data = json.routes[0];
+    const routeCoords = data.geometry.coordinates;
+    const route: GeoJSON.GeoJSON = {
+      type: 'Feature',
+      properties: {},
+      geometry: {
+        type: 'LineString',
+        coordinates: routeCoords
+      }
+    };
+    // Draw route lines
+    if (map.getSource('route')) {
+      (map.getSource('route') as mapboxgl.GeoJSONSource).setData(route);
+    }
+    else {
+      map.addLayer({
+        id: 'route',
+        type: 'line',
+        source: {
+          type: 'geojson',
+          data: route
+        },
+        layout: {
+          'line-join': 'round',
+          'line-cap': 'round'
+        },
+        paint: {
+          'line-color': '#3887be',
+          'line-width': 5,
+          'line-opacity': 0.75
+        }
+      });
+    }
+    // Write route directions
+    const instructions = document.getElementById('instructions');
+    const steps = data.legs[0].steps;
+    let tripInstructions = '';
+    for (const step of steps) {
+      tripInstructions += `<li>${step.maneuver.instruction}</li>`;
+    }
+    if (instructions != null) {
+      instructions.innerHTML = `<p><strong>Walking Time 🚶: ${Math.floor(
+        data.duration / 60
+      )} min</strong></p><ol>${tripInstructions}</ol>`;
+    }
   }
 }

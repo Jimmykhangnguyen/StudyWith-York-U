@@ -1,155 +1,157 @@
-import { environment } from './../../environments/environment';
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { environment } from './../../environments/environment';
+import { StudyMapService } from '../study-map-service/study-map-service';
 import * as mapboxgl from 'mapbox-gl';
 
 @Component({
   selector: 'app-map',
   standalone: true,
+  imports: [CommonModule],
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css'],
 })
 
 export class MapComponent implements OnInit {
+  map: any;
+  showDirections = false;
+  points = new Map<string, any>([
+    ['start', []],
+    ['end', []]
+  ]);
+  pointColours = new Map<string, string>([
+    ['start', '#3887be'],
+    ['end', '#f30']
+  ]);
+
+  constructor(private studyMapService: StudyMapService) {}
+
   ngOnInit() {
-    const map = new mapboxgl.Map({
-       accessToken: environment.accessToken,
-       container: 'map',
-       style: 'mapbox://styles/jimmykhang/cm701v76n007w01qu16uy4vvu',
-       zoom: 9,
-       maxBounds: [[-79.51440, 43.76300], [-79.49500, 43.78147]],
-     });
-    
-     const start = [-79.500334, 43.774114]; // yorku station
+    this.map = new mapboxgl.Map({
+      accessToken: environment.accessToken,
+      container: 'map',
+      style: 'mapbox://styles/jimmykhang/cm701v76n007w01qu16uy4vvu',
+      zoom: 9,
+      maxBounds: [[-79.51440, 43.76300], [-79.49500, 43.78147]],
+    });
 
-     // function to request direction to a location
-    async function getRoute(end: number[]) {
-      const query = await fetch(
-        `https://api.mapbox.com/directions/v5/mapbox/walking/${start[0]},${start[1]};${end[0]},${end[1]}?steps=true&geometries=geojson&access_token=${environment.accessToken}`,
-        { method: 'GET' }
-      );
-      const json = await query.json();
-      const data = json.routes[0];
-      const route = data.geometry.coordinates;
-      const geojson: GeoJSON.GeoJSON = {
-        type: 'Feature',
-        properties: {},
-        geometry: {
-          type: 'LineString',
-          coordinates: route
-        }
-      };
-      // if route exists, reset it using setData
-      if (map.getSource('route')) {
-        (map.getSource('route') as mapboxgl.GeoJSONSource).setData(geojson);
-      }
-      else { // otherwise, make a new request
-        map.addLayer({
-          id: 'route',
-          type: 'line',
-          source: {
-            type: 'geojson',
-            data: geojson
-          },
-          layout: {
-            'line-join': 'round',
-            'line-cap': 'round'
-          },
-          paint: {
-            'line-color': '#3887be',
-            'line-width': 5,
-            'line-opacity': 0.75
-          }
-        });
-      }
-      
-      const instructions = document.getElementById('instructions');
-      const steps = data.legs[0].steps;
+    this.studyMapService.currentCoords.subscribe(studyAreaCoords => {
+      this.points.set('end', studyAreaCoords);
+      this.updatePoint('end');
+      this.updateRoute();
+    });
 
-      let tripInstructions = '';
-      for (const step of steps) {
-        tripInstructions += `<li>${step.maneuver.instruction}</li>`;
+    this.map.on('click', (event: any) => {
+      const distFromStart = Math.hypot((this.points.get('start')[0] - event.lngLat.lng), (this.points.get('start')[1] - event.lngLat.lat));
+      if (distFromStart < 0.0001) {
+        this.points.set('start', []);
+      } else {
+        this.points.set('start', [event.lngLat.lng, event.lngLat.lat]);
       }
-      if (instructions != null) {
-        instructions.innerHTML = `<p><strong>Walking Time 🚶: ${Math.floor(
-          data.duration / 60
-        )} min </strong></p><ol>${tripInstructions}</ol>`;
-      }
+      this.updatePoint('start');
+      this.updateRoute();
+    });
+  }
+
+  updatePoint(pointId: string) {
+    const pointCoords = this.points.get(pointId);
+    if (pointCoords.length == 0) {
+      this.map.removeLayer(pointId);
+      this.map.removeSource(pointId);
+      return;
     }
-
-    map.on('load', () => {
-      getRoute(start); // initial directions to start
-
-      // add starting point to the map
-      map.addLayer({
-        id: 'point',
+    const pointData: GeoJSON.GeoJSON = {
+      type: 'FeatureCollection',
+      features: [
+        {
+          type: 'Feature',
+          properties: {},
+          geometry: {
+            type: 'Point',
+            coordinates: pointCoords
+          }
+        }
+      ]
+    };
+    if (this.map.getLayer(pointId)) {
+      (this.map.getSource(pointId) as mapboxgl.GeoJSONSource).setData(pointData);
+    } else {
+      this.map.addLayer({
+        id: pointId,
         type: 'circle',
         source: {
           type: 'geojson',
-          data: {
-            type: 'FeatureCollection',
-            features: [
-              {
-                type: 'Feature',
-                properties: {},
-                geometry: {
-                  type: 'Point',
-                  coordinates: start
-                }
-              }
-            ]
-          }
+          data: pointData
         },
         paint: {
           'circle-radius': 10,
-          'circle-color': '#3887be'
+          'circle-color': this.pointColours.get(pointId)
         }
       });
-      
-      map.on('click', (event) => {
-        const coords = [event.lngLat.lng, event.lngLat.lat];
-        const end: GeoJSON.GeoJSON = {
-          type: 'FeatureCollection',
-          features: [
-            {
-              type: 'Feature',
-              properties: {},
-              geometry: {
-                type: 'Point',
-                coordinates: coords
-              }
-            }
-          ]
-        };
-        if (map.getLayer('end')) {
-          (map.getSource('end') as mapboxgl.GeoJSONSource).setData(end);
-        } else {
-          map.addLayer({
-            id: 'end',
-            type: 'circle',
-            source: {
-              type: 'geojson',
-              data: {
-                type: 'FeatureCollection',
-                features: [
-                  {
-                    type: 'Feature',
-                    properties: {},
-                    geometry: {
-                      type: 'Point',
-                      coordinates: coords
-                    }
-                  }
-                ]
-              }
-            },
-            paint: {
-              'circle-radius': 10,
-              'circle-color': '#f30'
-            }
-          });
+    }
+  }
+
+  async updateRoute() {
+    // Guard case for invalid routes
+    if (!this.map.getLayer('end') || !this.map.getLayer('start')) {
+      this.map.removeLayer('route');
+      this.map.removeSource('route');
+      this.showDirections = false;
+      return;
+    }
+    this.showDirections = true;
+    // Format route data
+    const query = await fetch(
+      `https://api.mapbox.com/directions/v5/mapbox/walking/
+      ${this.points.get('start')[0]},${this.points.get('start')[1]};${this.points.get('end')[0]},${this.points.get('end')[1]}
+      ?steps=true&geometries=geojson&access_token=${environment.accessToken}`,
+      { method: 'GET' }
+    );
+    const json = await query.json();
+    const data = json.routes[0];
+    const routeCoords = data.geometry.coordinates;
+    const routeData: GeoJSON.GeoJSON = {
+      type: 'Feature',
+      properties: {},
+      geometry: {
+        type: 'LineString',
+        coordinates: routeCoords
+      }
+    };
+    // Draw route lines
+    if (this.map.getSource('route')) {
+      (this.map.getSource('route') as mapboxgl.GeoJSONSource).setData(routeData);
+    }
+    else {
+      this.map.addLayer({
+        id: 'route',
+        type: 'line',
+        source: {
+          type: 'geojson',
+          data: routeData
+        },
+        layout: {
+          'line-join': 'round',
+          'line-cap': 'round'
+        },
+        paint: {
+          'line-color': '#3887be',
+          'line-width': 5,
+          'line-opacity': 0.75
         }
-        getRoute(coords);
       });
-    });
+    }
+    // Write route directions
+    const instructions = document.getElementById('instructions');
+    const steps = data.legs[0].steps;
+    let tripInstructions = '';
+    for (const step of steps) {
+      tripInstructions += `<li>${step.maneuver.instruction}</li>`;
+    }
+    if (instructions != null) {
+      instructions.innerHTML = `<p><strong>Walking Time 🚶: ${Math.floor(
+        data.duration / 60
+      )} min</strong></p><ol>${tripInstructions}</ol>`;
+    }
   }
 }

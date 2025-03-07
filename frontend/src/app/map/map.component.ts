@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { environment } from './../../environments/environment';
 import { StudyMapService } from '../study-map-service/study-map-service';
 import * as mapboxgl from 'mapbox-gl';
+import 'mapbox-gl/dist/mapbox-gl.css';
 
 @Component({
   selector: 'app-map',
@@ -34,6 +35,7 @@ export class MapComponent implements OnInit {
       zoom: 9,
       maxBounds: [[-79.51440, 43.76300], [-79.49500, 43.78147]],
     });
+    let onStartPoint = false;
 
     this.studyMapService.currentCoords.subscribe(studyAreaCoords => {
       this.points.set('end', studyAreaCoords);
@@ -41,9 +43,18 @@ export class MapComponent implements OnInit {
       this.updateRoute();
     });
 
+    this.map.on('mousemove', 'start', (event: any) => {
+      this.map.getCanvas().style.cursor = 'pointer';
+      onStartPoint = true;
+    });
+
+    this.map.on('mouseleave', 'start', (event: any) => {
+      this.map.getCanvas().style.cursor = '';
+      onStartPoint = false;
+    });
+
     this.map.on('click', (event: any) => {
-      const distFromStart = Math.hypot((this.points.get('start')[0] - event.lngLat.lng), (this.points.get('start')[1] - event.lngLat.lat));
-      if (distFromStart < 0.0001) {
+      if (onStartPoint) {
         this.points.set('start', []);
       } else {
         this.points.set('start', [event.lngLat.lng, event.lngLat.lat]);
@@ -56,8 +67,10 @@ export class MapComponent implements OnInit {
   updatePoint(pointId: string) {
     const pointCoords = this.points.get(pointId);
     if (pointCoords.length == 0) {
-      this.map.removeLayer(pointId);
-      this.map.removeSource(pointId);
+      if (this.map.getLayer(pointId)) {
+        this.map.removeLayer(pointId);
+        this.map.removeSource(pointId);
+      }
       return;
     }
     const pointData: GeoJSON.GeoJSON = {
@@ -94,9 +107,11 @@ export class MapComponent implements OnInit {
   async updateRoute() {
     // Guard case for invalid routes
     if (!this.map.getLayer('end') || !this.map.getLayer('start')) {
-      this.map.removeLayer('route');
-      this.map.removeSource('route');
-      this.showDirections = false;
+      if (this.map.getLayer('route')) {
+        this.map.removeLayer('route');
+        this.map.removeSource('route');
+        this.showDirections = false;
+      }
       return;
     }
     this.showDirections = true;

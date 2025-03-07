@@ -19,6 +19,9 @@ Ashley Thong
 2. Map of Campus with Directions: Find the nearest study space to you and find out how to walk there.
 3. Filter study areas based on your preferences: Get a list of which spaces have any feature you like.
 
+# Architecture
+
+![layered_architecture](https://github.com/user-attachments/assets/1789f06d-3d31-4361-93e6-f4966e8227c4)
 
 
 

@@ -27,7 +27,7 @@ February 11, X:XX - X:XX, XX minutes, 2025
 
 February 12, X:XX - 23:59, XX minutes, 2025
 
-- Continued work on StudyAreas class
+- Continued work on business logic for StudyAreas backend
 - Added business ratings, opening and closing time. 
 - Began adding directions to the map (front end and back end)
 
@@ -54,13 +54,26 @@ March 3, 9:30 - 10:40, 50 minutes, 2025
 - Began working on an improved user interface
 - Added some J-Unit Tests for ITR1
 
-March 4, X:XX - X:XX, XX minutes, 2025
+March 4,  X:XX - X:XX, XX minutes, 2025
 
 - Updated the ReadMe to include how to run the program and the app features from ITR1
 - Added more J-Unit tests
+- Began working on an improved user interface for filtering and map displays
+- added basic GUI for filtering front end
+- Added some J-Unit Tests for ITR1
+
+March 4, 13:00 - 14:30, 90 minutes, 2025
+
+- Updated the ReadMe/Wiki to include how to run the program and the app features from ITR1
+- Added more J-Unit tests
+- Added J-Unit tests for study areas backend for its amenities, and busyness
 
 March 5, 21:30 - 23:30, 120 minutes, 2025
 
 - Added functional directions based on study areas
 - Improved directions UI/UX
 - Refactored and cleaned up map code
+
+March 6, 9:00 - 9:30, 30 minutes, 2025
+ -Added more locations to database
+ - Added Arcitecture to readme/wiki

@@ -9,7 +9,7 @@ import { StudyMapService } from '../study-map-service/study-map-service';
 
 interface filterCaterogy {
   name: string;
-  value: boolean;
+  value: boolean | number;
 }
 
 @Component({
@@ -31,13 +31,14 @@ export class StudyAreaComponent implements OnInit {
   selectedStudyArea: any = null;
   isSlidingOut: boolean = false;
   searchTerm: string = ''; // Property to hold the search term
+  selectedCategory: filterCaterogy = { name: '', value: false };
 
   categories: filterCaterogy[] = [
-    { name: 'Charging Outlets', value: false },
-    { name: 'Cleanliness Rating', value: false },
+    { name: 'Charging Outlets', value: true },
+    { name: 'Cleanliness Rating', value: 5 },
     { name: 'Accessible', value: false },
-    { name: 'Loudness', value: false },
-    { name: 'Business', value: false },
+    { name: 'Loudness', value: 3 },
+    { name: 'Business', value: 0 },
     { name: 'Opening', value: false }
   ];
 
@@ -74,4 +75,39 @@ export class StudyAreaComponent implements OnInit {
       area.name.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
   }
+
+  filterByCategory(category: filterCaterogy): void {
+    switch (category.name) {
+      case "Charging Outlets":
+        this.filteredStudyAreas = this.studyAreas.filter(area => area.chargingOutlets === true);
+        break;
+  
+      case "Cleanliness Rating":
+        this.filteredStudyAreas = this.studyAreas.filter(area => area.cleanlinessRating >= 3);
+        break;
+  
+      case "Accessible":
+        this.filteredStudyAreas = this.studyAreas.filter(area => area.accessible === true);
+        break;
+  
+      case "Loudness":
+        this.filteredStudyAreas = this.studyAreas.filter(area => area.loudness <= 3);
+        break;
+  
+      case "Business":
+        this.filteredStudyAreas = this.studyAreas.filter(area => area.business <= 3);
+        break;
+  
+      case "Opening":
+        this.filteredStudyAreas = this.studyAreas.filter(area => area.opening >= 7 && area.closing <= 20);
+        break;
+  
+      default:
+        console.warn("Unknown category:", category.name);
+        break;
+    }
+  }
+  
+  
+
 }

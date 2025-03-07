@@ -26,21 +26,22 @@
       *ngFor="let area of filteredStudyAreas"
       (click)="onSelectStudyArea(area)"
     >
-      {{ area.name }}
+      <div 
+        *ngIf="selectedStudyArea;else other_content"
+        
+      >
+        <h3>{{ selectedStudyArea.name }}</h3>
+        <p><strong>Charging Outlets:</strong> {{ selectedStudyArea.chargingOutlets ? 'Yes' : 'No' }}</p>
+        <p><strong>Cleanliness Rating:</strong> {{ selectedStudyArea.cleanlinessRating }}</p>
+        <p><strong>Accessible:</strong> {{ selectedStudyArea.accessible ? 'Yes' : 'No' }}</p>
+        <p><strong>Loudness:</strong> {{ selectedStudyArea.loudness }}</p>
+        <p><strong>Business Rating:</strong> {{ selectedStudyArea.business }}</p>
+        <p><strong>Opening-Closing Hours:</strong> {{ selectedStudyArea.opening }}:00 to {{ selectedStudyArea.closing }}:00</p>
+      </div>
+      <ng-template #other_content>
+        {{ area.name }}
+      </ng-template>
     </button>
   </ul>
 </div>
 
-<div
-  *ngIf="selectedStudyArea"
-  class="display-studyArea-amenities"
-  [class.slide-out]="isSlidingOut"
->
-  <h3>{{ selectedStudyArea.name }}</h3>
-  <p><strong>Charging Outlets:</strong> {{ selectedStudyArea.chargingOutlets ? 'Yes' : 'No' }}</p>
-  <p><strong>Cleanliness Rating:</strong> {{ selectedStudyArea.cleanlinessRating }}</p>
-  <p><strong>Accessible:</strong> {{ selectedStudyArea.accessible ? 'Yes' : 'No' }}</p>
-  <p><strong>Loudness:</strong> {{ selectedStudyArea.loudness }}</p>
-  <p><strong>Business Rating:</strong> {{ selectedStudyArea.business }}</p>
-  <p><strong>Opening-Closing Hours:</strong> {{ selectedStudyArea.opening }}:00 to {{ selectedStudyArea.closing }}:00</p>
-</div>

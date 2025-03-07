@@ -1,6 +1,7 @@
 package com.backend.database.resources;
 
 import com.backend.database.resources.StudyAreaRequest.Location;
+import java.util.ArrayList;
 
 public class StudyAreaRequest {
 //this class is used to prevent exposing and to validate StudyArea class
@@ -14,8 +15,8 @@ public class StudyAreaRequest {
 	private int openingTime;
 	private int closingTime; 
 	private int business; 
-	private Integer userRatings;
-	
+	private int userRatings;
+	private ArrayList<String>  ratings = new ArrayList<String>(); 	
 
 	//Location static nested class for longitude and latitude request
 	public static class Location {
@@ -42,7 +43,7 @@ public class StudyAreaRequest {
 	public StudyAreaRequest() {
 		
 	}
-	public StudyAreaRequest(String name, boolean chargingOutlets, int cleanlinessRating, boolean accessible, int loudness, Location location, int openingTime, int closingTime, int business, Integer userRatings) {
+	public StudyAreaRequest(String name, boolean chargingOutlets, int cleanlinessRating, boolean accessible, int loudness, Location location, int openingTime, int closingTime, int business, int userRatings, ArrayList<String> ratings) {
 		this.name = name;
 		this.chargingOutlets = chargingOutlets;
 		this.cleanlinessRating = cleanlinessRating;
@@ -53,6 +54,7 @@ public class StudyAreaRequest {
 		this.closingTime = closingTime; 
 		this.business = business; 
         this.userRatings = userRatings;
+		this.ratings = ratings; 
 
 	}
 	
@@ -96,9 +98,13 @@ public class StudyAreaRequest {
 		return this.business; 
 	}
 	
-	public Integer getUserRating(){
+	public int getUserRating(){
         return this.userRatings;
     }
+
+public ArrayList<String> getRatingComments(){
+	 return this.ratings; 
+}
 	
 	
 }

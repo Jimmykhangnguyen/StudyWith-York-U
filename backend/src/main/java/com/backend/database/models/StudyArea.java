@@ -3,6 +3,7 @@ package com.backend.database.models;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.Calendar;
+import java.util.ArrayList; 
 
 @Document(collection = "study_areas")
 public class StudyArea {
@@ -20,6 +21,7 @@ public class StudyArea {
 	private Location location; //will store the longitude and latitude of each study area
 	private int totalRatingSum;  // Sum of all ratings given
     private int totalRatingCount; // Number of ratings given
+	private ArrayList<String> ratings = new ArrayList<String>();
 
 	//Nested static class for location, to access the location  longitude and latitude to avoid creating an instance of location class
 	public static class Location {
@@ -184,6 +186,14 @@ public class StudyArea {
 		return (double) totalRatingSum/totalRatingCount ;	//calculate avg of ratings as new ones are added by the users 
 
 	}
+
+ public void addRatingComment(String s){
+	 ratings.add(s); 
+}
+
+public ArrayList<String> getRatings(){
+	return ratings; 
+}
 
 public int getOpening(){
 	return this.openingTime;

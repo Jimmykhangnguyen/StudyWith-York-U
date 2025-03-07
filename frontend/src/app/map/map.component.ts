@@ -54,13 +54,9 @@ export class MapComponent implements OnInit {
     });
 
     this.map.on('click', (event: any) => {
-      if (onStartPoint) {
-        this.points.set('start', []);
-        onStartPoint = false;
-      } else {
-        this.points.set('start', [event.lngLat.lng, event.lngLat.lat]);
-        onStartPoint = true;
-      }
+      this.points.set('start', onStartPoint ? [] : [event.lngLat.lng, event.lngLat.lat]);
+      this.map.getCanvas().style.cursor = onStartPoint ? '' : 'pointer';
+      onStartPoint = !onStartPoint;
       this.updatePoint('start');
       this.updateRoute();
     });

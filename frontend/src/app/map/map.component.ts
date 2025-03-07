@@ -56,8 +56,10 @@ export class MapComponent implements OnInit {
     this.map.on('click', (event: any) => {
       if (onStartPoint) {
         this.points.set('start', []);
+        onStartPoint = false;
       } else {
         this.points.set('start', [event.lngLat.lng, event.lngLat.lat]);
+        onStartPoint = true;
       }
       this.updatePoint('start');
       this.updateRoute();

@@ -70,8 +70,8 @@ export class StudyAreaComponent implements OnInit {
     }
   }
 
-  filterStudyAreas(): void {
-    this.filteredStudyAreas = this.studyAreas.filter(area =>
+  filterStudyAreas() {
+    this.filteredStudyAreas = this.studyAreas.filter((area: any) =>
       area.name.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
   }

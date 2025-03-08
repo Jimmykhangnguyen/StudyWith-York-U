@@ -26,16 +26,14 @@
       *ngFor="let area of filteredStudyAreas"
       (click)="onSelectStudyArea(area)"
     >
-      <div *ngIf="selectedStudyArea === area; else other_content" 
-        class="selectedCSS" 
-        [ngClass]="{'expanded': selectedStudyArea === area}">
-      <h3><strong>{{ selectedStudyArea.name }}</strong></h3>
-      <p><strong>Charging Outlets:</strong> {{ selectedStudyArea.chargingOutlets ? 'Yes' : 'No' }}</p>
-      <p><strong>Cleanliness Rating:</strong> {{ selectedStudyArea.cleanlinessRating }}</p>
-      <p><strong>Accessible:</strong> {{ selectedStudyArea.accessible ? 'Yes' : 'No' }}</p>
-      <p><strong>Loudness:</strong> {{ selectedStudyArea.loudness }}</p>
-      <p><strong>Business Rating:</strong> {{ selectedStudyArea.business }}</p>
-      <p><strong>Opening-Closing Hours:</strong> {{ selectedStudyArea.opening }}:00 to {{ selectedStudyArea.closing }}:00</p>
+      <div *ngIf="selectedStudyArea === area; else other_content" class="selectedCSS">
+        <h3>{{ selectedStudyArea.name }}</h3>
+        <p><strong>Charging Outlets:</strong> {{ selectedStudyArea.chargingOutlets ? 'Yes' : 'No' }}</p>
+        <p><strong>Cleanliness Rating:</strong> {{ selectedStudyArea.cleanlinessRating }}</p>
+        <p><strong>Accessible:</strong> {{ selectedStudyArea.accessible ? 'Yes' : 'No' }}</p>
+        <p><strong>Loudness:</strong> {{ selectedStudyArea.loudness }}</p>
+        <p><strong>Business Rating:</strong> {{ selectedStudyArea.business }}</p>
+        <p><strong>Opening-Closing Hours:</strong> {{ selectedStudyArea.opening }}:00 to {{ selectedStudyArea.closing }}:00</p>
       </div>
       <ng-template #other_content>
         {{ area.name }}

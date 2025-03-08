@@ -21,16 +21,16 @@ interface filterCaterogy {
 })
 
 export class StudyAreaComponent implements OnInit {
-  studyAreas = [ //43.77350, -79.50600 and 43.77161, -79.50308
-    { name: 'Example1', chargingOutlets: true, cleanlinessRating: 4, accessible: true,
-      loudness: 3, location: [-79.50600, 43.77350], business: 2, opening: 8, closing: 22 },
-    { name: 'Example2', chargingOutlets: false, cleanlinessRating: 3, accessible: false,
-      loudness: 2, location: [-79.50308, 43.77161], business: 3, opening: 7, closing: 20 },
-  ];
-  filteredStudyAreas: any[] = []; // Array to hold filtered study areas
+  studyAreas = [
+    { name: 'Example1', chargingOutlets: true, cleanlinessRating: 4, accessible: true, loudness: 3,
+      location: { latitude: -79.50600, longitude: 43.77350,  }, business: 2, opening: 8, closing: 22 },
+    { name: 'Example2', chargingOutlets: false, cleanlinessRating: 3, accessible: false, loudness: 2,
+      location: { latitude: -79.50308, longitude: 43.77161 }, business: 3, opening: 7, closing: 20 },
+  ]; // Stub database
+  filteredStudyAreas: any[] = [];
   selectedStudyArea: any = null;
   isSlidingOut: boolean = false;
-  searchTerm: string = ''; // Property to hold the search term
+  searchTerm: string = '';
   selectedCategory: filterCaterogy = { name: '', value: false };
 
   categories: filterCaterogy[] = [
@@ -66,7 +66,7 @@ export class StudyAreaComponent implements OnInit {
     } else { // Selected study space
       this.selectedStudyArea = studyArea;
       this.isSlidingOut = false;
-      this.studyMapService.changeData([studyArea.location[0], studyArea.location[1]]);
+      this.studyMapService.changeData([studyArea.location.latitude, studyArea.location.longitude]);
     }
   }
 

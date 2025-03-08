@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; // Import FormsModule for ngModel
 import { MatInputModule } from '@angular/material/input';
@@ -107,7 +107,17 @@ export class StudyAreaComponent implements OnInit {
         break;
     }
   }
-  
+
+  addRating(Rating: String): any{  
+    let payload = Rating;
+    let url = 'http://localhost:8080/studyAreas';
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+      })
+    };
+      return this.http.post(url, payload, httpOptions)
   
 
+}
 }

@@ -12,10 +12,10 @@
 
   <mat-form-field class="filter">
     <mat-label>Filtering</mat-label>
-    <mat-select>
-      @for (category of categories; track category) {
-        <mat-option [value]="category.value">{{category.name}}</mat-option>
-      }
+    <mat-select [(ngModel)]="selectedCategory" (selectionChange)="filterByCategory(selectedCategory)">
+      <mat-option *ngFor="let category of categories" [value]="category">
+        {{ category.name }}
+      </mat-option>
     </mat-select>
   </mat-form-field>
 
@@ -42,4 +42,5 @@
   <p><strong>Loudness:</strong> {{ selectedStudyArea.loudness }}</p>
   <p><strong>Business Rating:</strong> {{ selectedStudyArea.business }}</p>
   <p><strong>Opening-Closing Hours:</strong> {{ selectedStudyArea.opening }}:00 to {{ selectedStudyArea.closing }}:00</p>
+  <p><strong>Location:</strong> {{ selectedStudyArea.location.latitude }}, {{ selectedStudyArea.location.longitude }}</p>
 </div>

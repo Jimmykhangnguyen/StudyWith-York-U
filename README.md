@@ -39,17 +39,19 @@ Windows
 # Major Changes in Iteration 2
 1. Able to get the directions to work when a study Area was clicked on. Shows how to get there from the location a user clicks on to the study area location. 
 2. Had to change the design of filtering process using drop down menu instead of buttons.
-3. Added a ratings form. 
 4. Changed the data schema for study Area collection in database. Modified to inlcude ratings and busyness.
 5. Juinits were added to backend components: Busyness, locations, studyarea
 6. Added more locations to the database.
 7. Changed the GUI for displaying study areas and filtering.
-8. Structure of the source code stayed the same.
-9. New or revised big stories and detailed user stories are updated in the planning document. 
+9. Structure of the source code stayed the same.
+10. New or revised big stories and detailed user stories are updated in the planning document. 
 
 # Architecture
 
 ![layered_architecture](https://github.com/user-attachments/assets/1789f06d-3d31-4361-93e6-f4966e8227c4)
+
+# UML Class Diagram
+<img width="710" alt="Screenshot 2025-03-07 at 10 29 27 PM" src="https://github.com/user-attachments/assets/f616be4b-7d45-4d05-bf8b-b2abc04bb0a2" />
 
 
 

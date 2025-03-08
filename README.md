@@ -17,7 +17,7 @@ Ashley Thong
 # Implementation requirements
 Frontend - Angular
 Backend - Java Spring Boot
-Databse - MongoDB
+Database - MongoDB
 ---------------------
 Our Group choose to use MongoDB a non-SQL Database. Reason: Easier to implement using the Spring framework. MongoDB's connectors allow us to perform database operations like GET, POST, and DELETE with ease. MongoDB is also much more flexible in handling structured or semi structured data, which allowed us to add or modify the schema with ease (like adding busyness or locations). Also, JSON structure works much easier with Angular. 
 

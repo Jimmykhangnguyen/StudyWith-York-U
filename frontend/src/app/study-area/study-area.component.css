@@ -12,7 +12,7 @@
   display: flex;
   flex-direction: column;
   text-align: center;
-  height: 83%;
+  top: 20px;
 }
 
 h2 {
@@ -25,12 +25,13 @@ h2 {
 }
 
 h3 {
+  margin-top: 5px;
   font-size: 20px;
   size: 20px;
 }
 
 #searchBar {
-  height: 25px;
+  height: 30px;
   width: 92%;
   background-color: #ffffff;
   color: #000000;
@@ -76,9 +77,10 @@ ul {
 }
 
 .selectedCSS {
-  margin: -10px -10px;
+  margin: -7.5px -7.5px;
   background: gold;
   height: auto;
   cursor: pointer;
   border-radius: 5px;
+  border: 2px solid black;
 }

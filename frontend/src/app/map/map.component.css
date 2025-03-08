@@ -3,12 +3,10 @@
 :host {
     position: absolute;
     display: block;
-    height: 83%;
+    top: 20px;
     width: 75.5%;
     right: 16px;
     bottom: 16px;
-    margin: 0;
-    padding: 0;
 }
 
 .map {

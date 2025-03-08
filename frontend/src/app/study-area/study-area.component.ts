@@ -23,9 +23,9 @@ interface filterCaterogy {
 export class StudyAreaComponent implements OnInit {
   studyAreas = [
     { name: 'Example1', chargingOutlets: true, cleanlinessRating: 4, accessible: true, loudness: 3,
-      location: { longitude: -79.50600, latitude: 43.77350 }, business: 2, opening: 8, closing: 22 },
+      location: { latitude: -79.50600, longitude: 43.77350,  }, business: 2, opening: 8, closing: 22 },
     { name: 'Example2', chargingOutlets: false, cleanlinessRating: 3, accessible: false, loudness: 2,
-      location: { longitude: -79.50308, latitude: 43.77161 }, business: 3, opening: 7, closing: 20 },
+      location: { latitude: -79.50308, longitude: 43.77161 }, business: 3, opening: 7, closing: 20 },
   ]; // Stub database
   filteredStudyAreas: any[] = [];
   selectedStudyArea: any = null;
@@ -66,7 +66,7 @@ export class StudyAreaComponent implements OnInit {
     } else { // Selected study space
       this.selectedStudyArea = studyArea;
       this.isSlidingOut = false;
-      this.studyMapService.changeData([studyArea.location.longitude, studyArea.location.latitude]);
+      this.studyMapService.changeData([studyArea.location.latitude, studyArea.location.longitude]);
     }
   }
 

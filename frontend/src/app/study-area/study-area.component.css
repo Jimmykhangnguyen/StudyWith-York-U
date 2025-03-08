@@ -24,6 +24,11 @@ h2 {
   padding-left: 18px;
 }
 
+h3 {
+  font-size: 20px;
+  size: 20px;
+}
+
 #searchBar {
   height: 25px;
   width: 92%;
@@ -52,57 +57,28 @@ ul {
 }
 
 .studyPlacesButton {
-  background: linear-gradient(to left, #ffffff 50%, gold 50%) right;
+  background: #ffffff;
   background-size: 200% 100%;
-  transition:all 1.5s ease;
   color: #000000;
   font-size: 20px;
   cursor: pointer;
   border-radius: 5px;
   margin-top: 5%;
-  padding: 10px 10px;
+  width: 90%;
+  height: 60px;
   text-align: center;
 }
 
 
 .studyPlacesButton:hover {
-  background-position: left
+  background-position: left;
+  background: gold
 }
 
-.display-studyArea-amenities {
-  width: 100%;
-  z-index: 1;
-  position: absolute;
-  left: 30px;
-  padding-left: 10px;
+.selectedCSS {
+  margin: -10px -10px;
+  background: gold;
+  height: auto;
+  cursor: pointer;
   border-radius: 5px;
-  border: 1px solid #ffffff;
-  background-color: #ffffff;
-  animation: slideIn 0.5s ease-out;
-}
-
-.display-studyArea-amenities.slide-out {
-  animation: slideOut 0.5s ease-in;
-}
-
-@keyframes slideIn {
-  from {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-@keyframes slideOut {
-  from {
-    transform: translateX(0);
-    opacity: 1;
-  }
-  to {
-    transform: translateX(100%);
-    opacity: 0;
-  }
 }

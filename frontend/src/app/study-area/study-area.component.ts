@@ -49,23 +49,12 @@ export class StudyAreaComponent implements OnInit {
       });
   }
 
-  onSelectStudyArea(studyArea: any): void {
-    if (this.selectedStudyArea === studyArea) {
-      // Trigger slide-out animation
-      this.isSlidingOut = true;
-      // Wait for the animation to complete before deselecting
-      setTimeout(() => {
-        this.selectedStudyArea = null;
-        this.isSlidingOut = false;
-      }, 500); // Match the duration of the slideOut animation
-    } else {
-      this.selectedStudyArea = studyArea;
-      this.isSlidingOut = false;
-    }
+  onSelectStudyArea(area: any) {
+    this.selectedStudyArea = this.selectedStudyArea === area ? null : area;
   }
 
-  filterStudyAreas(): void {
-    this.filteredStudyAreas = this.studyAreas.filter(area =>
+  filterStudyAreas() {
+    this.filteredStudyAreas = this.studyAreas.filter((area: any) =>
       area.name.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
   }

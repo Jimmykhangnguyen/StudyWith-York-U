@@ -26,11 +26,8 @@
       *ngFor="let area of filteredStudyAreas"
       (click)="onSelectStudyArea(area)"
     >
-      <div 
-        *ngIf="selectedStudyArea;else other_content"
-        
-      >
-        <h3>{{ selectedStudyArea.name }}</h3>
+      <div *ngIf="selectedStudyArea === area; else other_content" class="selectedCSS">
+        <h3><strong>{{ selectedStudyArea.name }}</strong></h3>
         <p><strong>Charging Outlets:</strong> {{ selectedStudyArea.chargingOutlets ? 'Yes' : 'No' }}</p>
         <p><strong>Cleanliness Rating:</strong> {{ selectedStudyArea.cleanlinessRating }}</p>
         <p><strong>Accessible:</strong> {{ selectedStudyArea.accessible ? 'Yes' : 'No' }}</p>
@@ -44,4 +41,3 @@
     </button>
   </ul>
 </div>
-

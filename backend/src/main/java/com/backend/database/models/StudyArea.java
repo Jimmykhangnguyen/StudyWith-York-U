@@ -2,8 +2,6 @@ package com.backend.database.models;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import java.util.Calendar;
-import java.util.ArrayList; 
 
 @Document(collection = "study_areas")
 public class StudyArea {
@@ -21,7 +19,6 @@ public class StudyArea {
 	private Location location; //will store the longitude and latitude of each study area
 	private int totalRatingSum;  // Sum of all ratings given
     private int totalRatingCount; // Number of ratings given
-	private ArrayList<String> ratings = new ArrayList<String>();
 
 	//Nested static class for location, to access the location  longitude and latitude to avoid creating an instance of location class
 	public static class Location {
@@ -174,39 +171,39 @@ public class StudyArea {
 	
 	public void addUserRating(int rating) {
 		if(rating>=1 && rating<=5) {
-			totalRatingSum += rating;
-	        totalRatingCount++;
+			this.totalRatingSum += rating;
+	        this.totalRatingCount++;
 		}
 	}
 	
+	public int getTotalRatingSum() {
+		return totalRatingSum;
+	}
+
+	public int getTotalRatingCount() {
+		return totalRatingCount;
+	}
+
 	public double getAverageUserRating() {
 		if(totalRatingCount==0) {
 			return 0.0;
 		}
 		return (double) totalRatingSum/totalRatingCount ;	//calculate avg of ratings as new ones are added by the users 
-
 	}
 
- public void addRatingComment(String s){
-	 ratings.add(s); 
-}
 
-public ArrayList<String> getRatings(){
-	return ratings; 
-}
+	public int getOpening(){
+		return this.openingTime;
+	}
 
-public int getOpening(){
-	return this.openingTime;
-}
-
-public int getClosing(){
-	return this.closingTime; 
-}
-public void setOpening(int opening){
-	this.openingTime = opening; 
-}
-public void setClosing(int closing){
-	this.closingTime = closing; 
-}
+	public int getClosing(){
+		return this.closingTime; 
+	}
+	public void setOpening(int opening){
+		this.openingTime = opening; 
+	}
+	public void setClosing(int closing){
+		this.closingTime = closing; 
+	}
 	
 }

@@ -32,6 +32,7 @@ export class StudyAreaComponent implements OnInit {
   isSlidingOut: boolean = false;
   searchTerm: string = '';
   selectedCategory: filterCaterogy = { name: '', value: false };
+  ratings: number[] = [0, 0];
 
   categories: filterCaterogy[] = [
     { name: 'Charging Outlets', value: true },
@@ -65,6 +66,7 @@ export class StudyAreaComponent implements OnInit {
       this.studyMapService.changeData([]);
     } else { // Selected study space
       this.selectedStudyArea = studyArea;
+      this.getRatings(studyArea.id);
       this.isSlidingOut = false;
       this.studyMapService.changeData([studyArea.location.latitude, studyArea.location.longitude]);
     }
@@ -76,6 +78,16 @@ export class StudyAreaComponent implements OnInit {
     );
   }
 
+  getRatings(studyAreaId: string): void {
+    this.http.get<number[]>(`http://localhost:8080/ratings?id=${studyAreaId}`)
+      .subscribe(response => {
+        this.ratings = response; 
+        console.log('Fetched ratings:', this.ratings);
+      }, error => {
+        console.error('Failed to fetch ratings:', error);
+      });
+  }
+  
   filterByCategory(category: filterCaterogy): void {
     switch (category.name) {
       case "Charging Outlets":

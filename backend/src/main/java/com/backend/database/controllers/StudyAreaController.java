@@ -32,7 +32,7 @@ public class StudyAreaController {
 	//create a new study area object
 	@PostMapping("/study_areas")
 	public ResponseEntity<StudyArea> createStudyArea(@RequestBody StudyAreaRequest studyAreaRequest){
-		StudyArea studyArea = new StudyArea(         
+		StudyArea studyArea = new StudyArea(
 				studyAreaRequest.getName(),
 	            studyAreaRequest.getChargingOutlets(),
 	            studyAreaRequest.getCleanlinessRating(),

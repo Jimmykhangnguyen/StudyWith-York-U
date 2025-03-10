@@ -42,7 +42,8 @@ public class StudyAreaRequest {
 	public StudyAreaRequest() {
 		
 	}
-	public StudyAreaRequest(String name, boolean chargingOutlets, int cleanlinessRating, boolean accessible, int loudness, Location location, int openingTime, int closingTime, int business, int totalRatingSum, int totalRatingCount) {
+	public StudyAreaRequest(String id, String name, boolean chargingOutlets, int cleanlinessRating, boolean accessible, int loudness, Location location, int openingTime, int closingTime, int business, int totalRatingSum, int totalRatingCount) {
+		this.id = id;
 		this.name = name;
 		this.chargingOutlets = chargingOutlets;
 		this.cleanlinessRating = cleanlinessRating;
@@ -53,7 +54,7 @@ public class StudyAreaRequest {
 		this.closingTime = closingTime; 
 		this.business = business; 
 		this.totalRatingSum = totalRatingSum;
-		this.totalRatingSum = totalRatingCount;
+		this.totalRatingCount = totalRatingCount;
 	}
 	
 	//getters
@@ -66,6 +67,9 @@ public class StudyAreaRequest {
 		return chargingOutlets;
 	}
 
+	public String getId() {
+		return id;
+	}
 	
 	public int getCleanlinessRating() {
 		return cleanlinessRating;

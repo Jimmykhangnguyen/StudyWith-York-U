@@ -48,8 +48,12 @@ public class StudyAreaController {
 	}
 	
 	// create/ add repostitory for user ratings for existing study area objects 
-    @PostMapping("/rate")
+    @PostMapping("/ratings")
     public ResponseEntity<String> rateStudyArea(@RequestParam String id, @RequestParam int rating) {
+		if (rating < 1 || rating > 5) {
+			return ResponseEntity.status(400).body("Rating must be between 1 and 5.");
+		}
+
         Optional<StudyArea> studyAreaOpt = studyAreaRepository.findById(id);
 
         if (studyAreaOpt.isPresent()) {
@@ -63,5 +67,15 @@ public class StudyAreaController {
         return ResponseEntity.status(404).body("Study area not found.");
     }
 	
+	// Getting ratings for study areas
+	@GetMapping("/ratings")
+	public ResponseEntity<String> getRatings(@RequestParam String id) {
+		Optional<StudyArea> studyAreaOpt = studyAreaRepository.findById(id);
+		if (studyAreaOpt.isPresent()) {
+			StudyArea studyArea = studyAreaOpt.get();
+			return ResponseEntity.ok("The total rating for this study area is: " + studyArea.getTotalRatingSum() + " and the total number of ratings is: " + studyArea.getTotalRatingCount());
+		}
+		return ResponseEntity.status(404).body("Study area not found.");
+	}
 	
 }

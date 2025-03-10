@@ -56,7 +56,7 @@ public class StudyArea {
 	public StudyArea() {
 		
 	}
-	public StudyArea(String name, boolean chargingOutlets, int cleanlinessRating, boolean accessible, int loudness, Location location, int openingTime, int closingTime) {
+	public StudyArea(String name, boolean chargingOutlets, int cleanlinessRating, boolean accessible, int loudness, Location location, int openingTime, int closingTime, int business) {
 		//if cleanliness and loudness fall out of rating range throw an exception
 		if(cleanlinessRating < 1 || cleanlinessRating > 5) {
 			throw new IllegalArgumentException("Cleanliness rating must be between 1 and 5");
@@ -74,7 +74,7 @@ public class StudyArea {
 		this.location = location;
 		this.openingTime = openingTime;
 		this.closingTime = closingTime; 
-		this.business = this.getBusiness(); 
+		this.business = business; 
 	}
 	
 	//getters and setters
@@ -136,41 +136,41 @@ public class StudyArea {
 	}
 	
 	public int getBusiness(){
-    Calendar cal = Calendar.getInstance(); 
-	int hour = cal.get(Calendar.HOUR_OF_DAY);
+		// Calendar cal = Calendar.getInstance(); 
+		// int hour = cal.get(Calendar.HOUR_OF_DAY);
 
-	if (this.loudness <= 3){
-		if (hour < this.openingTime){
-			this.business = 0; 
-		} else if (hour <= 10 && hour < this.closingTime){ // Early morning, before 10 AM
-			this.business = 1; 
-		} else if (hour <= 13 && hour < this.closingTime){ //Lunchtime, between 11 AM and 1 PM
-			this.business = 4;
-		} else if (hour <= 18 && hour < this.closingTime){ // Afternoon, between 2 and 6 PM
-			this.business = 5; 
-		} else if (hour <= 21 && hour < this.closingTime){ // Evening, between 7PM and close
-			this.business = 3; 
-		} else{
-			this.business = 0; 
-		}
-	} else {
-		if (hour < this.openingTime){
-			this.business = 0; 
-		} else if (hour <= 10 && hour < this.closingTime){ //Early morning, before 10 AM
-			this.business = 2; 
-		} else if (hour <= 13 && hour < this.closingTime){ //Lunchtime, between 11 AM and 1 PM
-			this.business = 5;
-		} else if (hour <= 18 && hour < this.closingTime){ //Afternoon, between 2 and 6 PM
-			this.business = 4; 
-		} else if (hour <= 21 && hour < this.closingTime){ //Evening, between 7 PM and closing time
-			this.business = 2; 
-		} else{
-			this.business = 0; 
-	}
-	}
-	return this.business; 
+		// if (this.loudness <= 3){
+		// 	if (hour < this.openingTime){
+		// 		this.business = 0; 
+		// 	} else if (hour <= 10 && hour < this.closingTime){ // Early morning, before 10 AM
+		// 		this.business = 1; 
+		// 	} else if (hour <= 13 && hour < this.closingTime){ //Lunchtime, between 11 AM and 1 PM
+		// 		this.business = 4;
+		// 	} else if (hour <= 18 && hour < this.closingTime){ // Afternoon, between 2 and 6 PM
+		// 		this.business = 5; 
+		// 	} else if (hour <= 21 && hour < this.closingTime){ // Evening, between 7PM and close
+		// 		this.business = 3; 
+		// 	} else{
+		// 		this.business = 0; 
+		// 	}
+		// } else {
+		// 	if (hour < this.openingTime){
+		// 		this.business = 0; 
+		// 	} else if (hour <= 10 && hour < this.closingTime){ //Early morning, before 10 AM
+		// 		this.business = 2; 
+		// 	} else if (hour <= 13 && hour < this.closingTime){ //Lunchtime, between 11 AM and 1 PM
+		// 		this.business = 5;
+		// 	} else if (hour <= 18 && hour < this.closingTime){ //Afternoon, between 2 and 6 PM
+		// 		this.business = 4; 
+		// 	} else if (hour <= 21 && hour < this.closingTime){ //Evening, between 7 PM and closing time
+		// 		this.business = 2; 
+		// 	} else{
+		// 		this.business = 0; 
+		// }
+		// }
+		return this.business; 
 	
-}
+	}
 	
 	public void addUserRating(int rating) {
 		if(rating>=1 && rating<=5) {

@@ -66,7 +66,7 @@ export class StudyAreaComponent implements OnInit {
       this.studyMapService.changeData([]);
     } else { // Selected study space
       this.selectedStudyArea = studyArea;
-      this.getRatings(studyArea.id);
+      this.getRatings(studyArea._links.self.href.split('/').pop());
       this.isSlidingOut = false;
       this.studyMapService.changeData([studyArea.location.latitude, studyArea.location.longitude]);
     }

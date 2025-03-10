@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -47,7 +48,8 @@ public class StudyAreaController {
 		return ResponseEntity.status(201).body(this.studyAreaRepository.save(studyArea));
 	}
 	
-	// create/ add repostitory for user ratings for existing study area objects 
+	// create/ add repostitory for user ratings for existing study area objects
+	@CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/ratings")
     public ResponseEntity<String> rateStudyArea(@RequestParam String id, @RequestParam int rating) {
 		if (rating < 1 || rating > 5) {
@@ -68,6 +70,7 @@ public class StudyAreaController {
     }
 	
 	// Getting ratings for study areas
+	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping("/ratings")
 	public ResponseEntity<String> getRatings(@RequestParam String id) {
 		Optional<StudyArea> studyAreaOpt = studyAreaRepository.findById(id);

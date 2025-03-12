@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MapComponent } from './map/map.component';
 import { StudyAreaComponent } from './study-area/study-area.component';
-import { HttpClientModule } from '@angular/common/http'; // Add this import
+import { HttpClientModule } from '@angular/common/http'; 
 
 @Component({
   selector: 'app-root',

@@ -1,6 +1,8 @@
 package com.backend.database.controllers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.http.ResponseEntity;
@@ -72,13 +74,17 @@ public class StudyAreaController {
 	// Getting ratings for study areas
 	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping("/ratings")
-	public ResponseEntity<String> getRatings(@RequestParam String id) {
+	public ResponseEntity<Map<String, Object>> getRatings(@RequestParam String id) {
 		Optional<StudyArea> studyAreaOpt = studyAreaRepository.findById(id);
 		if (studyAreaOpt.isPresent()) {
 			StudyArea studyArea = studyAreaOpt.get();
-			return ResponseEntity.ok("The total rating for this study area is: " + studyArea.getTotalRatingSum() + " and the total number of ratings is: " + studyArea.getTotalRatingCount());
+			Map<String, Object> response = new HashMap<>();
+			response.put("totalRatingSum", studyArea.getTotalRatingSum());
+			response.put("totalRatingCount", studyArea.getTotalRatingCount());
+			return ResponseEntity.ok(response);
 		}
-		return ResponseEntity.status(404).body("Study area not found.");
+		return ResponseEntity.status(404).body(Map.of("error", "Study area not found."));
 	}
+
 	
 }

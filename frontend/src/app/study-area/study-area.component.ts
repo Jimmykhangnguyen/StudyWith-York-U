@@ -6,6 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { StudyMapService } from '../study-map-service/study-map-service';
+import { response } from 'express';
 
 interface filterCaterogy {
   name: string;
@@ -76,6 +77,16 @@ export class StudyAreaComponent implements OnInit {
     this.filteredStudyAreas = this.studyAreas.filter((area: any) =>
       area.name.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
+  }
+
+  rateStudyArea(studyAreaId: string, rating: number): void {
+    this.http.post(`http://localhost:8080/ratings?id=${studyAreaId}&rating=${rating}`, null)
+      .subscribe(response => {
+        console.log('Successfully rated study area:', response);
+        this.getRatings(studyAreaId);
+      }, error => {
+        console.error('Failed to rate study area:', error);
+      });
   }
 
   getRatings(studyAreaId: string): void {

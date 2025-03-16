@@ -1,7 +1,6 @@
 package com.backend.database.resources;
 
 import com.backend.database.resources.StudyAreaRequest.Location;
-import java.util.ArrayList;
 
 public class StudyAreaRequest {
 //this class is used to prevent exposing and to validate StudyArea class
@@ -15,8 +14,8 @@ public class StudyAreaRequest {
 	private int openingTime;
 	private int closingTime; 
 	private int business; 
-	private int userRatings;
-	private ArrayList<String>  ratings = new ArrayList<String>(); 	
+	private int totalRatingSum;  // Sum of all ratings given
+	private int totalRatingCount; // Number of ratings given
 
 	//Location static nested class for longitude and latitude request
 	public static class Location {
@@ -43,7 +42,8 @@ public class StudyAreaRequest {
 	public StudyAreaRequest() {
 		
 	}
-	public StudyAreaRequest(String name, boolean chargingOutlets, int cleanlinessRating, boolean accessible, int loudness, Location location, int openingTime, int closingTime, int business, int userRatings, ArrayList<String> ratings) {
+	public StudyAreaRequest(String id, String name, boolean chargingOutlets, int cleanlinessRating, boolean accessible, int loudness, Location location, int openingTime, int closingTime, int business, int totalRatingSum, int totalRatingCount) {
+		this.id = id;
 		this.name = name;
 		this.chargingOutlets = chargingOutlets;
 		this.cleanlinessRating = cleanlinessRating;
@@ -53,9 +53,8 @@ public class StudyAreaRequest {
 		this.openingTime = openingTime;
 		this.closingTime = closingTime; 
 		this.business = business; 
-        this.userRatings = userRatings;
-		this.ratings = ratings; 
-
+		this.totalRatingSum = totalRatingSum;
+		this.totalRatingCount = totalRatingCount;
 	}
 	
 	//getters
@@ -68,6 +67,9 @@ public class StudyAreaRequest {
 		return chargingOutlets;
 	}
 
+	public String getId() {
+		return id;
+	}
 	
 	public int getCleanlinessRating() {
 		return cleanlinessRating;
@@ -98,13 +100,11 @@ public class StudyAreaRequest {
 		return this.business; 
 	}
 	
-	public int getUserRating(){
-        return this.userRatings;
-    }
-
-public ArrayList<String> getRatingComments(){
-	 return this.ratings; 
-}
+	public int getTotalRatingSum() {
+		return totalRatingSum;
+	}
 	
-	
+	public int getTotalRatingCount() {
+		return totalRatingCount;
+	}	
 }

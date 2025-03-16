@@ -2,8 +2,6 @@ package com.backend.database.models;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import java.util.Calendar;
-import java.util.ArrayList; 
 
 @Document(collection = "study_areas")
 public class StudyArea {
@@ -21,7 +19,6 @@ public class StudyArea {
 	private Location location; //will store the longitude and latitude of each study area
 	private int totalRatingSum;  // Sum of all ratings given
     private int totalRatingCount; // Number of ratings given
-	private ArrayList<String> ratings = new ArrayList<String>();
 
 	//Nested static class for location, to access the location  longitude and latitude to avoid creating an instance of location class
 	public static class Location {
@@ -56,7 +53,7 @@ public class StudyArea {
 	public StudyArea() {
 		
 	}
-	public StudyArea(String name, boolean chargingOutlets, int cleanlinessRating, boolean accessible, int loudness, Location location, int openingTime, int closingTime) {
+	public StudyArea(String name, boolean chargingOutlets, int cleanlinessRating, boolean accessible, int loudness, Location location, int openingTime, int closingTime, int business) {
 		//if cleanliness and loudness fall out of rating range throw an exception
 		if(cleanlinessRating < 1 || cleanlinessRating > 5) {
 			throw new IllegalArgumentException("Cleanliness rating must be between 1 and 5");
@@ -74,7 +71,7 @@ public class StudyArea {
 		this.location = location;
 		this.openingTime = openingTime;
 		this.closingTime = closingTime; 
-		this.business = this.getBusiness(); 
+		this.business = business; 
 	}
 	
 	//getters and setters
@@ -136,77 +133,77 @@ public class StudyArea {
 	}
 	
 	public int getBusiness(){
-    Calendar cal = Calendar.getInstance(); 
-	int hour = cal.get(Calendar.HOUR_OF_DAY);
+		// Calendar cal = Calendar.getInstance(); 
+		// int hour = cal.get(Calendar.HOUR_OF_DAY);
 
-	if (this.loudness <= 3){
-		if (hour < this.openingTime){
-			this.business = 0; 
-		} else if (hour <= 10 && hour < this.closingTime){ // Early morning, before 10 AM
-			this.business = 1; 
-		} else if (hour <= 13 && hour < this.closingTime){ //Lunchtime, between 11 AM and 1 PM
-			this.business = 4;
-		} else if (hour <= 18 && hour < this.closingTime){ // Afternoon, between 2 and 6 PM
-			this.business = 5; 
-		} else if (hour <= 21 && hour < this.closingTime){ // Evening, between 7PM and close
-			this.business = 3; 
-		} else{
-			this.business = 0; 
-		}
-	} else {
-		if (hour < this.openingTime){
-			this.business = 0; 
-		} else if (hour <= 10 && hour < this.closingTime){ //Early morning, before 10 AM
-			this.business = 2; 
-		} else if (hour <= 13 && hour < this.closingTime){ //Lunchtime, between 11 AM and 1 PM
-			this.business = 5;
-		} else if (hour <= 18 && hour < this.closingTime){ //Afternoon, between 2 and 6 PM
-			this.business = 4; 
-		} else if (hour <= 21 && hour < this.closingTime){ //Evening, between 7 PM and closing time
-			this.business = 2; 
-		} else{
-			this.business = 0; 
-	}
-	}
-	return this.business; 
+		// if (this.loudness <= 3){
+		// 	if (hour < this.openingTime){
+		// 		this.business = 0; 
+		// 	} else if (hour <= 10 && hour < this.closingTime){ // Early morning, before 10 AM
+		// 		this.business = 1; 
+		// 	} else if (hour <= 13 && hour < this.closingTime){ //Lunchtime, between 11 AM and 1 PM
+		// 		this.business = 4;
+		// 	} else if (hour <= 18 && hour < this.closingTime){ // Afternoon, between 2 and 6 PM
+		// 		this.business = 5; 
+		// 	} else if (hour <= 21 && hour < this.closingTime){ // Evening, between 7PM and close
+		// 		this.business = 3; 
+		// 	} else{
+		// 		this.business = 0; 
+		// 	}
+		// } else {
+		// 	if (hour < this.openingTime){
+		// 		this.business = 0; 
+		// 	} else if (hour <= 10 && hour < this.closingTime){ //Early morning, before 10 AM
+		// 		this.business = 2; 
+		// 	} else if (hour <= 13 && hour < this.closingTime){ //Lunchtime, between 11 AM and 1 PM
+		// 		this.business = 5;
+		// 	} else if (hour <= 18 && hour < this.closingTime){ //Afternoon, between 2 and 6 PM
+		// 		this.business = 4; 
+		// 	} else if (hour <= 21 && hour < this.closingTime){ //Evening, between 7 PM and closing time
+		// 		this.business = 2; 
+		// 	} else{
+		// 		this.business = 0; 
+		// }
+		// }
+		return this.business; 
 	
-}
+	}
 	
 	public void addUserRating(int rating) {
 		if(rating>=1 && rating<=5) {
-			totalRatingSum += rating;
-	        totalRatingCount++;
+			this.totalRatingSum += rating;
+	        this.totalRatingCount++;
 		}
 	}
 	
+	public int getTotalRatingSum() {
+		return totalRatingSum;
+	}
+
+	public int getTotalRatingCount() {
+		return totalRatingCount;
+	}
+
 	public double getAverageUserRating() {
 		if(totalRatingCount==0) {
 			return 0.0;
 		}
 		return (double) totalRatingSum/totalRatingCount ;	//calculate avg of ratings as new ones are added by the users 
-
 	}
 
- public void addRatingComment(String s){
-	 ratings.add(s); 
-}
 
-public ArrayList<String> getRatings(){
-	return ratings; 
-}
+	public int getOpening(){
+		return this.openingTime;
+	}
 
-public int getOpening(){
-	return this.openingTime;
-}
-
-public int getClosing(){
-	return this.closingTime; 
-}
-public void setOpening(int opening){
-	this.openingTime = opening; 
-}
-public void setClosing(int closing){
-	this.closingTime = closing; 
-}
+	public int getClosing(){
+		return this.closingTime; 
+	}
+	public void setOpening(int opening){
+		this.openingTime = opening; 
+	}
+	public void setClosing(int closing){
+		this.closingTime = closing; 
+	}
 	
 }

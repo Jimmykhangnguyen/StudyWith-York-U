@@ -1,8 +1,11 @@
 package com.backend.database.models;
 
-import static org.junit.jupiter.api.Assertions.*;
 import java.util.Calendar; 
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +19,7 @@ class StudyAreaTest {
 		//used random values and location 
 		StudyArea.Location location = new StudyArea.Location(43.77361615981798f, -79.50184694563765f);
 		studyArea = new StudyArea(
-				"Example_Location", true, 3, false, 4, location, 9, 20 );
+				"Example_Location", true, 3, false, 4, location, 9, 20, 0);
 		
 	}
 
@@ -38,7 +41,7 @@ class StudyAreaTest {
 		assertTrue(studyArea.getCleanlinessRating() >= 1 && studyArea.getCleanlinessRating() <= 5, "Cleaniness rating should be in range 1-5!");
 		//throw exception when valid is out of range
 		assertThrows(IllegalArgumentException.class, () -> new StudyArea(
-				"Example_Location", true, -1, false, 4, studyArea.getLocation(), 9, 20 ));
+				"Example_Location", true, -1, false, 4, studyArea.getLocation(), 9, 20, 0));
 	}
 
 	@Test
@@ -54,7 +57,7 @@ class StudyAreaTest {
 				"Loudness should be between 1 and 5.");
 	   //throw exception when valid is out of range 
 		assertThrows(IllegalArgumentException.class, () -> new StudyArea(
-				"Example_Location", true, 3, false, 6, studyArea.getLocation(), 9, 20 ));
+				"Example_Location", true, 3, false, 6, studyArea.getLocation(), 9, 20, 0));
 	}
 
 	@Test

@@ -6,6 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { StudyMapService } from '../study-map-service/study-map-service';
+import { response } from 'express';
 
 interface filterCaterogy {
   name: string;
@@ -32,6 +33,7 @@ export class StudyAreaComponent implements OnInit {
   isSlidingOut: boolean = false;
   searchTerm: string = '';
   selectedCategory: filterCaterogy = { name: '', value: false };
+  ratings: number[] = [0, 0];
 
   categories: filterCaterogy[] = [
     { name: 'Charging Outlets', value: true },
@@ -65,6 +67,7 @@ export class StudyAreaComponent implements OnInit {
       this.studyMapService.changeData([]);
     } else { // Selected study space
       this.selectedStudyArea = studyArea;
+      this.getRatings(studyArea._links.self.href.split('/').pop());
       this.isSlidingOut = false;
       this.studyMapService.changeData([studyArea.location.latitude, studyArea.location.longitude]);
     }
@@ -76,6 +79,26 @@ export class StudyAreaComponent implements OnInit {
     );
   }
 
+  rateStudyArea(studyAreaId: string, rating: number): void {
+    this.http.post(`http://localhost:8080/ratings?id=${studyAreaId}&rating=${rating}`, null)
+      .subscribe(response => {
+        console.log('Successfully rated study area:', response);
+        this.getRatings(studyAreaId);
+      }, error => {
+        console.error('Failed to rate study area:', error);
+      });
+  }
+
+  getRatings(studyAreaId: string): void {
+    this.http.get<number[]>(`http://localhost:8080/ratings?id=${studyAreaId}`)
+      .subscribe(response => {
+        this.ratings = response; 
+        console.log('Fetched ratings:', this.ratings);
+      }, error => {
+        console.error('Failed to fetch ratings:', error);
+      });
+  }
+  
   filterByCategory(category: filterCaterogy): void {
     switch (category.name) {
       case "Charging Outlets":

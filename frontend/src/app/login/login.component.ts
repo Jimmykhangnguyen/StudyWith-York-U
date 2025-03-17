@@ -21,6 +21,8 @@ export class LoginComponent {
   // When login button is clicked move to 'map'
   onSubmit() {
     // For demo, assume login is always successful to redirect to the map
-    this.router.navigate(['/map']);  
+    this.router.navigate(['/map']).then(() => {
+      location.reload();
+    });
   }
 }

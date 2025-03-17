@@ -9,7 +9,7 @@ import { StudyMapService } from '../study-map-service/study-map-service';
 
 interface filterCaterogy {
   name: string;
-  value: boolean;
+  value: boolean | number;
 }
 
 @Component({
@@ -21,23 +21,24 @@ interface filterCaterogy {
 })
 
 export class StudyAreaComponent implements OnInit {
-  studyAreas = [ //43.77350, -79.50600 and 43.77161, -79.50308
-    { name: 'Example1', chargingOutlets: true, cleanlinessRating: 4, accessible: true,
-      loudness: 3, location: [-79.50600, 43.77350], business: 2, opening: 8, closing: 22 },
-    { name: 'Example2', chargingOutlets: false, cleanlinessRating: 3, accessible: false,
-      loudness: 2, location: [-79.50308, 43.77161], business: 3, opening: 7, closing: 20 },
-  ];
-  filteredStudyAreas: any[] = []; // Array to hold filtered study areas
+  studyAreas = [
+    { name: 'Example1', chargingOutlets: true, cleanlinessRating: 4, accessible: true, loudness: 3,
+      location: { latitude: -79.50600, longitude: 43.77350,  }, business: 2, opening: 8, closing: 22 },
+    { name: 'Example2', chargingOutlets: false, cleanlinessRating: 3, accessible: false, loudness: 2,
+      location: { latitude: -79.50308, longitude: 43.77161 }, business: 3, opening: 7, closing: 20 },
+  ]; // Stub database
+  filteredStudyAreas: any[] = [];
   selectedStudyArea: any = null;
   isSlidingOut: boolean = false;
-  searchTerm: string = ''; // Property to hold the search term
+  searchTerm: string = '';
+  selectedCategory: filterCaterogy = { name: '', value: false };
 
   categories: filterCaterogy[] = [
-    { name: 'Charging Outlets', value: false },
-    { name: 'Cleanliness Rating', value: false },
+    { name: 'Charging Outlets', value: true },
+    { name: 'Cleanliness Rating', value: 5 },
     { name: 'Accessible', value: false },
-    { name: 'Loudness', value: false },
-    { name: 'Business', value: false },
+    { name: 'Loudness', value: 3 },
+    { name: 'Business', value: 0 },
     { name: 'Opening', value: false }
   ];
 
@@ -65,13 +66,48 @@ export class StudyAreaComponent implements OnInit {
     } else { // Selected study space
       this.selectedStudyArea = studyArea;
       this.isSlidingOut = false;
-      this.studyMapService.changeData([studyArea.location[0], studyArea.location[1]]);
+      this.studyMapService.changeData([studyArea.location.latitude, studyArea.location.longitude]);
     }
   }
 
-  filterStudyAreas(): void {
-    this.filteredStudyAreas = this.studyAreas.filter(area =>
+  filterStudyAreas() {
+    this.filteredStudyAreas = this.studyAreas.filter((area: any) =>
       area.name.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
   }
+
+  filterByCategory(category: filterCaterogy): void {
+    switch (category.name) {
+      case "Charging Outlets":
+        this.filteredStudyAreas = this.studyAreas.filter(area => area.chargingOutlets === true);
+        break;
+  
+      case "Cleanliness Rating":
+        this.filteredStudyAreas = this.studyAreas.filter(area => area.cleanlinessRating >= 3);
+        break;
+  
+      case "Accessible":
+        this.filteredStudyAreas = this.studyAreas.filter(area => area.accessible === true);
+        break;
+  
+      case "Loudness":
+        this.filteredStudyAreas = this.studyAreas.filter(area => area.loudness <= 3);
+        break;
+  
+      case "Business":
+        this.filteredStudyAreas = this.studyAreas.filter(area => area.business <= 3);
+        break;
+  
+      case "Opening":
+        this.filteredStudyAreas = this.studyAreas.filter(area => area.opening >= 7 && area.closing <= 20);
+        break;
+  
+      default:
+        console.warn("Unknown category:", category.name);
+        break;
+    }
+  }
+  
+  
+
 }

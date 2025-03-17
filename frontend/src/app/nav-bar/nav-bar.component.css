@@ -1,0 +1,35 @@
+.navbar {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100.0%;
+  height: 15.0%;
+  top: 0px;
+  background-color: #ffffff;
+  color: #000000;
+  font: 500 20px/32px Roboto, "Helvetica Neue", sans-serif;
+}
+
+.logo_container {
+  height: 100%;
+  display: flex;
+  margin-left: 0.75%;
+  justify-content: center;
+  text-align: center;
+}
+
+img {
+  height: 90.0%;
+}
+
+ul {
+  display: flex;
+  text-align: center;
+}
+
+li {
+  display: inline;
+  padding: 20px;
+  font-size: 30px;
+}

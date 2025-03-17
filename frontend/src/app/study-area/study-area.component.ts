@@ -30,7 +30,6 @@ export class StudyAreaComponent implements OnInit {
   ]; // Stub database
   filteredStudyAreas: any[] = [];
   selectedStudyArea: any = null;
-  isSlidingOut: boolean = false;
   searchTerm: string = '';
   selectedCategory: filterCaterogy = { name: '', value: false };
   ratings: number[] = [0, 0];
@@ -57,19 +56,12 @@ export class StudyAreaComponent implements OnInit {
 
   onSelectStudyArea(studyArea: any): void {
     if (this.selectedStudyArea === studyArea) { // Unselected study space
-      // Trigger slide-out animation
-      this.isSlidingOut = true;
-      // Wait for the animation to complete before deselecting
-      setTimeout(() => {
-        this.selectedStudyArea = null;
-        this.isSlidingOut = false;
-      }, 500); // Match the duration of the slideOut animation
+      this.selectedStudyArea = null;
       this.studyMapService.changeData([]);
     } else { // Selected study space
       this.selectedStudyArea = studyArea;
-      this.getRatings(studyArea._links.self.href.split('/').pop());
-      this.isSlidingOut = false;
       this.studyMapService.changeData([studyArea.location.latitude, studyArea.location.longitude]);
+      this.getRatings(studyArea._links.self.href.split('/').pop());
     }
   }
 
@@ -104,33 +96,24 @@ export class StudyAreaComponent implements OnInit {
       case "Charging Outlets":
         this.filteredStudyAreas = this.studyAreas.filter(area => area.chargingOutlets === true);
         break;
-  
       case "Cleanliness Rating":
         this.filteredStudyAreas = this.studyAreas.filter(area => area.cleanlinessRating >= 3);
         break;
-  
       case "Accessible":
         this.filteredStudyAreas = this.studyAreas.filter(area => area.accessible === true);
         break;
-  
       case "Loudness":
         this.filteredStudyAreas = this.studyAreas.filter(area => area.loudness <= 3);
         break;
-  
       case "Business":
         this.filteredStudyAreas = this.studyAreas.filter(area => area.business <= 3);
         break;
-  
       case "Opening":
         this.filteredStudyAreas = this.studyAreas.filter(area => area.opening >= 7 && area.closing <= 20);
         break;
-  
       default:
         console.warn("Unknown category:", category.name);
         break;
     }
   }
-  
-  
-
 }

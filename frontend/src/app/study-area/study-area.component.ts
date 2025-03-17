@@ -30,7 +30,6 @@ export class StudyAreaComponent implements OnInit {
   ]; // Stub database
   filteredStudyAreas: any[] = [];
   selectedStudyArea: any = null;
-  isSlidingOut: boolean = false;
   searchTerm: string = '';
   selectedCategory: filterCaterogy = { name: '', value: false };
   ratings: number[] = [0, 0];
@@ -57,19 +56,12 @@ export class StudyAreaComponent implements OnInit {
 
   onSelectStudyArea(studyArea: any): void {
     if (this.selectedStudyArea === studyArea) { // Unselected study space
-      // Trigger slide-out animation
-      this.isSlidingOut = true;
-      // Wait for the animation to complete before deselecting
-      setTimeout(() => {
-        this.selectedStudyArea = null;
-        this.isSlidingOut = false;
-      }, 500); // Match the duration of the slideOut animation
+      this.selectedStudyArea = null;
       this.studyMapService.changeData([]);
     } else { // Selected study space
       this.selectedStudyArea = studyArea;
-      this.getRatings(studyArea._links.self.href.split('/').pop());
-      this.isSlidingOut = false;
       this.studyMapService.changeData([studyArea.location.latitude, studyArea.location.longitude]);
+      this.getRatings(studyArea._links.self.href.split('/').pop());
     }
   }
 

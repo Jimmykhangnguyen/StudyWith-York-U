@@ -1,22 +1,31 @@
 .navbar {
   position: absolute;
-  width: 100%;
-  height: 6.0%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100.0%;
+  height: 15.0%;
   top: 0px;
-  background-color: #E31837;
-  color: #ffffff;
+  background-color: #ffffff;
+  color: #000000;
   font: 500 20px/32px Roboto, "Helvetica Neue", sans-serif;
 }
 
+.logo_container {
+  height: 100%;
+  display: flex;
+  margin-left: 0.75%;
+  justify-content: center;
+  text-align: center;
+}
+
 img {
-  position: absolute;
-  padding: 0.25%;
-  height: 82.5%;
-  background-color: #ffffff;
+  height: 90.0%;
 }
 
 ul {
-  float: right;
+  display: flex;
+  text-align: center;
 }
 
 li {

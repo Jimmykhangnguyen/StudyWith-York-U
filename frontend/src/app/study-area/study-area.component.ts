@@ -96,33 +96,24 @@ export class StudyAreaComponent implements OnInit {
       case "Charging Outlets":
         this.filteredStudyAreas = this.studyAreas.filter(area => area.chargingOutlets === true);
         break;
-  
       case "Cleanliness Rating":
         this.filteredStudyAreas = this.studyAreas.filter(area => area.cleanlinessRating >= 3);
         break;
-  
       case "Accessible":
         this.filteredStudyAreas = this.studyAreas.filter(area => area.accessible === true);
         break;
-  
       case "Loudness":
         this.filteredStudyAreas = this.studyAreas.filter(area => area.loudness <= 3);
         break;
-  
       case "Business":
         this.filteredStudyAreas = this.studyAreas.filter(area => area.business <= 3);
         break;
-  
       case "Opening":
         this.filteredStudyAreas = this.studyAreas.filter(area => area.opening >= 7 && area.closing <= 20);
         break;
-  
       default:
         console.warn("Unknown category:", category.name);
         break;
     }
   }
-  
-  
-
 }

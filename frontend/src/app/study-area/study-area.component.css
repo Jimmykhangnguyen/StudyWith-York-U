@@ -1,18 +1,16 @@
-
-
 .study-area {
   position: absolute;
   z-index: 2;
   width: 22%;
-  left: 16px;
-  bottom: 16px;
+  left: 0.75%;
+  top: 7.5%;
+  bottom: 1.75%;
   border-radius: 12px;
   background-color: #E31837;
   font-size: 20px;
   display: flex;
   flex-direction: column;
   text-align: center;
-  top: 20px;
 }
 
 h2 {
@@ -69,6 +67,7 @@ ul {
   width: 90%;
   height: 60px;
   text-align: center;
+  overflow: auto;
 }
 
 

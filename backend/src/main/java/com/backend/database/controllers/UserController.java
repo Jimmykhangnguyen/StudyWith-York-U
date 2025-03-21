@@ -17,17 +17,17 @@ import com.backend.database.resources.UserRequest;
 public class UserController {
 
 	private final UserRepository userRepository; 
-	
+
 	public UserController(UserRepository userRepository) {
 		this.userRepository = userRepository;
 	}
-	
+
 	//get all the User stored in database
 	@GetMapping("/users")
 	public ResponseEntity<List<User>> getAllUsers(){
 		return ResponseEntity.ok(this.userRepository.findAll());
 	}
-	
+
 	//create a User area object
 	@PostMapping("/register")
 	public ResponseEntity<User> registerUser(@RequestBody UserRequest userRequest){
@@ -36,10 +36,10 @@ public class UserController {
 				userRequest.getEmail(),
 				userRequest.getPassword()
 				);
-	
+
 		return ResponseEntity.status(201).body(this.userRepository.save(user));
 	}
-	
-	
-	
+
+
+
 }

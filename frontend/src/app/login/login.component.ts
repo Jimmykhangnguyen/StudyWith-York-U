@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms'; // Import FormsModule for ngModel
-import { Router } from '@angular/router';  // Import Router to make page transitions
+import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -14,15 +15,43 @@ export class LoginComponent {
   email: string = '';
   password: string = '';
   loginError: boolean = false;
+  errorMessage: string = '';
 
-  //use a router to make transitions between pages
-  constructor(private router: Router) {}
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
 
-  // When login button is clicked move to 'map'
+  constructor(private router: Router, private http: HttpClient) {}
+
+  // When login button is clicked, move to 'map'
+  //map includes (study area, mao and navBar compoennts in msp-layout component)
   onSubmit() {
-    // For demo, assume login is always successful to redirect to the map
-    this.router.navigate(['/map']).then(() => {
-      location.reload();
-    });
+    console.log('Form Submitted');
+    const loginData = {
+      email: this.email,
+      password: this.password
+    };
+
+    this.http.post('http://localhost:8080/login', loginData, {
+  headers: this.httpOptions.headers,
+  responseType: 'text' // messages from database: Login Succseful, User not found, Invalid creidentials
+}).subscribe({
+  next: (response) => {
+    console.log('Login successful:', response);
+    if (response === 'Login successful') {
+      this.router.navigate(['/map']).then(() => {
+        location.reload(); 
+      });
+    } else {
+      this.errorMessage = 'Error';
+      this.loginError = true;
+    }
+  },
+  error: (error) => {
+    console.error('Login error:', error);
+    this.errorMessage = error.error || 'Invalid email or password. Please try again.';
+    this.loginError = true;
+  }
+});
   }
 }

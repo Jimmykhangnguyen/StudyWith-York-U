@@ -28,6 +28,13 @@ public class UserRequest {
     public String getPassword() {
         return password;
     }
+    
+    @Override
+    public String toString() {
+        return "UserRequest{email='" + email + "password= ****";
+    }
+    
+    
 
 }
 

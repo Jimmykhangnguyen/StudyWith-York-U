@@ -19,6 +19,16 @@ public class StudyArea {
 	private Location location; //will store the longitude and latitude of each study area
 	private int totalRatingSum;  // Sum of all ratings given
     private int totalRatingCount; // Number of ratings given
+	private int totalBusynessCount; 
+	private double avgBusiness;
+	private double avgClean; 
+	private double avgRating; 
+	private int totalCleanCount; 
+	private int totalLoudCount; 
+	private double avgLoud; 
+	private int totalBusynessRating;
+	private int totalCleanRating; 
+	private int totalLoudnessRating; 
 
 	//Nested static class for location, to access the location  longitude and latitude to avoid creating an instance of location class
 	public static class Location {
@@ -175,7 +185,44 @@ public class StudyArea {
 	        this.totalRatingCount++;
 		}
 	}
-	
+	public void addBusynessRating(int rating){
+		if(rating>=1 && rating<=5) {
+			this.totalBusynessRating += rating;
+			this.totalBusynessCount++; 
+	}
+}
+
+	public double getAvgBusinessRating(){
+if (totalBusynessCount == 0){
+	return 0; 
+} else {
+	avgBusiness = (double) totalBusynessRating/totalBusynessCount;
+	return avgBusiness; 
+}
+	}
+
+	public void addCleanlinessRating(int rating){
+		if(rating>=1 && rating<=5) {
+			this.totalCleanRating += rating;
+	        this.totalCleanCount++; 
+	}
+}
+    public double getAvgClean(){
+		if (totalCleanCount == 0){
+			return 0; 
+		} else {
+            avgClean = (double) cleanlinessRating/totalCleanCount;
+			return avgClean ; 
+		}
+}
+
+	public int getBusinessCount(){
+		return totalBusynessCount; 
+	}
+public int getCleanCount(){
+	return totalCleanCount; 
+}
+
 	public int getTotalRatingSum() {
 		return totalRatingSum;
 	}
@@ -187,10 +234,43 @@ public class StudyArea {
 	public double getAverageUserRating() {
 		if(totalRatingCount==0) {
 			return 0.0;
+		} else {
+			avgRating = (double) totalRatingSum/totalRatingCount; 
+			return avgRating;	//calculate avg of ratings as new ones are added by the users 
 		}
-		return (double) totalRatingSum/totalRatingCount ;	//calculate avg of ratings as new ones are added by the users 
 	}
 
+	public void addLoudRating(int rating){
+		if(rating>=1 && rating<=5) {
+			this.totalLoudnessRating += rating;
+	        this.totalLoudCount++; 
+	}
+	}
+
+	public int getLoudCount(){
+		return totalLoudCount; 
+	}
+
+	public double getAvgLoud(){
+		if (totalLoudCount == 0){
+			return 0; 
+		} else{
+			avgLoud = (double) loudness/totalLoudCount; 
+			return avgLoud; 
+		}
+	}
+
+	public int getTotalBusyRatings(){
+		return totalBusynessRating; 
+	}
+
+	public int getTotalCleanRatings(){
+		return totalCleanRating; 
+	}
+
+	public int getTotalLoudRatings(){
+		return totalLoudnessRating; 
+	}
 
 	public int getOpening(){
 		return this.openingTime;

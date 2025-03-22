@@ -16,6 +16,15 @@ public class StudyAreaRequest {
 	private int business; 
 	private int totalRatingSum;  // Sum of all ratings given
 	private int totalRatingCount; // Number of ratings given
+	private double avgBusiness;
+	private double avgClean; 
+	private double avgLoud; 
+	private int totalBusynessCount;
+	private int totalBusynessRating; 
+	private int totalCleanCount;
+	private int totalCleanliness; 
+	private int totalLoudCount; 
+	private int totalLoudness; 		
 
 	//Location static nested class for longitude and latitude request
 	public static class Location {
@@ -42,7 +51,7 @@ public class StudyAreaRequest {
 	public StudyAreaRequest() {
 		
 	}
-	public StudyAreaRequest(String id, String name, boolean chargingOutlets, int cleanlinessRating, boolean accessible, int loudness, Location location, int openingTime, int closingTime, int business, int totalRatingSum, int totalRatingCount) {
+	public StudyAreaRequest(String id, String name, boolean chargingOutlets, int cleanlinessRating, boolean accessible, int loudness, Location location, int openingTime, int closingTime, int business, int totalRatingSum, int totalRatingCount, double avgBusiness, double avgClean, double avgLoud, int totalBusynessCount, int totalBusynessRating, int totalCleanCount, int totalCleanliness, int totalLoudCount, int totalLoudness) {
 		this.id = id;
 		this.name = name;
 		this.chargingOutlets = chargingOutlets;
@@ -55,6 +64,15 @@ public class StudyAreaRequest {
 		this.business = business; 
 		this.totalRatingSum = totalRatingSum;
 		this.totalRatingCount = totalRatingCount;
+		this.avgBusiness = avgBusiness; 
+		this.avgClean = avgClean;
+		this.avgLoud = avgLoud; 
+		this.totalBusynessCount = totalBusynessCount;
+		this.totalBusynessRating = totalBusynessRating;
+		this.totalCleanCount = totalCleanCount; 
+		this.totalCleanliness = totalCleanliness;
+		this.totalLoudCount = totalLoudCount; 
+		this.totalLoudness = totalLoudness; 
 	}
 	
 	//getters
@@ -107,4 +125,42 @@ public class StudyAreaRequest {
 	public int getTotalRatingCount() {
 		return totalRatingCount;
 	}	
+
+	public double getAvgBusinessRating(){
+		return this.avgBusiness; 
+	}
+
+	public double getAvgCleanRating(){
+		return avgClean; 
+	}
+
+	public double getAvgLoudRating(){
+		return avgLoud; 
+	}
+
+	public int getTotalBusyRatings(){
+		return totalBusynessRating;
+	}
+
+	public int getTotalCleanRatings(){
+		return totalCleanliness;
+	}
+
+	public int getTotalLoudRatings(){
+		return totalLoudness; 
+	}
+
+	public int getBusinessCount(){
+		return totalBusynessCount; 
+	}
+public int getCleanCount(){
+	return totalCleanCount; 
+}
+
+public int getLoudCount(){
+	return totalLoudCount; 
+}
+
+
+	
 }

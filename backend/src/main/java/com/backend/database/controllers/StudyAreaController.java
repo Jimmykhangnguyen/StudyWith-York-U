@@ -81,6 +81,16 @@ public class StudyAreaController {
 			Map<String, Object> response = new HashMap<>();
 			response.put("totalRatingSum", studyArea.getTotalRatingSum());
 			response.put("totalRatingCount", studyArea.getTotalRatingCount());
+			response.put("avgRating", studyArea.getAverageUserRating()); 
+			response.put("totalBusynessRating", studyArea.getTotalBusyRatings()); 
+			response.put("totalBusynessCount", studyArea.getBusinessCount());
+			response.put("avgBusynessRating", studyArea.getAvgBusinessRating()); 
+			response.put("totalCleanliness", studyArea.getTotalCleanRatings());
+			response.put("totalCleanlinessCount", studyArea.getCleanCount()); 
+			response.put("avgCleanRating", studyArea.getAvgClean());
+			response.put("totalLoudness", studyArea.getTotalLoudRatings());
+			response.put("totalLoudnessCount", studyArea.getLoudCount());
+			response.put("avgLoudRating", studyArea.getAvgLoud()); 
 			return ResponseEntity.ok(response);
 		}
 		return ResponseEntity.status(404).body(Map.of("error", "Study area not found."));

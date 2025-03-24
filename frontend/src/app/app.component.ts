@@ -4,12 +4,13 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { MapComponent } from './map/map.component';
 import { StudyAreaComponent } from './study-area/study-area.component';
 import { LoginComponent } from './login/login.component';
-import { HttpClientModule } from '@angular/common/http'; // Add this import
+import { HttpClientModule } from '@angular/common/http';
+import { StarRatingModule } from 'angular-star-rating';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavBarComponent, MapComponent, StudyAreaComponent, HttpClientModule, LoginComponent],
+  imports: [RouterOutlet, NavBarComponent, MapComponent, StudyAreaComponent, HttpClientModule, LoginComponent, StarRatingModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

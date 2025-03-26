@@ -6,7 +6,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { StudyMapService } from '../study-map-service/study-map-service';
-import { RatingModule } from 'primeng/rating';
 
 interface filterCaterogy {
   name: string;
@@ -16,7 +15,7 @@ interface filterCaterogy {
 @Component({
   selector: 'app-study-area',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatFormFieldModule, MatSelectModule, MatInputModule, RatingModule],
+  imports: [CommonModule, FormsModule, MatFormFieldModule, MatSelectModule, MatInputModule],
   templateUrl: './study-area.component.html',
   styleUrls: ['./study-area.component.css']
 })

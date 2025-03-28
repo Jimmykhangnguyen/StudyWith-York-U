@@ -27,12 +27,24 @@ export class MapComponent implements OnInit {
   ]);
   rating: number = 0;
   questions: number = 1;
+  questionTexts: string[] = [
+    "How clean is the space?",
+    "How quiet is the space?",
+    "How busy is the space?"
+  ];
+  questionLabels: string[][] = [
+    ["Very Dirty", "Very Clean"],
+    ["Very Noisy", "Very Quiet"],
+    ["Very Busy", "Very Empty"]
+  ]
 
   setRating(value: number) {
     this.rating = value;
-    if (this.questions < 3) {
-      this.questions++;
-    }
+    setTimeout(() => {
+      if (this.questions < 3) {
+        this.questions++;
+      }
+    }, 500);
   }
 
   constructor(private studyMapService: StudyMapService) {}

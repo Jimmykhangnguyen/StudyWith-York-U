@@ -30,21 +30,34 @@ export class MapComponent implements OnInit {
   questionTexts: string[] = [
     "How clean is the space?",
     "How quiet is the space?",
-    "How busy is the space?"
+    "How busy is the space?",
+    "Thank you for your feedback!"
   ];
   questionLabels: string[][] = [
     ["Very Dirty", "Very Clean"],
     ["Very Noisy", "Very Quiet"],
-    ["Very Busy", "Very Empty"]
-  ]
+    ["Very Busy", "Very Empty"],
+    ["", ""]
+  ];
+  fadeOut: boolean = false;
 
   setRating(value: number) {
-    this.rating = value;
-    setTimeout(() => {
-      if (this.questions < 3) {
-        this.questions++;
-      }
-    }, 500);
+    if (this.questions < 4) {
+      this.rating = value;
+      this.fadeOut = true;
+
+      setTimeout(() => {
+        if (this.questions < 4) {
+          this.questions++;
+        }
+        this.fadeOut = false;
+        if (this.questions == 4) {
+          this.rating = 5;
+        } else {
+          this.rating = 0;
+        }
+      }, 500);
+    }
   }
 
   constructor(private studyMapService: StudyMapService) {}

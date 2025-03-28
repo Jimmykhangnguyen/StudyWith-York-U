@@ -1,7 +1,7 @@
 .study-area {
   position: absolute;
   z-index: 2;
-  width: 22%;
+  width: 28%;
   left: 0.75%;
   top: 15.0%;
   bottom: 1.75%;
@@ -13,19 +13,13 @@
   text-align: center;
 }
 
-h2 {
+#pageTitle {
+  padding-left: 18px;
   margin-top: 18px;
   color: #ffffff;
   font-weight: bold;
   text-align: left;
   font-size: 2.60ch;
-  padding-left: 18px;
-}
-
-h3 {
-  margin-top: 5px;
-  font-size: 20px;
-  size: 20px;
 }
 
 #searchBar {
@@ -58,28 +52,85 @@ ul {
 
 .studyPlacesButton {
   background: #ffffff;
-  background-size: 200% 100%;
+  margin-top: 5%;
   color: #000000;
   font-size: 20px;
   cursor: pointer;
-  border-radius: 5px;
-  margin-top: 5%;
+  border-radius: 10px;
+  border: 2px solid black;
   width: 90%;
-  height: 60px;
+  height: auto;
+  text-align: center;
+  padding-left: 18px;
+}
+
+.nameAndStars {
+  margin-top: 15px;
+  line-height: 10px;
+  display:flex;
+  flex-direction: row;
+  align-items: baseline;
   text-align: center;
 }
 
 
-.studyPlacesButton:hover {
-  background-position: left;
-  background: gold
+.lowerStudyCard {
+  display: flex;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  flex-direction: column;
+  align-items: start;
+  text-align: left;
+  line-height: 10px;
 }
 
-.selectedCSS {
-  margin: -7.5px -7.5px;
-  background: gold;
-  height: auto;
-  cursor: pointer;
-  border-radius: 5px;
-  border: 2px solid black;
+.generalStudyInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  width: 100%;
+}
+
+.library-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: black;
+}
+
+.library-distance {
+  color: #4a5568;
+}
+
+.library-hours {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.library-address {
+  color: #2d3748;
+  font-size: 1.2rem;
+}
+
+.library-rating {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  margin-left: 17%;
+}
+
+.star-filled {
+  color: #e53e3e;
+  font-size: 2.3rem;
+}
+
+.star-empty {
+  color: #a0aec0;
+  font-size: 2.3rem;
+}
+
+.library-tags {
+  color: #e53e3e;
+  margin-top: 8px;
 }

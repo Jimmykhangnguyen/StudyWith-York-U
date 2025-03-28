@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.backend.database.models.User;
@@ -32,12 +33,13 @@ public class UserController {
     @PostMapping("/register")
     public ResponseEntity<User> registerUser(@RequestBody UserRequest userRequest) {
         String password = userRequest.getPassword();
+        String email = userRequest.getEmail();
 
-        if (!isPasswordValid(password)) {
+        if (!isPasswordValid(password) || !isEmailUnique(email)) {
             return ResponseEntity.badRequest().body(null);
         }
 
-        // Password is Hased using BCrypt, if password is valid
+        // Password is Hased using BCrypt, if password is valid and email is unique 
         String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
 
         User user = new User(
@@ -70,6 +72,11 @@ public class UserController {
         }
     }
     
+    //end-point to check for email uniqueness
+    @GetMapping("/check-email")
+    public ResponseEntity<Boolean> checkEmail(@RequestParam String email) {
+        return ResponseEntity.ok(isEmailUnique(email));
+    }
 
     // Password must be 8 - 20 chars long, one capital, and at least one number.
     private boolean isPasswordValid(String password) {
@@ -77,5 +84,15 @@ public class UserController {
                password.length() <= 20 &&
                password.matches(".*[A-Z].*") && 
                password.matches(".*[0-9].*");
+    }
+    
+ // Email must be unique and include a @ and .com or .ca
+    private boolean isEmailUnique(String email) {
+    	  if (!email.matches(".*[@].*") || (!email.matches(".*\\.com$") && !email.matches(".*\\.ca$"))) {
+    	        return false;  
+    	    }
+    	  User userExist = userRepository.findByEmail(email);
+		return userExist == null; 
+        
     }
 }

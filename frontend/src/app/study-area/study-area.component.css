@@ -1,7 +1,7 @@
 .study-area {
   position: absolute;
   z-index: 2;
-  width: 22%;
+  width: 27%;
   left: 0.75%;
   top: 15.0%;
   bottom: 1.75%;
@@ -69,15 +69,9 @@ ul {
   text-align: center;
 }
 
-
-.studyPlacesButton:hover {
-  background-position: left;
-  background: gold
-}
-
 .selectedCSS {
   margin: -7.5px -7.5px;
-  background: gold;
+  background: white;
   height: auto;
   cursor: pointer;
   border-radius: 5px;

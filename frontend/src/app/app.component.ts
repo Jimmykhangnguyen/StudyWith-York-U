@@ -4,7 +4,7 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { MapComponent } from './map/map.component';
 import { StudyAreaComponent } from './study-area/study-area.component';
 import { LoginComponent } from './login/login.component';
-import { HttpClientModule } from '@angular/common/http'; // Add this import
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',

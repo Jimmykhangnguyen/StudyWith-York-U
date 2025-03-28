@@ -25,7 +25,7 @@ export class LoginComponent {
 
   // When login button is clicked, move to 'map'
   //map includes (study area, mao and navBar compoennts in msp-layout component)
-  onSubmit() {
+  onLoginSubmit() {
     console.log('Form Submitted');
     const loginData = {
       email: this.email,
@@ -53,5 +53,10 @@ export class LoginComponent {
     this.loginError = true;
   }
 });
+  }
+
+
+  registerRoute() {
+    this.router.navigate(['/register']);
   }
 }

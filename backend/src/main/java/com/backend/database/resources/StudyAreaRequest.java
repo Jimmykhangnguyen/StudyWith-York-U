@@ -13,10 +13,10 @@ public class StudyAreaRequest {
 	private Location location;
 	private int openingTime;
 	private int closingTime; 
-	private int business; 
+	private int busyness; 
 	private int totalRatingSum;  // Sum of all ratings given
 	private int totalRatingCount; // Number of ratings given
-	private double avgBusiness;
+	private double avgBusyness;
 	private double avgClean; 
 	private double avgLoud; 
 	private int totalBusynessCount;
@@ -51,7 +51,7 @@ public class StudyAreaRequest {
 	public StudyAreaRequest() {
 		
 	}
-	public StudyAreaRequest(String id, String name, boolean chargingOutlets, int cleanlinessRating, boolean accessible, int loudness, Location location, int openingTime, int closingTime, int business, int totalRatingSum, int totalRatingCount, double avgBusiness, double avgClean, double avgLoud, int totalBusynessCount, int totalBusynessRating, int totalCleanCount, int totalCleanliness, int totalLoudCount, int totalLoudness) {
+	public StudyAreaRequest(String id, String name, boolean chargingOutlets, int cleanlinessRating, boolean accessible, int loudness, Location location, int openingTime, int closingTime, int busyness, int totalRatingSum, int totalRatingCount, double avgBusyness, double avgClean, double avgLoud, int totalBusynessCount, int totalBusynessRating, int totalCleanCount, int totalCleanliness, int totalLoudCount, int totalLoudness) {
 		this.id = id;
 		this.name = name;
 		this.chargingOutlets = chargingOutlets;
@@ -61,10 +61,10 @@ public class StudyAreaRequest {
 		this.location = location;
 		this.openingTime = openingTime;
 		this.closingTime = closingTime; 
-		this.business = business; 
+		this.busyness = busyness; 
 		this.totalRatingSum = totalRatingSum;
 		this.totalRatingCount = totalRatingCount;
-		this.avgBusiness = avgBusiness; 
+		this.avgBusyness = avgBusyness; 
 		this.avgClean = avgClean;
 		this.avgLoud = avgLoud; 
 		this.totalBusynessCount = totalBusynessCount;
@@ -114,8 +114,8 @@ public class StudyAreaRequest {
 		return this.closingTime; 
 	}
 
-	public int getBusiness(){
-		return this.business; 
+	public int getBusyness(){
+		return this.busyness; 
 	}
 	
 	public int getTotalRatingSum() {
@@ -126,8 +126,8 @@ public class StudyAreaRequest {
 		return totalRatingCount;
 	}	
 
-	public double getAvgBusinessRating(){
-		return this.avgBusiness; 
+	public double getAvgBusynessRating(){
+		return this.avgBusyness; 
 	}
 
 	public double getAvgCleanRating(){

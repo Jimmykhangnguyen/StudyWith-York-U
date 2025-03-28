@@ -83,8 +83,8 @@ public class StudyAreaController {
 			response.put("totalRatingCount", studyArea.getTotalRatingCount());
 			response.put("avgRating", studyArea.getAverageUserRating()); 
 			response.put("totalBusynessRating", studyArea.getTotalBusyRatings()); 
-			response.put("totalBusynessCount", studyArea.getBusinessCount());
-			response.put("avgBusynessRating", studyArea.getAvgBusinessRating()); 
+			response.put("totalBusynessCount", studyArea.getBusynessCount());
+			response.put("avgBusynessRating", studyArea.getAvgBusynessRating()); 
 			response.put("totalCleanliness", studyArea.getTotalCleanRatings());
 			response.put("totalCleanlinessCount", studyArea.getCleanCount()); 
 			response.put("avgCleanRating", studyArea.getAvgClean());

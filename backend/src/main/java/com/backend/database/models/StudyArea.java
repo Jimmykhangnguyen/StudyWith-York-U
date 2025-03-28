@@ -13,14 +13,14 @@ public class StudyArea {
 	private int cleanlinessRating; //1-5 scale from student ratings
 	private boolean accessible; 
 	private int loudness; //1-5 scale from student ratings
-	private int business; // Rating from 0-5 based on time & ratings(coming in ITR2) (0 is closed, 1 is less busy, 5 is very busy)
+	private int busyness; // Rating from 0-5 based on time & ratings(coming in ITR2) (0 is closed, 1 is less busy, 5 is very busy)
 	private int openingTime; 
 	private int closingTime; 
 	private Location location; //will store the longitude and latitude of each study area
 	private int totalRatingSum;  // Sum of all ratings given
     private int totalRatingCount; // Number of ratings given
 	private int totalBusynessCount; 
-	private double avgBusiness;
+	private double avgBusyness;
 	private double avgClean; 
 	private double avgRating; 
 	private int totalCleanCount; 
@@ -63,7 +63,7 @@ public class StudyArea {
 	public StudyArea() {
 		
 	}
-	public StudyArea(String name, boolean chargingOutlets, int cleanlinessRating, boolean accessible, int loudness, Location location, int openingTime, int closingTime, int business) {
+	public StudyArea(String name, boolean chargingOutlets, int cleanlinessRating, boolean accessible, int loudness, Location location, int openingTime, int closingTime, int busyness) {
 		//if cleanliness and loudness fall out of rating range throw an exception
 		if(cleanlinessRating < 1 || cleanlinessRating > 5) {
 			throw new IllegalArgumentException("Cleanliness rating must be between 1 and 5");
@@ -81,7 +81,7 @@ public class StudyArea {
 		this.location = location;
 		this.openingTime = openingTime;
 		this.closingTime = closingTime; 
-		this.business = business; 
+		this.busyness = busyness; 
 	}
 	
 	//getters and setters
@@ -142,7 +142,7 @@ public class StudyArea {
 		this.location = location;
 	}
 	
-	public int getBusiness(){
+	public int getBusyness(){
 		// Calendar cal = Calendar.getInstance(); 
 		// int hour = cal.get(Calendar.HOUR_OF_DAY);
 
@@ -175,7 +175,7 @@ public class StudyArea {
 		// 		this.business = 0; 
 		// }
 		// }
-		return this.business; 
+		return this.busyness; 
 	
 	}
 	
@@ -192,12 +192,12 @@ public class StudyArea {
 	}
 }
 
-	public double getAvgBusinessRating(){
+	public double getAvgBusynessRating(){
 if (totalBusynessCount == 0){
 	return 0; 
 } else {
-	avgBusiness = (double) totalBusynessRating/totalBusynessCount;
-	return avgBusiness; 
+	avgBusyness = (double) totalBusynessRating/totalBusynessCount;
+	return avgBusyness; 
 }
 	}
 
@@ -216,7 +216,7 @@ if (totalBusynessCount == 0){
 		}
 }
 
-	public int getBusinessCount(){
+	public int getBusynessCount(){
 		return totalBusynessCount; 
 	}
 public int getCleanCount(){

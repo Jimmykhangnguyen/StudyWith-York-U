@@ -45,6 +45,7 @@ li {
 a {
   color: #000000;
   text-decoration: none;
+  font-size: 1.5rem;
 }
 
 .active-link {
@@ -61,7 +62,7 @@ button {
   border-radius: 10px;
   border-width: 0px;
   color: white;
-  font-size: 25px;
+  font-size: 1.5rem;
   padding-left: 5px;
   padding: 10px 20px;
   cursor: pointer;

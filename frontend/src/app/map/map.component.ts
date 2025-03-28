@@ -25,7 +25,7 @@ export class MapComponent implements OnInit {
     ['start', '#3887be'],
     ['end', '#f30']
   ]);
-  rating: number = 3;
+  rating: number = 0;
   questions: number = 1;
 
   setRating(value: number) {

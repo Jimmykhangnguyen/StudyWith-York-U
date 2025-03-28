@@ -31,8 +31,10 @@ export class MapComponent implements OnInit {
     this.map = new mapboxgl.Map({
       accessToken: environment.accessToken,
       container: 'map',
-      style: 'mapbox://styles/jimmykhang/cm701v76n007w01qu16uy4vvu',
-      zoom: 9,
+      style: 'mapbox://styles/jimmykhang/cm8s5qptw00j701sdbuur5s5a',
+      zoom: 0,
+      dragRotate: false,
+      pitchWithRotate: false,
       maxBounds: [[-79.51440, 43.76300], [-79.49500, 43.78147]],
     });
     let onStartPoint = false;

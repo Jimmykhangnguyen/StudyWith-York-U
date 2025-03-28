@@ -44,7 +44,7 @@ public class StudyAreaController {
 			   new StudyArea.Location(studyAreaRequest.getLocation().getLongitude(), studyAreaRequest.getLocation().getLatitude()),
 	            studyAreaRequest.getOpening(),
 				studyAreaRequest.getClosing(),
-				studyAreaRequest.getBusiness()
+				studyAreaRequest.getBusyness()
 	        );
 		
 		return ResponseEntity.status(201).body(this.studyAreaRepository.save(studyArea));

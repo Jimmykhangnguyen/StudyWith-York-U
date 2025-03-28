@@ -26,7 +26,6 @@
     "@popperjs/core": "~2.11.8",
     "express": "^4.18.2",
     "mapbox-gl": "^3.9.4",
-    "ng-starrating": "^1.0.20",
     "rm-ng-star-rating": "^2.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.8.1",

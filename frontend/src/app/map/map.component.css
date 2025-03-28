@@ -8,6 +8,7 @@
 }
 
 .map {
+  display: relative;
   height: 400px;
   width: 200px;
   right: 16px;
@@ -25,6 +26,7 @@
   position: absolute;
   margin: 20px;
   width: 22%;
+  height: 60%;
   top: 0;
   bottom: 30%;
   padding: 20px;
@@ -32,4 +34,57 @@
   background-color: #fff;
   overflow-y: scroll;
   font-family: sans-serif;
+}
+
+.rating-container {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  width: 300px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  font-family: Arial, sans-serif;
+  z-index: 1000;
+}
+
+.progress-bar {
+  height: 10px;
+  background: #f8d7da;
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.progress-bar .filled {
+  height: 100%;
+  background: red;
+  width: 60%;
+}
+
+.question {
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.stars {
+  font-size: 30px;
+  color: lightgray;
+  cursor: pointer;
+}
+
+.stars span {
+  padding: 5px;
+}
+
+.stars .filled {
+  color: red;
+}
+
+.labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  margin-top: 10px;
 }

@@ -4,3 +4,24 @@
   id="instructions"
 >
 </div>
+
+<div class="rating-container">
+  <div class="progress-bar">
+    <div class="filled" [style.width]="(questions / 3) * 100 + '%'"></div>
+  </div>
+  
+  <p class="question">How clean is the space?</p>
+
+  <div class="stars">
+    <span *ngFor="let star of [1, 2, 3, 4, 5]" 
+          (click)="setRating(star)" 
+          [class.filled]="star <= rating">
+      ★
+    </span>
+  </div>
+
+  <div class="labels">
+    <span>Very Dirty</span>
+    <span>Very Clean</span>
+  </div>
+</div>

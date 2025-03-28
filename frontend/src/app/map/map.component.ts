@@ -16,6 +16,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 export class MapComponent implements OnInit {
   map: any;
   showDirections = false;
+  showFeedback = false;
   points = new Map<string, any>([
     ['start', []],
     ['end', []]
@@ -24,6 +25,15 @@ export class MapComponent implements OnInit {
     ['start', '#3887be'],
     ['end', '#f30']
   ]);
+  rating: number = 3;
+  questions: number = 1;
+
+  setRating(value: number) {
+    this.rating = value;
+    if (this.questions < 3) {
+      this.questions++;
+    }
+  }
 
   constructor(private studyMapService: StudyMapService) {}
 

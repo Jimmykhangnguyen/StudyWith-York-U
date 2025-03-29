@@ -65,7 +65,7 @@ ul {
 }
 
 .nameAndStars {
-  width: 95%;
+  width: 100%;
   margin-top: 15px;
   line-height: 10px;
   display: flex;
@@ -112,23 +112,19 @@ ul {
   font-size: 1.05rem;
 }
 
-.library-rating {
+.stars {
+  font-size: 30px;
   display: flex;
   flex-direction: row;
-  align-items: center;
-  align-items: baseline;
-  text-align: center;
-  justify-content: center;
+  color: lightgray;
+  }
+
+.stars span {
+  padding: 5px;
 }
 
-.star-filled {
-  color: #e53e3e;
-  font-size: 2.3rem;
-}
-
-.star-empty {
-  color: #a0aec0;
-  font-size: 2.3rem;
+.stars .filled {
+  color: red;
 }
 
 .library-tags {

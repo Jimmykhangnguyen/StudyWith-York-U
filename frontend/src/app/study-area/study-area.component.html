@@ -32,12 +32,11 @@
       <div class="generalStudyInfo">
         <div class="nameAndStars">
           <h2 class="library-title">{{ area.name }}</h2>
-          <div class="library-rating">
-            <span class="star-filled">★</span>
-            <span class="star-filled">★</span>
-            <span class="star-filled">★</span>
-            <span class="star-empty">☆</span>
-            <span class="star-empty">☆</span>
+          <div class="stars">
+            <span *ngFor="let star of [1, 2, 3, 4, 5]" 
+                  [class.filled]="star <= area.totalRatingSum/(area.totalRatingCount+0.2) + 1">
+              ★
+            </span>
           </div>
         </div>
         <p class="library-distance">6.2 km away | 10 minutes away</p>

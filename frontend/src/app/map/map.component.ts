@@ -21,7 +21,7 @@ export class MapComponent implements OnInit {
     ['end', []]
   ]);
   pointColours = new Map<string, string>([
-    ['start', '#4a0000'],
+    ['start', '#3887be'],
     ['end', '#e53e3e']
   ]);
 

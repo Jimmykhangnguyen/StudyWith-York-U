@@ -6,7 +6,7 @@
   top: 15.0%;
   bottom: 1.75%;
   border-radius: 12px;
-  background-color: #E31837;
+  background-color: #e31836;
   font-size: 20px;
   display: flex;
   flex-direction: column;
@@ -123,7 +123,7 @@ ul {
 }
 
 .star-filled {
-  color: #e53e3e;
+  color: #e31836;
   font-size: 2.3rem;
 }
 
@@ -133,6 +133,6 @@ ul {
 }
 
 .library-tags {
-  color: #e53e3e;
+  color: #e31836;
   margin-top: 8px;
 }

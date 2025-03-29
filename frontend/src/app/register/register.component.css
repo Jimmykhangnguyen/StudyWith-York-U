@@ -1,60 +1,57 @@
-
 * {
-    margin: 0;
-    padding: 5px;
-    box-sizing: border-box;
-    font-weight: bold;
-    font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 5px;
+  box-sizing: border-box;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .body {
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    min-height: 100vh;
-    background: url("/assets/images/map_image.png") no-repeat;
-    background-size: cover;
-    padding-top: 100px;
-  }
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  min-height: 100vh;
+  background: url("/assets/images/map_image.png") no-repeat;
+  background-size: cover;
+  padding-top: 100px;
+}
 
-  .wrapper {
-    width: 480px;
-    background: url("/assets/images/StudyYorkULogo.png") no-repeat;
-    background-size: 100px;
-    background-position:center top; 
-    margin: auto;
-    text-align: center;
-    background-color: rgb(240, 240, 240); 
-    padding: 80px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.wrapper {
+  width: 480px;
+  background: url("/assets/images/StudyYorkULogo.png") no-repeat;
+  background-size: 100px;
+  background-position:center top; 
+  margin: auto;
+  text-align: center;
+  background-color: rgb(240, 240, 240); 
+  padding: 80px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
-
-    font-weight: bold;
+  font-weight: bold;
 }
 
 label {
-    font-weight: bold;
-    font-size: larger;
+  font-weight: bold;
+  font-size: larger;
 }
 
 button {
-    width: 100%;
-    background-color: #d42300;
-    color: white;
-    padding: 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
+  width: 100%;
+  background-color: #d42300;
+  color: white;
+  padding: 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
 }
   
-  .error-message {
-    color: #d9534f;
-    margin-top: 10px;
-    text-align: center;
-  }
-  
+.error-message {
+  color: #d9534f;
+  margin-top: 10px;
+  text-align: center;
+}
   

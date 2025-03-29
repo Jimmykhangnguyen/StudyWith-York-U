@@ -23,7 +23,7 @@ export class MapComponent implements OnInit {
   ]);
   pointColours = new Map<string, string>([
     ['start', '#3887be'],
-    ['end', '#e53e3e']
+    ['end', '#e31836']
   ]);
   rating: number = 0;
   questions: number = 1;
@@ -194,7 +194,7 @@ export class MapComponent implements OnInit {
           'line-cap': 'round'
         },
         paint: {
-          'line-color': '#e53e3e',
+          'line-color': '#e31836',
           'line-width': 5
         }
       });

@@ -16,6 +16,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 export class MapComponent implements OnInit {
   map: any;
   showDirections = false;
+  showFeedback = false;
   points = new Map<string, any>([
     ['start', []],
     ['end', []]
@@ -24,6 +25,40 @@ export class MapComponent implements OnInit {
     ['start', '#3887be'],
     ['end', '#f30']
   ]);
+  rating: number = 0;
+  questions: number = 1;
+  questionTexts: string[] = [
+    "How clean is the space?",
+    "How quiet is the space?",
+    "How busy is the space?",
+    "Thank you for your feedback!"
+  ];
+  questionLabels: string[][] = [
+    ["Very Dirty", "Very Clean"],
+    ["Very Noisy", "Very Quiet"],
+    ["Very Busy", "Very Empty"],
+    ["", ""]
+  ];
+  fadeOut: boolean = false;
+
+  setRating(value: number) {
+    if (this.questions < 4) {
+      this.rating = value;
+      this.fadeOut = true;
+
+      setTimeout(() => {
+        if (this.questions < 4) {
+          this.questions++;
+        }
+        this.fadeOut = false;
+        if (this.questions == 4) {
+          this.rating = 5;
+        } else {
+          this.rating = 0;
+        }
+      }, 500);
+    }
+  }
 
   constructor(private studyMapService: StudyMapService) {}
 

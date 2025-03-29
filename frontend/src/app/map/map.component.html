@@ -4,3 +4,26 @@
   id="instructions"
 >
 </div>
+
+<div class="rating-container" [ngClass]="{'fade-out': fadeOut, 'fade-in': !fadeOut}">
+  <div class="progress-bar">
+    <div class="segment" [class.filled]="questions >= 1"></div>
+    <div class="segment" [class.filled]="questions >= 2"></div>
+    <div class="segment" [class.filled]="questions >= 3"></div>
+  </div>
+  
+  <p class="question">{{ questionTexts[questions-1] }}</p>
+
+  <div class="stars">
+    <span *ngFor="let star of [1, 2, 3, 4, 5]" 
+          (click)="setRating(star)" 
+          [class.filled]="star <= rating">
+      ★
+    </span>
+  </div>
+
+  <div class="labels">
+    <span>{{ questionLabels[questions-1][0] }}</span>
+    <span>{{ questionLabels[questions-1][1] }}</span>
+  </div>
+</div>

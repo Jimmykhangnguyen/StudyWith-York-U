@@ -82,31 +82,31 @@ class StudyAreaTest {
 
 		if (studyArea.getLoudness() <= 3){
 			if (time < studyArea.getOpening()){
-				assertEquals(0, studyArea.getBusiness());
+				assertEquals(0, studyArea.getBusyness());
 			} else if (time <= 10 && time < studyArea.getClosing()){ // Early morning, before 10 AM
-				assertEquals(1, studyArea.getBusiness());
+				assertEquals(1, studyArea.getBusyness());
 			} else if (time <= 13 && time < studyArea.getClosing()){ //Lunchtime, between 11 AM and 1 PM
-				assertEquals(4, studyArea.getBusiness());
+				assertEquals(4, studyArea.getBusyness());
 			}  else if (time <= 18 && time < studyArea.getClosing()){ // Afternoon, between 2 and 6 PM
-				assertEquals(5, studyArea.getBusiness());
+				assertEquals(5, studyArea.getBusyness());
 			}else if (time <= 21 && time < studyArea.getClosing()){ // Evening, between 7PM and close
-				assertEquals(3, studyArea.getBusiness());
+				assertEquals(3, studyArea.getBusyness());
 			} else{
-				assertEquals(0, studyArea.getBusiness());
+				assertEquals(0, studyArea.getBusyness());
 			}
 		} else {
 			if (time < studyArea.getOpening()){
-				assertEquals(0, studyArea.getBusiness());
+				assertEquals(0, studyArea.getBusyness());
 			} else if (time <= 10 && time < studyArea.getClosing()){ // Early morning, before 10 AM
-				assertEquals(2, studyArea.getBusiness());
+				assertEquals(2, studyArea.getBusyness());
 			} else if (time <= 13 && time < studyArea.getClosing()){ //Lunchtime, between 11 AM and 1 PM
-				assertEquals(5, studyArea.getBusiness());
+				assertEquals(5, studyArea.getBusyness());
 			}  else if (time <= 18 && time < studyArea.getClosing()){ // Afternoon, between 2 and 6 PM
-				assertEquals(4, studyArea.getBusiness());
+				assertEquals(4, studyArea.getBusyness());
 			}else if (time <= 21 && time < studyArea.getClosing()){ // Evening, between 7PM and close
-				assertEquals(2, studyArea.getBusiness());
+				assertEquals(2, studyArea.getBusyness());
 			} else{
-				assertEquals(0, studyArea.getBusiness());
+				assertEquals(0, studyArea.getBusyness());
 			}
 	}
 

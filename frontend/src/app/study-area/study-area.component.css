@@ -65,6 +65,7 @@ ul {
 }
 
 .nameAndStars {
+  width: 95%;
   margin-top: 15px;
   line-height: 10px;
   display:flex;
@@ -92,7 +93,8 @@ ul {
 }
 
 .library-title {
-  font-size: 2rem;
+  width: 12vw;
+  font-size: 1.1vw;
   font-weight: bold;
   color: black;
 }

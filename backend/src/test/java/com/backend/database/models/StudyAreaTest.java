@@ -19,7 +19,7 @@ class StudyAreaTest {
 		//used random values and location 
 		StudyArea.Location location = new StudyArea.Location(43.77361615981798f, -79.50184694563765f);
 		studyArea = new StudyArea(
-				"Example_Location", true, 3, false, 4, location, 9, 20, 0);
+				"Example_Location", true, 3, false, 4, location, 9, 20, 0, "Test Address");
 		
 	}
 
@@ -41,7 +41,7 @@ class StudyAreaTest {
 		assertTrue(studyArea.getCleanlinessRating() >= 1 && studyArea.getCleanlinessRating() <= 5, "Cleaniness rating should be in range 1-5!");
 		//throw exception when valid is out of range
 		assertThrows(IllegalArgumentException.class, () -> new StudyArea(
-				"Example_Location", true, -1, false, 4, studyArea.getLocation(), 9, 20, 0));
+				"Example_Location", true, -1, false, 4, studyArea.getLocation(), 9, 20, 0, "Test Address"));
 	}
 
 	@Test
@@ -57,7 +57,7 @@ class StudyAreaTest {
 				"Loudness should be between 1 and 5.");
 	   //throw exception when valid is out of range 
 		assertThrows(IllegalArgumentException.class, () -> new StudyArea(
-				"Example_Location", true, 3, false, 6, studyArea.getLocation(), 9, 20, 0));
+				"Example_Location", true, 3, false, 6, studyArea.getLocation(), 9, 20, 0, "Test Address"));
 	}
 
 	@Test
@@ -82,31 +82,31 @@ class StudyAreaTest {
 
 		if (studyArea.getLoudness() <= 3){
 			if (time < studyArea.getOpening()){
-				assertEquals(0, studyArea.getBusiness());
+				assertEquals(0, studyArea.getBusyness());
 			} else if (time <= 10 && time < studyArea.getClosing()){ // Early morning, before 10 AM
-				assertEquals(1, studyArea.getBusiness());
+				assertEquals(1, studyArea.getBusyness());
 			} else if (time <= 13 && time < studyArea.getClosing()){ //Lunchtime, between 11 AM and 1 PM
-				assertEquals(4, studyArea.getBusiness());
+				assertEquals(4, studyArea.getBusyness());
 			}  else if (time <= 18 && time < studyArea.getClosing()){ // Afternoon, between 2 and 6 PM
-				assertEquals(5, studyArea.getBusiness());
+				assertEquals(5, studyArea.getBusyness());
 			}else if (time <= 21 && time < studyArea.getClosing()){ // Evening, between 7PM and close
-				assertEquals(3, studyArea.getBusiness());
+				assertEquals(3, studyArea.getBusyness());
 			} else{
-				assertEquals(0, studyArea.getBusiness());
+				assertEquals(0, studyArea.getBusyness());
 			}
 		} else {
 			if (time < studyArea.getOpening()){
-				assertEquals(0, studyArea.getBusiness());
+				assertEquals(0, studyArea.getBusyness());
 			} else if (time <= 10 && time < studyArea.getClosing()){ // Early morning, before 10 AM
-				assertEquals(2, studyArea.getBusiness());
+				assertEquals(2, studyArea.getBusyness());
 			} else if (time <= 13 && time < studyArea.getClosing()){ //Lunchtime, between 11 AM and 1 PM
-				assertEquals(5, studyArea.getBusiness());
+				assertEquals(5, studyArea.getBusyness());
 			}  else if (time <= 18 && time < studyArea.getClosing()){ // Afternoon, between 2 and 6 PM
-				assertEquals(4, studyArea.getBusiness());
+				assertEquals(4, studyArea.getBusyness());
 			}else if (time <= 21 && time < studyArea.getClosing()){ // Evening, between 7PM and close
-				assertEquals(2, studyArea.getBusiness());
+				assertEquals(2, studyArea.getBusyness());
 			} else{
-				assertEquals(0, studyArea.getBusiness());
+				assertEquals(0, studyArea.getBusyness());
 			}
 	}
 

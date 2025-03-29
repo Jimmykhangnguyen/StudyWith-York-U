@@ -152,7 +152,7 @@ public class StudyAreaRequest {
 		return totalLoudness; 
 	}
 
-	public int getBusinessCount(){
+	public int getBusynessCount(){
 		return totalBusynessCount; 
 	}
 public int getCleanCount(){

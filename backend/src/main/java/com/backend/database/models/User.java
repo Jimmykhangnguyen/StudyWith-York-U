@@ -12,7 +12,7 @@ public class User {
 	private String email;
 	private String password; 
 	private StudyArea[] favourites = new StudyArea[10]; 
-	private int numFavourites; 
+	private int numFavourites = 0; 
 
 	//Constructors
 	public User() {

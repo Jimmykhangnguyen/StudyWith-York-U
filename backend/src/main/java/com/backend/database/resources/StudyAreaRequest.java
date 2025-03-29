@@ -6,6 +6,7 @@ public class StudyAreaRequest {
 //this class is used to prevent exposing and to validate StudyArea class
 	private String id;
 	private String name;
+	private String address; 
 	private boolean chargingOutlets; 
 	private int cleanlinessRating; //1-5 scale from student ratings
 	private boolean accessible; 
@@ -51,7 +52,7 @@ public class StudyAreaRequest {
 	public StudyAreaRequest() {
 		
 	}
-	public StudyAreaRequest(String id, String name, boolean chargingOutlets, int cleanlinessRating, boolean accessible, int loudness, Location location, int openingTime, int closingTime, int busyness, int totalRatingSum, int totalRatingCount, double avgBusyness, double avgClean, double avgLoud, int totalBusynessCount, int totalBusynessRating, int totalCleanCount, int totalCleanliness, int totalLoudCount, int totalLoudness) {
+	public StudyAreaRequest(String id, String name, boolean chargingOutlets, int cleanlinessRating, boolean accessible, int loudness, Location location, int openingTime, int closingTime, int busyness, int totalRatingSum, int totalRatingCount, double avgBusyness, double avgClean, double avgLoud, int totalBusynessCount, int totalBusynessRating, int totalCleanCount, int totalCleanliness, int totalLoudCount, int totalLoudness, String address) {
 		this.id = id;
 		this.name = name;
 		this.chargingOutlets = chargingOutlets;
@@ -73,6 +74,7 @@ public class StudyAreaRequest {
 		this.totalCleanliness = totalCleanliness;
 		this.totalLoudCount = totalLoudCount; 
 		this.totalLoudness = totalLoudness; 
+		this.address = address; 
 	}
 	
 	//getters
@@ -159,6 +161,10 @@ public int getCleanCount(){
 
 public int getLoudCount(){
 	return totalLoudCount; 
+}
+
+public String getAddress(){
+	return address; 
 }
 
 

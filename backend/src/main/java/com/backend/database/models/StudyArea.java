@@ -9,6 +9,7 @@ public class StudyArea {
 	@Id
 	private String id;
 	private String name;
+	private String address;
 	private boolean chargingOutlets; 
 	private int cleanlinessRating; //1-5 scale from student ratings
 	private boolean accessible; 
@@ -63,7 +64,7 @@ public class StudyArea {
 	public StudyArea() {
 		
 	}
-	public StudyArea(String name, boolean chargingOutlets, int cleanlinessRating, boolean accessible, int loudness, Location location, int openingTime, int closingTime, int busyness) {
+	public StudyArea(String name, boolean chargingOutlets, int cleanlinessRating, boolean accessible, int loudness, Location location, int openingTime, int closingTime, int busyness, String address) {
 		//if cleanliness and loudness fall out of rating range throw an exception
 		if(cleanlinessRating < 1 || cleanlinessRating > 5) {
 			throw new IllegalArgumentException("Cleanliness rating must be between 1 and 5");
@@ -82,6 +83,7 @@ public class StudyArea {
 		this.openingTime = openingTime;
 		this.closingTime = closingTime; 
 		this.busyness = busyness; 
+		this.address = address; 
 	}
 	
 	//getters and setters
@@ -177,6 +179,14 @@ public class StudyArea {
 		// }
 		return this.busyness; 
 	
+	}
+
+	public String getAddress(){
+		return this.address; 
+	}
+
+	public void setAddress(String address){
+		this.address = address; 
 	}
 	
 	public void addUserRating(int rating) {

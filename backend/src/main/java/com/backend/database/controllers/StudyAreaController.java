@@ -45,7 +45,7 @@ public class StudyAreaController {
 	            studyAreaRequest.getOpening(),
 				studyAreaRequest.getClosing(),
 				studyAreaRequest.getBusyness(),
-				studyAreaRequest.getAddress(); 
+				studyAreaRequest.getAddress() 
 	        );
 		
 		return ResponseEntity.status(201).body(this.studyAreaRepository.save(studyArea));

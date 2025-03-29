@@ -58,11 +58,12 @@ export class StudyAreaComponent implements OnInit {
     if (this.selectedStudyArea === studyArea) { // Unselected study space
       this.selectedStudyArea = null;
       this.studyMapService.changeData([]);
+      this.studyMapService.changeFeedback(false);
     } else { // Selected study space
       this.selectedStudyArea = studyArea;
       this.studyMapService.changeData([studyArea.location.latitude, studyArea.location.longitude]);
+      this.studyMapService.changeFeedback(true);
       this.getRatings(studyArea._links.self.href.split('/').pop());
-      console.log(studyArea._links.self.href.split('/').pop());
     }
   }
 

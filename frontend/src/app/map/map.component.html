@@ -5,7 +5,7 @@
 >
 </div>
 
-<div class="rating-container" [ngClass]="{'fade-out': fadeOut, 'fade-in': !fadeOut}">
+<div class="rating-container" *ngIf="showFeedback" [ngClass]="{'fade-out': fadeOut, 'fade-in': !fadeOut}">
   <div class="progress-bar">
     <div class="segment" [class.filled]="questions >= 1"></div>
     <div class="segment" [class.filled]="questions >= 2"></div>

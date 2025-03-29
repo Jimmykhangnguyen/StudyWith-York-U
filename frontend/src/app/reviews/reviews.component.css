@@ -13,17 +13,23 @@
 }
 
 .recentReviews {
-    margin-left: 2.5%;
-    margin-bottom: 0;
-    font-size: 30px;
+  margin-left: 2.5%;
+  margin-bottom: 0;
+  font-size: 30px;
 }
 
 .writeReview {
-    margin-right: 2.5%;
-    background-color: red;  /* Red background */
-    color: white;           /* White text */
-    border: none;           /* Removes default border */
-    border-radius: 12px;    /* Rounded corners */
-    cursor: pointer;       /* Changes the cursor to a pointer when hovering */
-    transition: background-color 0.3s;  /* Smooth transition for hover effect */
+  margin-right: 2.5%;
+  padding: 15px 30px;
+  font-size: 24px;
+  background-color: #e31836;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.writeReview:hover {
+  background-color: #8a0e20;
 }

@@ -76,13 +76,12 @@
 .segment {
   flex: 1;
   background: #f8d7da;
-  transition: background 0.3s ease-in-out;
+  transition: background-color 0.3s ease-in-out;
 }
 
 .segment.filled {
-  background: red;
+  background-color: #e31836;
 }
-
 
 .question {
   font-weight: bold;
@@ -100,7 +99,7 @@
 }
 
 .stars .filled {
-  color: red;
+  color: #e31836;
 }
 
 .labels {

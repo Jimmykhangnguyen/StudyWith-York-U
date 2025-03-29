@@ -8,10 +8,8 @@ import { RegisterComponent } from './register/register.component';
 export const routes: Routes = [
     { path: 'login', component: LoginComponent},
     { path: 'register', component: RegisterComponent},
-    // Remember to change these compontents when you finish developing the correct ones!
     { path: 'map', component: MapLayoutComponent},
     { path: 'reviews', component: ReviewsLayoutComponent},
     { path: 'favourites', component: FavouritesLayoutComponent},
     { path: '', redirectTo: '/map', pathMatch: 'full' } 
 ];
-

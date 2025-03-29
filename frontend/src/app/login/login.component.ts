@@ -24,7 +24,7 @@ export class LoginComponent {
   constructor(private router: Router, private http: HttpClient) {}
 
   // When login button is clicked, move to 'map'
-  //map includes (study area, mao and navBar compoennts in msp-layout component)
+  // map includes (study area, map and navBar components in map-layout component)
   onLoginSubmit() {
     console.log('Form Submitted');
     const loginData = {
@@ -33,28 +33,27 @@ export class LoginComponent {
     };
 
     this.http.post('http://localhost:8080/login', loginData, {
-  headers: this.httpOptions.headers,
-  responseType: 'text' // messages from database: Login Succseful, User not found, Invalid creidentials
-}).subscribe({
-  next: (response) => {
-    console.log('Login successful:', response);
-    if (response === 'Login successful') {
-      this.router.navigate(['/map']).then(() => {
-        location.reload(); 
-      });
-    } else {
-      this.errorMessage = 'Error';
-      this.loginError = true;
-    }
-  },
-  error: (error) => {
-    console.error('Login error:', error);
-    this.errorMessage = error.error || 'Invalid email or password. Please try again.';
-    this.loginError = true;
+      headers: this.httpOptions.headers,
+      responseType: 'text' // messages from database: Login successful, User not found, Invalid credentials
+    }).subscribe({
+      next: (response) => {
+        console.log('Login successful:', response);
+        if (response === 'Login successful') {
+          this.router.navigate(['/map']).then(() => {
+            location.reload(); 
+          });
+        } else {
+          this.errorMessage = 'Error';
+          this.loginError = true;
+        }
+      },
+      error: (error) => {
+        console.error('Login error:', error);
+        this.errorMessage = error.error || 'Invalid email or password. Please try again.';
+        this.loginError = true;
+      }
+    });
   }
-});
-  }
-
 
   registerRoute() {
     this.router.navigate(['/register']);

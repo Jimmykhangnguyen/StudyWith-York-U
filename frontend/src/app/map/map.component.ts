@@ -31,27 +31,29 @@ export class MapComponent implements OnInit {
     "How clean is the space?",
     "How quiet is the space?",
     "How busy is the space?",
+    "Overall, how do you feel about the space?",
     "Thank you for your feedback!"
   ];
   questionLabels: string[][] = [
     ["Very Dirty", "Very Clean"],
     ["Very Noisy", "Very Quiet"],
     ["Very Busy", "Very Empty"],
+    ["Very Bad", "Awesome!"],
     ["", ""]
   ];
   fadeOut: boolean = false;
 
   setRating(value: number) {
-    if (this.questions < 4) {
+    if (this.questions < 5) {
       this.rating = value;
       this.fadeOut = true;
 
       setTimeout(() => {
-        if (this.questions < 4) {
+        if (this.questions < 5) {
           this.questions++;
         }
         this.fadeOut = false;
-        if (this.questions == 4) {
+        if (this.questions == 5) {
           this.rating = 5;
         } else {
           this.rating = 0;

@@ -68,8 +68,7 @@ ul {
   width: 95%;
   margin-top: 15px;
   line-height: 10px;
-  display:flex;
-  flex-direction: row;
+  display: flex;
   align-items: baseline;
   text-align: center;
 }
@@ -93,8 +92,8 @@ ul {
 }
 
 .library-title {
-  width: 12vw;
-  font-size: 1.1vw;
+  width: 100%;
+  font-size: 1.2vw;
   font-weight: bold;
   color: black;
 }
@@ -110,16 +109,16 @@ ul {
 
 .library-address {
   color: #2d3748;
-  font-size: 1.2rem;
+  font-size: 1.05rem;
 }
 
 .library-rating {
   display: flex;
   flex-direction: row;
   align-items: center;
+  align-items: baseline;
   text-align: center;
   justify-content: center;
-  margin-left: 17%;
 }
 
 .star-filled {

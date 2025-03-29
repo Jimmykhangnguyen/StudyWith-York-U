@@ -21,8 +21,8 @@ export class MapComponent implements OnInit {
     ['end', []]
   ]);
   pointColours = new Map<string, string>([
-    ['start', '#3887be'],
-    ['end', '#f30']
+    ['start', '#4a0000'],
+    ['end', '#e53e3e']
   ]);
 
   constructor(private studyMapService: StudyMapService) {}
@@ -150,9 +150,8 @@ export class MapComponent implements OnInit {
           'line-cap': 'round'
         },
         paint: {
-          'line-color': '#3887be',
-          'line-width': 5,
-          'line-opacity': 0.75
+          'line-color': '#e53e3e',
+          'line-width': 5
         }
       });
     }

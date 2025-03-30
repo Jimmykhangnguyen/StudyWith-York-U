@@ -5,7 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "study_areas")
 public class StudyArea {
-    //StudyArea will be used to Define how study areas are structured
+    //StudyArea will be used to define how study areas are structured
 	@Id
 	private String id;
 	private String name;

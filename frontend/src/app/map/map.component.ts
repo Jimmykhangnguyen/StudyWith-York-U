@@ -31,16 +31,16 @@ export class MapComponent implements OnInit {
   hoverRating: number = 0;
   questions: number = 1;
   questionTexts: string[] = [
-    "How clean is the space?",
-    "How quiet is the space?",
     "How busy is the space?",
+    "How clean is the space?",
+    "How loud is the space?",
     "Overall, how do you feel about the space?",
     "Thank you for your feedback!"
   ];
   questionLabels: string[][] = [
+    ["Very Busy", "Very Empty"],
     ["Very Dirty", "Very Clean"],
     ["Very Noisy", "Very Quiet"],
-    ["Very Busy", "Very Empty"],
     ["Very Bad", "Awesome!"],
     ["", ""]
   ];
@@ -79,7 +79,6 @@ export class MapComponent implements OnInit {
       this.studyAreaId = id;
       console.log('Study Area ID:', this.studyAreaId);
     });
-
 
     this.map.on('mousemove', 'start', (event: any) => {
       this.map.getCanvas().style.cursor = 'pointer';
@@ -225,13 +224,13 @@ export class MapComponent implements OnInit {
         this.fadeOut = false;
 
         if (this.questions == 2) {
-          this.studyMapService.rateCleanliness(this.studyAreaId, this.rating);
+          this.studyMapService.rateBusyness(this.studyAreaId, this.rating);
           this.rating = 0;
         } else if (this.questions == 4) {
-          this.studyMapService.rateLoudness(this.studyAreaId, this.rating);
+          this.studyMapService.rateCleanliness(this.studyAreaId, this.rating);
           this.rating = 0;
         } else if (this.questions == 3) {
-          this.studyMapService.rateBusyness(this.studyAreaId, this.rating);
+          this.studyMapService.rateLoudness(this.studyAreaId, this.rating);
           this.rating = 0;
         } else if (this.questions == 5) {
           this.studyMapService.rateStudyArea(this.studyAreaId, this.rating);

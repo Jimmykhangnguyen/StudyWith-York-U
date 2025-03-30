@@ -43,22 +43,6 @@ export class StudyMapService {
     this.idSource.next(studyAreaId);
   }
 
-  rateStudyArea(studyAreaId: string, rating: number): void {
-    this.http.post(
-      `http://localhost:8080/ratings?id=${studyAreaId}&rating=${rating}`,
-      null,
-      { responseType: 'text' }
-    ).subscribe({
-      next: (response) => {
-        console.log('Successfully rated study area:', response);
-      },
-      error: (error) => {
-        console.error('Failed to rate study area:', error.message);
-        alert('Failed to submit rating. Please try again later.');
-      }
-    });
-  }
-
   rateBusyness(studyAreaId: string, rating: number): void {
     this.http.post(
       `http://localhost:8080/ratings/busyness?id=${studyAreaId}&rating=${rating}`,
@@ -71,6 +55,22 @@ export class StudyMapService {
       error: (error) => {
         console.error('Failed to rate busyness:', error.message);
         alert('Failed to submit busyness rating. Please try again later.');
+      }
+    });
+  }
+  
+  rateCleanliness(studyAreaId: string, rating: number): void {
+    this.http.post(
+      `http://localhost:8080/ratings/cleanliness?id=${studyAreaId}&rating=${rating}`,
+      null,
+      { responseType: 'text' }
+    ).subscribe({
+      next: (response) => {
+        console.log('Successfully rated cleanliness:', response);
+      },
+      error: (error) => {
+        console.error('Failed to rate cleanliness:', error.message);
+        alert('Failed to submit cleanliness rating. Please try again later.');
       }
     });
   }
@@ -91,18 +91,18 @@ export class StudyMapService {
     });
   }
 
-  rateCleanliness(studyAreaId: string, rating: number): void {
+  rateStudyArea(studyAreaId: string, rating: number): void {
     this.http.post(
-      `http://localhost:8080/ratings/cleanliness?id=${studyAreaId}&rating=${rating}`,
+      `http://localhost:8080/ratings?id=${studyAreaId}&rating=${rating}`,
       null,
       { responseType: 'text' }
     ).subscribe({
       next: (response) => {
-        console.log('Successfully rated cleanliness:', response);
+        console.log('Successfully rated study area:', response);
       },
       error: (error) => {
-        console.error('Failed to rate cleanliness:', error.message);
-        alert('Failed to submit cleanliness rating. Please try again later.');
+        console.error('Failed to rate study area:', error.message);
+        alert('Failed to submit rating. Please try again later.');
       }
     });
   }

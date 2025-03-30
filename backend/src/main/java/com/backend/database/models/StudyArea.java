@@ -10,23 +10,19 @@ public class StudyArea {
 	private String id;
 	private String name;
 	private String address;
-	private boolean chargingOutlets; 
-	private int cleanlinessRating; //1-5 scale from student ratings
-	private boolean accessible; 
-	private int loudness; //1-5 scale from student ratings
-	private int busyness; // Rating from 0-5 based on time & ratings(coming in ITR2) (0 is closed, 1 is less busy, 5 is very busy)
-	private int openingTime; 
-	private int closingTime; 
+	private boolean chargingOutlets;
+	private boolean accessible;
+	private int openingTime;
+	private int closingTime;
 	private Location location; //will store the longitude and latitude of each study area
-	private int totalRatingSum;  // Sum of all ratings given
-    private int totalRatingCount; // Number of ratings given
-	private int totalBusynessCount; 
-	private double avgRating; 
-	private int totalCleanCount; 
-	private int totalLoudCount; 
-	private int totalBusynessRating;
-	private int totalCleanRating; 
-	private int totalLoudnessRating; 
+	private int totalRating;
+    private int totalRatingCount;
+	private int totalBusyRating;
+	private int totalBusyCount;
+	private int totalCleanRating;
+	private int totalCleanCount;
+	private int totalLoudRating;
+	private int totalLoudCount;
 
 	//Nested static class for location, to access the location  longitude and latitude to avoid creating an instance of location class
 	public static class Location {
@@ -62,26 +58,14 @@ public class StudyArea {
 		
 	}
 
-	public StudyArea(String name, boolean chargingOutlets, int cleanlinessRating, boolean accessible, int loudness, Location location, int openingTime, int closingTime, int busyness, String address) {
-		//if cleanliness and loudness fall out of rating range throw an exception
-		if(cleanlinessRating < 1 || cleanlinessRating > 5) {
-			throw new IllegalArgumentException("Cleanliness rating must be between 1 and 5");
-		}
-		
-		if(loudness < 1 || loudness > 5) {
-			throw new IllegalArgumentException("loudness rating must be between 1 and 5");
-		}
-		
+	public StudyArea(String name, String address, boolean chargingOutlets, boolean accessible, Location location, int openingTime, int closingTime) {
 		this.name = name;
+		this.address = address;
 		this.chargingOutlets = chargingOutlets;
-		this.cleanlinessRating = cleanlinessRating;
 		this.accessible = accessible;
-		this.loudness = loudness;
 		this.location = location;
 		this.openingTime = openingTime;
-		this.closingTime = closingTime; 
-		this.busyness = busyness; 
-		this.address = address; 
+		this.closingTime = closingTime;
 	}
 	
 	//getters and setters
@@ -100,6 +84,14 @@ public class StudyArea {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
 	
 	public boolean getChargingOutlets() {
 		return chargingOutlets;
@@ -107,14 +99,6 @@ public class StudyArea {
 	
 	public void setChargingOutlets(boolean chargingOutlets) {
 		this.chargingOutlets = chargingOutlets;
-	}
-	
-	public int getCleanlinessRating() {
-		return cleanlinessRating;
-	}
-	
-	public void setCleanlinessRating(int cleanlinessRating) {
-		this.cleanlinessRating = cleanlinessRating;
 	}
 	
 	public boolean getAccessible() {
@@ -125,14 +109,6 @@ public class StudyArea {
 		this.accessible = accessible;
 	}
 	
-	public int getLoudness() {
-		return loudness;
-	}
-	
-	public void setLoudness(int loudness) {
-		this.loudness = loudness;
-	}
-	
 	public Location getLocation() {
 		return location;
 	}
@@ -140,123 +116,80 @@ public class StudyArea {
 	public void setLocation(Location location) {
 		this.location = location;
 	}
+
+	public int getOpening() {
+		return openingTime;
+	}
+
+	public void setOpening(int opening) {
+		this.openingTime = opening;
+	}
+
+	public int getClosing() {
+		return closingTime;
+	}
 	
-	public int getBusyness() {
-		return busyness; 
+	public void setClosing(int closing) {
+		this.closingTime = closing;
 	}
 
-	public String getAddress() {
-		return address; 
-	}
-
-	public void setAddress(String address) {
-		this.address = address; 
-	}
-	
-	public void addUserRating(int rating) {
-		if (rating >= 1 && rating <= 5) {
-			this.totalRatingSum += rating;
-	        this.totalRatingCount++;
-		}
-	}
-
-	public void addBusynessRating(int rating) {
-		if(rating >= 1 && rating <= 5) {
-			this.totalBusynessRating = rating;
-			this.totalBusynessCount++; 
-		}
-	}
-
-	public double getAvgBusynessRating() {
-		if (totalBusynessCount == 0){
-			return 1;
-		} else {
-			return totalBusynessRating;
-		}
-	}
-
-	public void addCleanlinessRating(int rating) {
-		if(rating >= 1 && rating <= 5) {
-			this.totalCleanRating = rating;
-	        this.totalCleanCount++; 
-		}
-	}
-
-    public double getAvgClean() {
-		if (totalCleanCount == 0){
-			return 1; 
-		} else {
-			return totalCleanRating; 
-		}
-	}
-
-	public int getBusynessCount() {
-		return totalBusynessCount; 
-	}
-
-	public int getCleanCount() {
-		return totalCleanCount; 
-	}
-
-	public int getTotalRatingSum() {
-		return totalRatingSum;
+	public int getTotalRating() {
+		return totalRating;
 	}
 
 	public int getTotalRatingCount() {
 		return totalRatingCount;
 	}
-
-	public double getAverageUserRating() {
-		if(totalRatingCount == 0) {
-			return 0.0;
-		} else {
-			avgRating = (double) totalRatingSum / totalRatingCount; 
-			return avgRating; //calculate avg of ratings as new ones are added by the users 
+	
+	public void addRating(int rating) {
+		if (rating >= 1 && rating <= 5) {
+			this.totalRating += rating;
+	        this.totalRatingCount++;
 		}
+	}
+
+	public int getTotalBusyRating() {
+		return totalBusyRating;
+	}
+
+	public int getTotalBusyCount() {
+		return totalBusyCount;
+	}
+
+	public void addBusyRating(int rating) {
+		if (rating >= 1 && rating <= 5) {
+			this.totalBusyRating += rating;
+			this.totalBusyCount++;
+		}
+	}
+
+	public int getTotalCleanRating() {
+		return totalCleanRating;
+	}
+
+	public int getTotalCleanCount() {
+		return totalCleanCount;
+	}
+
+	public void addCleanRating(int rating) {
+		if (rating >= 1 && rating <= 5) {
+			this.totalCleanRating += rating;
+	        this.totalCleanCount++;
+		}
+	}
+
+	public int getTotalLoudRating() {
+		return totalLoudRating;
+	}
+
+	public int getTotalLoudCount() {
+		return totalLoudCount;
 	}
 
 	public void addLoudRating(int rating) {
-		if(rating >= 1 && rating <= 5) {
-			this.totalLoudnessRating = rating;
+		if (rating >= 1 && rating <= 5) {
+			this.totalLoudRating += rating;
 	        this.totalLoudCount++; 
-	}
-	}
-
-	public int getLoudCount() {
-		return totalLoudCount; 
-	}
-
-	public double getAvgLoud() {
-		if (totalLoudCount == 0){
-			return 1; 
-		} else{
-			return this.totalLoudnessRating;
 		}
-	}
-
-	public int getTotalBusyRatings() {
-		return totalBusynessRating; 
-	}
-
-	public int getTotalCleanRatings() {
-		return totalCleanRating; 
-	}
-
-	public int getTotalLoudRatings() {
-		return totalLoudnessRating; 
-	}
-
-	public int getOpening() {
-		return this.openingTime;
-	}
-
-	public int getClosing() {
-		return this.closingTime; 
-	}
-	public void setOpening(int opening) {
-		this.openingTime = opening; 
-	}
-	public void setClosing(int closing) {
-		this.closingTime = closing; 
 	}
 }

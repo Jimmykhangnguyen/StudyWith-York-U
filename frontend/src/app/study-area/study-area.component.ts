@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http'; // Import HttpClientModule
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
@@ -58,10 +59,12 @@ export class StudyAreaComponent implements OnInit {
       this.selectedStudyArea = null;
       this.studyMapService.changeData([]);
       this.studyMapService.changeFeedback(false);
+      this.studyMapService.changeId('');
     } else { // Selected study space
       this.selectedStudyArea = studyArea;
       this.studyMapService.changeData([studyArea.location.latitude, studyArea.location.longitude]);
       this.studyMapService.changeFeedback(true);
+      this.studyMapService.changeId(studyArea._links.self.href.split('/').pop());
       this.getRatings(studyArea._links.self.href.split('/').pop());
     }
   }

@@ -70,11 +70,10 @@ ul {
 }
 
 .nameAndStars {
-  width: 95%;
+  width: 100%;
   margin-top: 15px;
   line-height: 10px;
-  display:flex;
-  flex-direction: row;
+  display: flex;
   align-items: baseline;
   text-align: center;
 }
@@ -98,8 +97,8 @@ ul {
 }
 
 .library-title {
-  width: 12vw;
-  font-size: 1.1vw;
+  width: 100%;
+  font-size: 1.2vw;
   font-weight: bold;
   color: black;
 }
@@ -115,26 +114,26 @@ ul {
 
 .library-address {
   color: #2d3748;
-  font-size: 1.2rem;
+  font-size: 1.05rem;
 }
 
-.library-rating {
+.stars {
+  font-size: 30px;
   display: flex;
   flex-direction: row;
-  align-items: center;
-  text-align: center;
-  justify-content: center;
-  margin-left: 17%;
-}
+  color: lightgray;
+  }
 
 .star-filled {
   color: #e31836;
   font-size: 2.3rem;
+
+.stars span {
+  padding: 5px;
 }
 
-.star-empty {
-  color: #a0aec0;
-  font-size: 2.3rem;
+.stars .filled {
+  color: red;
 }
 
 .library-tags {

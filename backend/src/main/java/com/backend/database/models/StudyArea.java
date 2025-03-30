@@ -51,6 +51,7 @@ public class StudyArea {
         public float getLatitude() {
         	return latitude; 
         }
+		
         public void setLatitude(float latitude) {
         	this.latitude = latitude;
         }

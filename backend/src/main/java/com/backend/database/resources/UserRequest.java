@@ -5,11 +5,11 @@ public class UserRequest {
 	private String email;
 	private String password;
 
-
 	//constructors
 	public UserRequest() {
-
+		
 	}
+
 	public UserRequest(String username, String email, String password) {
 		this.username = username;
 		this.email = email;
@@ -32,19 +32,5 @@ public class UserRequest {
     @Override
     public String toString() {
         return "UserRequest{email='" + email + "password= ****";
-    }
-    
-    
-
+	}
 }
-
-
-
-
-
-
-
-
-
-
-

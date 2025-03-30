@@ -1,7 +1,5 @@
 package com.backend.database.resources;
 
-import com.backend.database.resources.StudyAreaRequest.Location;
-
 public class StudyAreaRequest {
 //this class is used to prevent exposing and to validate StudyArea class
 	private String id;
@@ -78,7 +76,6 @@ public class StudyAreaRequest {
 	}
 	
 	//getters
-
 	public String getName() {
 		return name;
 	}
@@ -94,7 +91,6 @@ public class StudyAreaRequest {
 	public int getCleanlinessRating() {
 		return cleanlinessRating;
 	}
-
 	
 	public boolean getAccessible() {
 		return accessible;
@@ -108,15 +104,15 @@ public class StudyAreaRequest {
 		return location;
 	}
 
-	public int getOpening(){
+	public int getOpening() {
 		return this.openingTime;
 	}
 	
-	public int getClosing(){
+	public int getClosing() {
 		return this.closingTime; 
 	}
 
-	public int getBusyness(){
+	public int getBusyness() {
 		return this.busyness; 
 	}
 	
@@ -128,45 +124,43 @@ public class StudyAreaRequest {
 		return totalRatingCount;
 	}	
 
-	public double getAvgBusynessRating(){
+	public double getAvgBusynessRating() {
 		return this.avgBusyness; 
 	}
 
-	public double getAvgCleanRating(){
+	public double getAvgCleanRating() {
 		return avgClean; 
 	}
 
-	public double getAvgLoudRating(){
+	public double getAvgLoudRating() {
 		return avgLoud; 
 	}
 
-	public int getTotalBusyRatings(){
+	public int getTotalBusyRatings() {
 		return totalBusynessRating;
 	}
 
-	public int getTotalCleanRatings(){
+	public int getTotalCleanRatings() {
 		return totalCleanliness;
 	}
 
-	public int getTotalLoudRatings(){
+	public int getTotalLoudRatings() {
 		return totalLoudness; 
 	}
 
-	public int getBusynessCount(){
+	public int getBusynessCount() {
 		return totalBusynessCount; 
 	}
-public int getCleanCount(){
-	return totalCleanCount; 
-}
 
-public int getLoudCount(){
-	return totalLoudCount; 
-}
+	public int getCleanCount() {
+		return totalCleanCount; 
+	}
 
-public String getAddress(){
-	return address; 
-}
+	public int getLoudCount() {
+		return totalLoudCount; 
+	}
 
-
-	
+	public String getAddress() {
+		return address; 
+	}	
 }

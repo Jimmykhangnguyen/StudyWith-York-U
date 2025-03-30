@@ -51,7 +51,7 @@ public class StudyAreaController {
 		return ResponseEntity.status(201).body(this.studyAreaRepository.save(studyArea));
 	}
 	
-	// create/ add repostitory for user ratings for existing study area objects
+	// create / add repository for user ratings for existing study area objects
 	@CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/ratings")
     public ResponseEntity<String> rateStudyArea(@RequestParam String id, @RequestParam int rating) {

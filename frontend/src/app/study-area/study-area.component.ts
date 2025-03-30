@@ -23,10 +23,10 @@ interface filterCaterogy {
 
 export class StudyAreaComponent implements OnInit {
   studyAreas = [
-    { name: 'Example1', chargingOutlets: true, cleanlinessRating: 4, accessible: true, loudness: 3,
-      location: { latitude: -79.50600, longitude: 43.77350,  }, busyness: 2, opening: 8, closing: 22 },
-    { name: 'Example2', chargingOutlets: false, cleanlinessRating: 3, accessible: false, loudness: 2,
-      location: { latitude: -79.50308, longitude: 43.77161 }, busyness: 3, opening: 7, closing: 20 },
+    { name: 'Example1', averageUserRating: 3, chargingOutlets: true, totalCleanRatings: 4, accessible: true, totalLoudRatings: 3,
+      location: { latitude: -79.50600, longitude: 43.77350,  }, totalBusyRatings: 2, opening: 8, closing: 22, distance: [0, 0] },
+    { name: 'Example2', averageUserRating: 3, chargingOutlets: false, totalCleanRatings: 3, accessible: false, totalLoudRatings: 2,
+      location: { latitude: -79.50308, longitude: 43.77161 }, totalBusyRatings: 3, opening: 7, closing: 20, distance: [0, 0] },
   ]; // Stub database
   filteredStudyAreas: any[] = [];
   selectedStudyArea: any = null;
@@ -38,20 +38,20 @@ export class StudyAreaComponent implements OnInit {
     { name: 'Charging Outlets', value: true },
     { name: 'Cleanliness Rating', value: 5 },
     { name: 'Accessible', value: false },
-    { name: 'Loudness', value: 3 },
-    { name: 'Busyness', value: 0 },
-    { name: 'Opening', value: false }
+    { name: 'Quiet', value: 3 },
+    { name: 'Not Crowded', value: 0 },
+    { name: 'Opening', value: false },
+    { name: 'Good Ratings', value: 4 },
   ];
 
   constructor(private http: HttpClient, private studyMapService: StudyMapService) {}
-
+  
   ngOnInit(): void {
-    this.filteredStudyAreas = this.studyAreas; // Initialize filteredStudyAreas with all study areas
-    this.http.get<{ _embedded: { studyAreas: any[] } }>('http://localhost:8080/studyAreas')
-      .subscribe(response => {
-        this.studyAreas = response._embedded?.studyAreas ?? "no Study areas!";
-        this.filteredStudyAreas = this.studyAreas; // Update filteredStudyAreas after fetching data
-      });
+    this.studyMapService.getData(); // Fetch data when component initializes
+    this.studyMapService.currentData.subscribe(data => {
+      this.studyAreas = data; // Subscribe to the data observable
+      this.filteredStudyAreas = this.studyAreas; // Initialize filteredStudyAreas with all study areas
+    });
   }
 
   onSelectStudyArea(studyArea: any): void {
@@ -64,8 +64,8 @@ export class StudyAreaComponent implements OnInit {
       this.selectedStudyArea = studyArea;
       this.studyMapService.changeData([studyArea.location.latitude, studyArea.location.longitude]);
       this.studyMapService.changeFeedback(true);
-      this.studyMapService.changeId(studyArea._links.self.href.split('/').pop());
-      this.getRatings(studyArea._links.self.href.split('/').pop());
+      this.studyMapService.changeId(studyArea.id);
+      this.getRatings(studyArea.id);
     }
   }
 
@@ -101,19 +101,22 @@ export class StudyAreaComponent implements OnInit {
         this.filteredStudyAreas = this.studyAreas.filter(area => area.chargingOutlets === true);
         break;
       case "Cleanliness Rating":
-        this.filteredStudyAreas = this.studyAreas.filter(area => area.cleanlinessRating >= 3);
+        this.filteredStudyAreas = this.studyAreas.filter(area => area.totalCleanRatings >= 3);
         break;
       case "Accessible":
         this.filteredStudyAreas = this.studyAreas.filter(area => area.accessible === true);
         break;
-      case "Loudness":
-        this.filteredStudyAreas = this.studyAreas.filter(area => area.loudness <= 3);
+      case "Quiet":
+        this.filteredStudyAreas = this.studyAreas.filter(area => area.totalLoudRatings < 3);
         break;
-      case "Busyness":
-        this.filteredStudyAreas = this.studyAreas.filter(area => area.busyness <= 3);
+      case "Not Crowded":
+        this.filteredStudyAreas = this.studyAreas.filter(area => area.totalBusyRatings < 3);
         break;
       case "Opening":
         this.filteredStudyAreas = this.studyAreas.filter(area => area.opening >= 7 && area.closing <= 20);
+        break;
+      case "Good Ratings":
+        this.filteredStudyAreas = this.studyAreas.filter(area => area.averageUserRating >= 3);
         break;
       default:
         console.warn("Unknown category:", category.name);

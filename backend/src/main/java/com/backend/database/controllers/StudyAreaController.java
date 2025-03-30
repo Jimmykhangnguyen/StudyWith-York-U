@@ -26,12 +26,14 @@ public class StudyAreaController {
 		this.studyAreaRepository = studyAreaRepository;
 	}
 	
+	@CrossOrigin(origins = "http://localhost:4200")
 	//get all the study areas of York University
 	@GetMapping("/study_areas")
 	public ResponseEntity<List<StudyArea>> getAllStudyAreas(){
 		return ResponseEntity.ok(this.studyAreaRepository.findAll());
 	}
 	
+	@CrossOrigin(origins = "http://localhost:4200")
 	//create a new study area object
 	@PostMapping("/study_areas")
 	public ResponseEntity<StudyArea> createStudyArea(@RequestBody StudyAreaRequest studyAreaRequest){
@@ -71,6 +73,66 @@ public class StudyAreaController {
 
         return ResponseEntity.status(404).body("Study area not found.");
     }
+
+	@CrossOrigin(origins = "http://localhost:4200")
+	@PostMapping("/ratings/busyness")
+	public ResponseEntity<String> rateBusyness(@RequestParam String id, @RequestParam int rating) {
+		if (rating < 1 || rating > 5) {
+			return ResponseEntity.status(400).body("Rating must be between 1 and 5.");
+		}
+
+		Optional<StudyArea> studyAreaOpt = studyAreaRepository.findById(id);
+
+		if (studyAreaOpt.isPresent()) {
+			StudyArea studyArea = studyAreaOpt.get();
+			studyArea.addBusynessRating(rating); 
+			studyAreaRepository.save(studyArea);
+
+			return ResponseEntity.status(201).body("Busyness rating submitted successfully.");
+		}
+
+		return ResponseEntity.status(404).body("Study area not found.");
+	}
+
+	@CrossOrigin(origins = "http://localhost:4200")
+	@PostMapping("/ratings/cleanliness")
+	public ResponseEntity<String> rateCleanliness(@RequestParam String id, @RequestParam int rating) {
+		if (rating < 1 || rating > 5) {
+			return ResponseEntity.status(400).body("Rating must be between 1 and 5.");
+		}
+
+		Optional<StudyArea> studyAreaOpt = studyAreaRepository.findById(id);
+
+		if (studyAreaOpt.isPresent()) {
+			StudyArea studyArea = studyAreaOpt.get();
+			studyArea.addCleanlinessRating(rating); 
+			studyAreaRepository.save(studyArea);
+
+			return ResponseEntity.status(201).body("Cleanliness rating submitted successfully.");
+		}
+
+		return ResponseEntity.status(404).body("Study area not found.");
+	}
+
+	@CrossOrigin(origins = "http://localhost:4200")
+	@PostMapping("/ratings/loudness")
+	public ResponseEntity<String> rateLoudness(@RequestParam String id, @RequestParam int rating) {
+		if (rating < 1 || rating > 5) {
+			return ResponseEntity.status(400).body("Rating must be between 1 and 5.");
+		}
+
+		Optional<StudyArea> studyAreaOpt = studyAreaRepository.findById(id);
+
+		if (studyAreaOpt.isPresent()) {
+			StudyArea studyArea = studyAreaOpt.get();
+			studyArea.addLoudRating(rating); 
+			studyAreaRepository.save(studyArea);
+
+			return ResponseEntity.status(201).body("Loudness rating submitted successfully.");
+		}
+
+		return ResponseEntity.status(404).body("Study area not found.");
+	}
 	
 	// Getting ratings for study areas
 	@CrossOrigin(origins = "http://localhost:4200")

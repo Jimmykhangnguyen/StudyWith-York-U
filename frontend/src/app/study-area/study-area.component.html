@@ -34,12 +34,23 @@
           <h2 class="library-title">{{ area.name }}</h2>
           <div class="stars">
             <span *ngFor="let star of [1, 2, 3, 4, 5]" 
-                  [class.filled]="star <= area.totalRatingSum/(area.totalRatingCount+0.2) + 1">
+                  [class.filled]="star <= area.totalRatingSum/(area.totalRatingCount+0.01) + 1">
               ★
             </span>
           </div>
         </div>
-        <p class="library-distance">6.2 km away | 10 minutes away</p>
+        <div class="library-distance">
+          <div class="statusLabel">Status:</div> 
+          <div class="status">
+            <span 
+              *ngIf="area.name !== 'First Student Centre' && area.name !== 'Bergeron Sandbox'; else closed"
+              class="status-open"
+            >Open</span>
+            <ng-template #closed>
+              <span class="status-closed">Closed</span>
+            </ng-template>
+          </div>
+        </div>
         <p class="library-hours">
           Hours {{ area.opening }}:00 to {{ area.closing }}:00
         </p>
@@ -49,7 +60,12 @@
         <p class="library-address">
           {{ area.address }}
         </p>
-        <p class="library-tags">Clean, Accessible, Good Ratings, Loud</p>
+        <p class="library-tags">
+          <span class="tags" *ngIf="area.totalCleanRatings >= 3">Clean</span>
+          <span class="tags" *ngIf="area.totalBusyRatings >= 3">Busy</span>
+          <span class="tags" *ngIf="area.totalLoudRatings >= 3">Loud</span>
+          <span class="tags" *ngIf="area.totalRatingSum/(area.totalRatingCount+0.01) + 1 >= 3">Good Ratings</span>
+        </p>
       </div>
     </button>
   </ul>

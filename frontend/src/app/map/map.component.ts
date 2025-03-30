@@ -214,19 +214,29 @@ export class MapComponent implements OnInit {
   }
 
   setRating(star: number) {
-    if (this.questions < 4) {
+    if (this.questions < 5) {
       this.rating = star;
       this.fadeOut = true;
 
       setTimeout(() => {
-        if (this.questions < 4) {
+        if (this.questions < 5) {
           this.questions++;
         }
         this.fadeOut = false;
-        if (this.questions == 4) {
-          this.rating = 5;
-        } else {
+
+        if (this.questions == 2) {
+          this.studyMapService.rateCleanliness(this.studyAreaId, this.rating);
           this.rating = 0;
+        } else if (this.questions == 4) {
+          this.studyMapService.rateLoudness(this.studyAreaId, this.rating);
+          this.rating = 0;
+        } else if (this.questions == 3) {
+          this.studyMapService.rateBusyness(this.studyAreaId, this.rating);
+          this.rating = 0;
+        } else if (this.questions == 5) {
+          this.studyMapService.rateStudyArea(this.studyAreaId, this.rating);
+          this.studyMapService.getData();
+          this.rating = 5;
         }
       }, 500);
     }

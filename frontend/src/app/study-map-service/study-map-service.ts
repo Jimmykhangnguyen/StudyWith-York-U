@@ -46,4 +46,52 @@ export class StudyMapService {
       }
     });
   }
+
+  rateBusyness(studyAreaId: string, rating: number): void {
+    this.http.post(
+      `http://localhost:8080/ratings/busyness?id=${studyAreaId}&rating=${rating}`,
+      null,
+      { responseType: 'text' }
+    ).subscribe({
+      next: (response) => {
+        console.log('Successfully rated busyness:', response);
+      },
+      error: (error) => {
+        console.error('Failed to rate busyness:', error.message);
+        alert('Failed to submit busyness rating. Please try again later.');
+      }
+    });
+  }
+
+  rateLoudness(studyAreaId: string, rating: number): void {
+    this.http.post(
+      `http://localhost:8080/ratings/loudness?id=${studyAreaId}&rating=${rating}`,
+      null,
+      { responseType: 'text' }
+    ).subscribe({
+      next: (response) => {
+        console.log('Successfully rated loudness:', response);
+      },
+      error: (error) => {
+        console.error('Failed to rate loudness:', error.message);
+        alert('Failed to submit loudness rating. Please try again later.');
+      }
+    });
+  }
+
+  rateCleanliness(studyAreaId: string, rating: number): void {
+    this.http.post(
+      `http://localhost:8080/ratings/cleanliness?id=${studyAreaId}&rating=${rating}`,
+      null,
+      { responseType: 'text' }
+    ).subscribe({
+      next: (response) => {
+        console.log('Successfully rated cleanliness:', response);
+      },
+      error: (error) => {
+        console.error('Failed to rate cleanliness:', error.message);
+        alert('Failed to submit cleanliness rating. Please try again later.');
+      }
+    });
+  }
 }

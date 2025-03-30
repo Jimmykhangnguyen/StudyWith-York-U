@@ -49,7 +49,12 @@
         <p class="library-address">
           {{ area.address }}
         </p>
-        <p class="library-tags">Clean, Accessible, Good Ratings, Loud</p>
+        <p class="library-tags">
+          <span class="tags" *ngIf="area.totalCleanRatings >= 3">Clean</span>
+          <span class="tags" *ngIf="area.totalBusyRatings >= 3">Busy</span>
+          <span class="tags" *ngIf="area.totalLoudRatings >= 3">Loud</span>
+          <span class="tags" *ngIf="area.totalRatingSum/(area.totalRatingCount+0.2) + 1 >= 3">Good Ratings</span>
+        </p>
       </div>
     </button>
   </ul>

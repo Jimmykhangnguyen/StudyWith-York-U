@@ -21,12 +21,9 @@ public class StudyArea {
 	private int totalRatingSum;  // Sum of all ratings given
     private int totalRatingCount; // Number of ratings given
 	private int totalBusynessCount; 
-	private double avgBusyness;
-	private double avgClean; 
 	private double avgRating; 
 	private int totalCleanCount; 
 	private int totalLoudCount; 
-	private double avgLoud; 
 	private int totalBusynessRating;
 	private int totalCleanRating; 
 	private int totalLoudnessRating; 
@@ -197,32 +194,30 @@ public class StudyArea {
 	}
 	public void addBusynessRating(int rating){
 		if(rating>=1 && rating<=5) {
-			this.totalBusynessRating += rating;
+			this.totalBusynessRating = rating;
 			this.totalBusynessCount++; 
 	}
 }
 
 	public double getAvgBusynessRating(){
-if (totalBusynessCount == 0){
-	return 0; 
-} else {
-	avgBusyness = (double) totalBusynessRating/totalBusynessCount;
-	return avgBusyness; 
-}
+		if (this.totalBusynessCount == 0){
+			return 1;
+		} else {
+			return this.totalBusynessRating;
+		}
 	}
 
 	public void addCleanlinessRating(int rating){
 		if(rating>=1 && rating<=5) {
-			this.totalCleanRating += rating;
+			this.totalCleanRating = rating;
 	        this.totalCleanCount++; 
 	}
 }
     public double getAvgClean(){
 		if (totalCleanCount == 0){
-			return 0; 
+			return 1; 
 		} else {
-            avgClean = (double) cleanlinessRating/totalCleanCount;
-			return avgClean ; 
+			return totalCleanRating; 
 		}
 }
 
@@ -252,7 +247,7 @@ public int getCleanCount(){
 
 	public void addLoudRating(int rating){
 		if(rating>=1 && rating<=5) {
-			this.totalLoudnessRating += rating;
+			this.totalLoudnessRating = rating;
 	        this.totalLoudCount++; 
 	}
 	}
@@ -263,10 +258,9 @@ public int getCleanCount(){
 
 	public double getAvgLoud(){
 		if (totalLoudCount == 0){
-			return 0; 
+			return 1; 
 		} else{
-			avgLoud = (double) loudness/totalLoudCount; 
-			return avgLoud; 
+			return this.totalLoudnessRating;
 		}
 	}
 

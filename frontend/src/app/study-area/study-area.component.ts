@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http'; // Import HttpClientModule
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; // Import FormsModule for ngModel
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { StudyMapService } from '../study-map-service/study-map-service';
-import { RmNgStarRatingComponent } from 'rm-ng-star-rating';
 
 interface filterCaterogy {
   name: string;
@@ -16,7 +16,7 @@ interface filterCaterogy {
 @Component({
   selector: 'app-study-area',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatFormFieldModule, MatSelectModule, MatInputModule, RmNgStarRatingComponent],
+  imports: [CommonModule, FormsModule, MatFormFieldModule, MatSelectModule, MatInputModule, HttpClientModule],
   templateUrl: './study-area.component.html',
   styleUrls: ['./study-area.component.css']
 })
@@ -59,10 +59,12 @@ export class StudyAreaComponent implements OnInit {
       this.selectedStudyArea = null;
       this.studyMapService.changeData([]);
       this.studyMapService.changeFeedback(false);
+      this.studyMapService.changeId('');
     } else { // Selected study space
       this.selectedStudyArea = studyArea;
       this.studyMapService.changeData([studyArea.location.latitude, studyArea.location.longitude]);
       this.studyMapService.changeFeedback(true);
+      this.studyMapService.changeId(studyArea._links.self.href.split('/').pop());
       this.getRatings(studyArea._links.self.href.split('/').pop());
     }
   }

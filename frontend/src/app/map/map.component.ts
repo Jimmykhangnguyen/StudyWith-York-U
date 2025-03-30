@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { environment } from './../../environments/environment';
 import { StudyMapService } from '../study-map-service/study-map-service';
+import { HttpClientModule } from '@angular/common/http';
 import * as mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 @Component({
   selector: 'app-map',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, HttpClientModule],
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css'],
 })
@@ -17,6 +18,7 @@ export class MapComponent implements OnInit {
   map: any;
   showDirections = false;
   showFeedback = false;
+  studyAreaId = '';
   points = new Map<string, any>([
     ['start', []],
     ['end', []]
@@ -31,27 +33,31 @@ export class MapComponent implements OnInit {
     "How clean is the space?",
     "How quiet is the space?",
     "How busy is the space?",
+    "Overall, how do you feel about the space?",
     "Thank you for your feedback!"
   ];
   questionLabels: string[][] = [
     ["Very Dirty", "Very Clean"],
     ["Very Noisy", "Very Quiet"],
     ["Very Busy", "Very Empty"],
+    ["Very Bad", "Awesome!"],
     ["", ""]
   ];
   fadeOut: boolean = false;
 
   setRating(value: number) {
-    if (this.questions < 4) {
+    if (this.questions < 5) {
       this.rating = value;
       this.fadeOut = true;
 
       setTimeout(() => {
-        if (this.questions < 4) {
+        if (this.questions < 5) {
           this.questions++;
         }
         this.fadeOut = false;
-        if (this.questions == 4) {
+
+        if (this.questions == 5) {
+          this.studyMapService.rateStudyArea(this.studyAreaId, this.rating);
           this.rating = 5;
         } else {
           this.rating = 0;
@@ -88,6 +94,12 @@ export class MapComponent implements OnInit {
         this.rating = 0;
       }
     });
+
+    this.studyMapService.currentId.subscribe(id => {
+      this.studyAreaId = id;
+      console.log('Study Area ID:', this.studyAreaId);
+    });
+
 
     this.map.on('mousemove', 'start', (event: any) => {
       this.map.getCanvas().style.cursor = 'pointer';

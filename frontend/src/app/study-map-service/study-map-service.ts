@@ -32,15 +32,16 @@ export class StudyMapService {
   }
 
   rateStudyArea(studyAreaId: string, rating: number): void {
-    this.http.post<{ message: string }>(
+    this.http.post(
       `http://localhost:8080/ratings?id=${studyAreaId}&rating=${rating}`,
-      null
+      null,
+      { responseType: 'text' }
     ).subscribe({
       next: (response) => {
-        console.log('Successfully rated study area:', response.message);
+        console.log('Successfully rated study area:', response);
       },
       error: (error) => {
-        console.error('Failed to rate study area:', error);
+        console.error('Failed to rate study area:', error.message);
         alert('Failed to submit rating. Please try again later.');
       }
     });

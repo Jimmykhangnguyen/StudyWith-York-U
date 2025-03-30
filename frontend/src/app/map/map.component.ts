@@ -56,11 +56,8 @@ export class MapComponent implements OnInit {
         }
         this.fadeOut = false;
 
-        if (this.questions == 4) {
-          this.studyMapService.rateStudyArea(this.studyAreaId, this.rating);
-        }
-
         if (this.questions == 5) {
+          this.studyMapService.rateStudyArea(this.studyAreaId, this.rating);
           this.rating = 5;
         } else {
           this.rating = 0;

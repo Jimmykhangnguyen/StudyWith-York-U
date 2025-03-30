@@ -15,7 +15,19 @@ export class StudyMapService {
   private idSource = new BehaviorSubject<string>("");
   currentId = this.idSource.asObservable();
 
+  private dataSource = new BehaviorSubject<any[]>([]);
+  currentData = this.dataSource.asObservable();
+
   constructor(private http: HttpClient) {} // Inject HttpClient
+
+  getData() {
+    this.http.get('http://localhost:8080/study_areas').subscribe((data: any) => {
+      this.dataSource.next(data);
+    }, (error) => {
+      console.error('Failed to fetch data:', error.message);
+      alert('Failed to fetch data. Please try again later.');
+    });
+  }
 
   changeData(studyAreaCoords: number[]) {
     this.studyAreaSource.next(studyAreaCoords);

@@ -45,14 +45,13 @@ export class StudyAreaComponent implements OnInit {
   ];
 
   constructor(private http: HttpClient, private studyMapService: StudyMapService) {}
-
+  
   ngOnInit(): void {
-    this.filteredStudyAreas = this.studyAreas; // Initialize filteredStudyAreas with all study areas
-    this.http.get<{ _embedded: { studyAreas: any[] } }>('http://localhost:8080/studyAreas')
-      .subscribe(response => {
-        this.studyAreas = response._embedded?.studyAreas ?? "no Study areas!";
-        this.filteredStudyAreas = this.studyAreas; // Update filteredStudyAreas after fetching data
-      });
+    this.studyMapService.getData(); // Fetch data when component initializes
+    this.studyMapService.currentData.subscribe(data => {
+      this.studyAreas = data; // Subscribe to the data observable
+      this.filteredStudyAreas = this.studyAreas; // Initialize filteredStudyAreas with all study areas
+    });
   }
 
   onSelectStudyArea(studyArea: any): void {
@@ -65,8 +64,8 @@ export class StudyAreaComponent implements OnInit {
       this.selectedStudyArea = studyArea;
       this.studyMapService.changeData([studyArea.location.latitude, studyArea.location.longitude]);
       this.studyMapService.changeFeedback(true);
-      this.studyMapService.changeId(studyArea._links.self.href.split('/').pop());
-      this.getRatings(studyArea._links.self.href.split('/').pop());
+      this.studyMapService.changeId(studyArea.id);
+      this.getRatings(studyArea.id);
     }
   }
 

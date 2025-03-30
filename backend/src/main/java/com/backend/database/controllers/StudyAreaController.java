@@ -26,12 +26,14 @@ public class StudyAreaController {
 		this.studyAreaRepository = studyAreaRepository;
 	}
 	
+	@CrossOrigin(origins = "http://localhost:4200")
 	//get all the study areas of York University
 	@GetMapping("/study_areas")
 	public ResponseEntity<List<StudyArea>> getAllStudyAreas(){
 		return ResponseEntity.ok(this.studyAreaRepository.findAll());
 	}
 	
+	@CrossOrigin(origins = "http://localhost:4200")
 	//create a new study area object
 	@PostMapping("/study_areas")
 	public ResponseEntity<StudyArea> createStudyArea(@RequestBody StudyAreaRequest studyAreaRequest){

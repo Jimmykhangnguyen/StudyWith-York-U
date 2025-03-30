@@ -61,7 +61,6 @@
   transform: translateX(0);
 }
 
-
 .progress-bar {
   display: flex;
   gap: 5px;
@@ -76,7 +75,7 @@
 .segment {
   flex: 1;
   background: #f8d7da;
-  transition: background-color 0.3s ease-in-out;
+  transition: background-color 0.3s;
 }
 
 .segment.filled {
@@ -92,6 +91,11 @@
   font-size: 30px;
   color: lightgray;
   cursor: pointer;
+  transition: color 0.3s;
+}
+
+.stars .hovered {
+  color: #e31836;
 }
 
 .stars span {

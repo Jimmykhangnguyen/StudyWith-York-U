@@ -26,6 +26,7 @@ export class MapComponent implements OnInit {
     ['end', '#e31836']
   ]);
   rating: number = 0;
+  hoverRating: number = 0;
   questions: number = 1;
   questionTexts: string[] = [
     "How clean is the space?",
@@ -40,25 +41,6 @@ export class MapComponent implements OnInit {
     ["", ""]
   ];
   fadeOut: boolean = false;
-
-  setRating(value: number) {
-    if (this.questions < 4) {
-      this.rating = value;
-      this.fadeOut = true;
-
-      setTimeout(() => {
-        if (this.questions < 4) {
-          this.questions++;
-        }
-        this.fadeOut = false;
-        if (this.questions == 4) {
-          this.rating = 5;
-        } else {
-          this.rating = 0;
-        }
-      }, 500);
-    }
-  }
 
   constructor(private studyMapService: StudyMapService) {}
 
@@ -210,6 +192,33 @@ export class MapComponent implements OnInit {
       instructions.innerHTML = `<p><strong>Walking Time 🚶: ${Math.floor(
         data.duration / 60
       )} min</strong></p><ol>${tripInstructions}</ol>`;
+    }
+  }
+
+  onMouseEnter(star: number) {
+    this.hoverRating = star;
+  }
+
+  onMouseLeave() {
+    this.hoverRating = 0;
+  }
+
+  setRating(star: number) {
+    if (this.questions < 4) {
+      this.rating = star;
+      this.fadeOut = true;
+
+      setTimeout(() => {
+        if (this.questions < 4) {
+          this.questions++;
+        }
+        this.fadeOut = false;
+        if (this.questions == 4) {
+          this.rating = 5;
+        } else {
+          this.rating = 0;
+        }
+      }, 500);
     }
   }
 }

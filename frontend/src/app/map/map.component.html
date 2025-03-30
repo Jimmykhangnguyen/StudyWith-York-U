@@ -16,8 +16,12 @@
 
   <div class="stars">
     <span *ngFor="let star of [1, 2, 3, 4, 5]" 
-          (click)="setRating(star)" 
-          [class.filled]="star <= rating">
+          [class.filled]="star <= rating"
+          [class.hovered]="star <= hoverRating && !rating"
+          (mouseenter)="onMouseEnter(star)"
+          (mouseleave)="onMouseLeave()"
+          (click)="setRating(star)"
+        >
       ★
     </span>
   </div>

@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import com.backend.database.models.*;
-import com.backend.database.repositories.*;
+
+import com.backend.database.models.User;
+import com.backend.database.repositories.UserRepository;
 import com.backend.database.resources.UserRequest;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200") // Allow POST request from front end 
@@ -95,21 +95,4 @@ public class UserController {
 		return userExist == null; 
         
     }
-
-    @GetMapping("/favourites")
-    public StudyArea[] getFavourites(@RequestParam User user) {
-        return user.getFavourites() ;
-    }
-
-    @PostMapping("/favourites")
-    public  ResponseEntity<String> addFavourite(@RequestParam StudyArea sa, @RequestParam User user) {
-
-        user.addFavourite(sa); 
-        return ResponseEntity.status(201).body("favourite added successfully!"); 
-
-
-    }
-    }
-    
-    
-
+}

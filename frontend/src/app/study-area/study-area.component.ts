@@ -23,10 +23,12 @@ interface filterCaterogy {
 
 export class StudyAreaComponent implements OnInit {
   studyAreas = [
-    { name: 'Example1', averageUserRating: 3, chargingOutlets: true, totalCleanRatings: 4, accessible: true, totalLoudRatings: 3,
-      location: { latitude: -79.50600, longitude: 43.77350,  }, totalBusyRatings: 2, opening: 8, closing: 22, distance: [0, 0] },
-    { name: 'Example2', averageUserRating: 3, chargingOutlets: false, totalCleanRatings: 3, accessible: false, totalLoudRatings: 2,
-      location: { latitude: -79.50308, longitude: 43.77161 }, totalBusyRatings: 3, opening: 7, closing: 20, distance: [0, 0] },
+    { id: 'E1', name: 'Example 1', address: 'Fake Address 1', chargingOutlets: true, accessible: true, opening: 8, closing: 22,
+      totalRating: 4, totalRatingCount: 1, totalBusyRating: 2, totalBusyCount: 1, totalCleanRating: 5, totalCleanCount: 1, totalLoudRating: 3, totalLoudCount: 1
+    },
+    { id: 'E2', name: 'Example 2', address: 'Fake Address 2', chargingOutlets: false, accessible: false, opening: 7, closing: 20,
+      totalRating: 5, totalRatingCount: 2, totalBusyRating: 11, totalBusyCount: 3, totalCleanRating: 3, totalCleanCount: 2, totalLoudRating: 6, totalLoudCount: 2
+    },
   ]; // Stub database
   filteredStudyAreas: any[] = [];
   selectedStudyArea: any = null;
@@ -35,13 +37,13 @@ export class StudyAreaComponent implements OnInit {
   ratings: number[] = [0, 0];
 
   categories: filterCaterogy[] = [
-    { name: 'Charging Outlets', value: true },
-    { name: 'Cleanliness Rating', value: 5 },
-    { name: 'Accessible', value: false },
-    { name: 'Quiet', value: 3 },
-    { name: 'Not Crowded', value: 0 },
-    { name: 'Opening', value: false },
     { name: 'Good Ratings', value: 4 },
+    { name: 'Charging Outlets', value: true },
+    { name: 'Accessible', value: false },
+    { name: 'Not Busy', value: 0 },
+    { name: 'Clean', value: 5 },
+    { name: 'Quiet', value: 3 },
+    { name: 'Opening', value: false }
   ];
 
   constructor(private http: HttpClient, private studyMapService: StudyMapService) {}
@@ -97,30 +99,36 @@ export class StudyAreaComponent implements OnInit {
   
   filterByCategory(category: filterCaterogy): void {
     switch (category.name) {
+      case "Good Ratings":
+        this.filteredStudyAreas = this.studyAreas.filter(area => area.totalRating / (area.totalRatingCount + 0.01) + 1 >= 3);
+        break;
       case "Charging Outlets":
         this.filteredStudyAreas = this.studyAreas.filter(area => area.chargingOutlets === true);
-        break;
-      case "Cleanliness Rating":
-        this.filteredStudyAreas = this.studyAreas.filter(area => area.totalCleanRatings >= 3);
         break;
       case "Accessible":
         this.filteredStudyAreas = this.studyAreas.filter(area => area.accessible === true);
         break;
-      case "Quiet":
-        this.filteredStudyAreas = this.studyAreas.filter(area => area.totalLoudRatings < 3);
+      case "Not Busy":
+        this.filteredStudyAreas = this.studyAreas.filter(area => area.totalBusyRating / (area.totalBusyCount + 0.01) + 1 < 3);
         break;
-      case "Not Crowded":
-        this.filteredStudyAreas = this.studyAreas.filter(area => area.totalBusyRatings < 3);
+      case "Clean":
+        this.filteredStudyAreas = this.studyAreas.filter(area => area.totalCleanRating / (area.totalCleanCount + 0.01) + 1 >= 3);
+        break;
+      case "Quiet":
+        this.filteredStudyAreas = this.studyAreas.filter(area => area.totalLoudRating / (area.totalLoudCount + 0.01) + 1 < 3);
         break;
       case "Opening":
         this.filteredStudyAreas = this.studyAreas.filter(area => area.opening >= 7 && area.closing <= 20);
-        break;
-      case "Good Ratings":
-        this.filteredStudyAreas = this.studyAreas.filter(area => area.averageUserRating >= 3);
         break;
       default:
         console.warn("Unknown category:", category.name);
         break;
     }
+  }
+
+  hardReset(studyAreas: any): void {
+    studyAreas.forEach((area: any) => {
+      this.studyMapService.resetRatings(area.id);
+    });
   }
 }

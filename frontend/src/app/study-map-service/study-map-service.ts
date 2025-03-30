@@ -106,4 +106,21 @@ export class StudyMapService {
       }
     });
   }
+
+  resetRatings(studyAreaId: string): void {
+    console.log('Study ID:', studyAreaId);
+    this.http.post(
+      `http://localhost:8080/ratings/reset?id=${studyAreaId}`,
+      null,
+      { responseType: 'text' }
+    ).subscribe({
+      next: (response) => {
+        console.log('Successfully reset study area:', response);
+      },
+      error: (error) => {
+        console.error('Failed to reset study area:', error.message);
+        alert('Failed to reset study area. Please try again later.');
+      }
+    });
+  }
 }

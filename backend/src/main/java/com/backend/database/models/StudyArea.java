@@ -192,4 +192,15 @@ public class StudyArea {
 	        this.totalLoudCount++; 
 		}
 	}
+
+	public void resetRatings() {
+		totalRating = 0;
+    	totalRatingCount = 0;
+		totalBusyRating = 0;
+		totalBusyCount = 0;
+		totalCleanRating = 0;
+		totalCleanCount = 0;
+		totalLoudRating = 0;
+		totalLoudCount = 0;
+	}
 }

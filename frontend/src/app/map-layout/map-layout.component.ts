@@ -3,11 +3,12 @@ import { Component } from '@angular/core';
 import { MapComponent } from '../map/map.component';
 import { StudyAreaComponent } from '../study-area/study-area.component';
 import { NavBarComponent } from '../nav-bar/nav-bar.component';
+import { HttpClientModule } from '@angular/common/http'; // Import HttpClientModule
 
 @Component({
   selector: 'app-map-layout',
   standalone: true,
-  imports: [CommonModule, MapComponent, StudyAreaComponent, NavBarComponent],
+  imports: [CommonModule, MapComponent, StudyAreaComponent, NavBarComponent, HttpClientModule],
   templateUrl: './map-layout.component.html',
   styleUrl: './map-layout.component.css'
 })

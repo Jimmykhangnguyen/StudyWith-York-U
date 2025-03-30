@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { environment } from './../../environments/environment';
 import { StudyMapService } from '../study-map-service/study-map-service';
+import { HttpClientModule } from '@angular/common/http';
 import * as mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 @Component({
   selector: 'app-map',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, HttpClientModule],
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css'],
 })
@@ -17,6 +18,7 @@ export class MapComponent implements OnInit {
   map: any;
   showDirections = false;
   showFeedback = false;
+  studyAreaId = '';
   points = new Map<string, any>([
     ['start', []],
     ['end', []]
@@ -53,6 +55,11 @@ export class MapComponent implements OnInit {
           this.questions++;
         }
         this.fadeOut = false;
+
+        if (this.questions == 4) {
+          this.studyMapService.rateStudyArea(this.studyAreaId, this.rating);
+        }
+
         if (this.questions == 5) {
           this.rating = 5;
         } else {
@@ -90,6 +97,12 @@ export class MapComponent implements OnInit {
         this.rating = 0;
       }
     });
+
+    this.studyMapService.currentId.subscribe(id => {
+      this.studyAreaId = id;
+      console.log('Study Area ID:', this.studyAreaId);
+    });
+
 
     this.map.on('mousemove', 'start', (event: any) => {
       this.map.getCanvas().style.cursor = 'pointer';

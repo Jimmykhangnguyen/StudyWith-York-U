@@ -1,13 +1,18 @@
-.reviewBar {
+.reviews {
   position: absolute;
+  top: 15.0%;
+  width: 100.0%;
+  height: 85.0%;
+}
+
+.reviewsBar {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: 98.5%;
-  left: 0.75%;
-  top: 15.0%;
-  bottom: 75.0%;
+  max-width: 98.5%;
+  margin: 0 auto;
+  height: 11.75%;
   overflow: hidden;
 }
 
@@ -33,14 +38,12 @@
   background-color: #8a0e20;
 }
 
-.reviewGrid {
-  position: absolute;
+.reviewsGrid {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 98.5%;
-  left: 0.75%;
-  top: 25.0%;
-  bottom: 1.75%;
+  max-width: 98.5%;
+  margin: 0 auto;
+  height: 88.25%;
   overflow: hidden;
 }

@@ -56,11 +56,11 @@ public class StudyArea {
         }
     }
 	
-	
 	//Constructors 
 	public StudyArea() {
 		
 	}
+
 	public StudyArea(String name, boolean chargingOutlets, int cleanlinessRating, boolean accessible, int loudness, Location location, int openingTime, int closingTime, int busyness, String address) {
 		//if cleanliness and loudness fall out of rating range throw an exception
 		if(cleanlinessRating < 1 || cleanlinessRating > 5) {
@@ -91,7 +91,6 @@ public class StudyArea {
 	public void setId(String id) {
 		this.id = id;
 	}
-	
 
 	public String getName() {
 		return name;
@@ -113,7 +112,7 @@ public class StudyArea {
 		return cleanlinessRating;
 	}
 	
-	public void setCleanlinessrating(int cleanlinessRating) {
+	public void setCleanlinessRating(int cleanlinessRating) {
 		this.cleanlinessRating = cleanlinessRating;
 	}
 	
@@ -141,92 +140,62 @@ public class StudyArea {
 		this.location = location;
 	}
 	
-	public int getBusyness(){
-		// Calendar cal = Calendar.getInstance(); 
-		// int hour = cal.get(Calendar.HOUR_OF_DAY);
-
-		// if (this.loudness <= 3){
-		// 	if (hour < this.openingTime){
-		// 		this.business = 0; 
-		// 	} else if (hour <= 10 && hour < this.closingTime){ // Early morning, before 10 AM
-		// 		this.business = 1; 
-		// 	} else if (hour <= 13 && hour < this.closingTime){ //Lunchtime, between 11 AM and 1 PM
-		// 		this.business = 4;
-		// 	} else if (hour <= 18 && hour < this.closingTime){ // Afternoon, between 2 and 6 PM
-		// 		this.business = 5; 
-		// 	} else if (hour <= 21 && hour < this.closingTime){ // Evening, between 7PM and close
-		// 		this.business = 3; 
-		// 	} else{
-		// 		this.business = 0; 
-		// 	}
-		// } else {
-		// 	if (hour < this.openingTime){
-		// 		this.business = 0; 
-		// 	} else if (hour <= 10 && hour < this.closingTime){ //Early morning, before 10 AM
-		// 		this.business = 2; 
-		// 	} else if (hour <= 13 && hour < this.closingTime){ //Lunchtime, between 11 AM and 1 PM
-		// 		this.business = 5;
-		// 	} else if (hour <= 18 && hour < this.closingTime){ //Afternoon, between 2 and 6 PM
-		// 		this.business = 4; 
-		// 	} else if (hour <= 21 && hour < this.closingTime){ //Evening, between 7 PM and closing time
-		// 		this.business = 2; 
-		// 	} else{
-		// 		this.business = 0; 
-		// }
-		// }
-		return this.busyness; 
-	
+	public int getBusyness() {
+		return busyness; 
 	}
 
-	public String getAddress(){
-		return this.address; 
+	public String getAddress() {
+		return address; 
 	}
 
-	public void setAddress(String address){
+	public void setAddress(String address) {
 		this.address = address; 
 	}
 	
 	public void addUserRating(int rating) {
-		if(rating>=1 && rating<=5) {
+		if (rating >= 1 && rating <= 5) {
 			this.totalRatingSum += rating;
 	        this.totalRatingCount++;
 		}
 	}
-	public void addBusynessRating(int rating){
-		if(rating>=1 && rating<=5) {
+
+	public void addBusynessRating(int rating) {
+		if(rating >= 1 && rating <= 5) {
 			this.totalBusynessRating = rating;
 			this.totalBusynessCount++; 
-	}
-}
-
-	public double getAvgBusynessRating(){
-		if (this.totalBusynessCount == 0){
-			return 1;
-		} else {
-			return this.totalBusynessRating;
 		}
 	}
 
-	public void addCleanlinessRating(int rating){
-		if(rating>=1 && rating<=5) {
+	public double getAvgBusynessRating() {
+		if (totalBusynessCount == 0){
+			return 1;
+		} else {
+			return totalBusynessRating;
+		}
+	}
+
+	public void addCleanlinessRating(int rating) {
+		if(rating >= 1 && rating <= 5) {
 			this.totalCleanRating = rating;
 	        this.totalCleanCount++; 
+		}
 	}
-}
-    public double getAvgClean(){
+
+    public double getAvgClean() {
 		if (totalCleanCount == 0){
 			return 1; 
 		} else {
 			return totalCleanRating; 
 		}
-}
+	}
 
-	public int getBusynessCount(){
+	public int getBusynessCount() {
 		return totalBusynessCount; 
 	}
-public int getCleanCount(){
-	return totalCleanCount; 
-}
+
+	public int getCleanCount() {
+		return totalCleanCount; 
+	}
 
 	public int getTotalRatingSum() {
 		return totalRatingSum;
@@ -237,26 +206,26 @@ public int getCleanCount(){
 	}
 
 	public double getAverageUserRating() {
-		if(totalRatingCount==0) {
+		if(totalRatingCount == 0) {
 			return 0.0;
 		} else {
-			avgRating = (double) totalRatingSum/totalRatingCount; 
-			return avgRating;	//calculate avg of ratings as new ones are added by the users 
+			avgRating = (double) totalRatingSum / totalRatingCount; 
+			return avgRating; //calculate avg of ratings as new ones are added by the users 
 		}
 	}
 
-	public void addLoudRating(int rating){
-		if(rating>=1 && rating<=5) {
+	public void addLoudRating(int rating) {
+		if(rating >= 1 && rating <= 5) {
 			this.totalLoudnessRating = rating;
 	        this.totalLoudCount++; 
 	}
 	}
 
-	public int getLoudCount(){
+	public int getLoudCount() {
 		return totalLoudCount; 
 	}
 
-	public double getAvgLoud(){
+	public double getAvgLoud() {
 		if (totalLoudCount == 0){
 			return 1; 
 		} else{
@@ -264,30 +233,29 @@ public int getCleanCount(){
 		}
 	}
 
-	public int getTotalBusyRatings(){
+	public int getTotalBusyRatings() {
 		return totalBusynessRating; 
 	}
 
-	public int getTotalCleanRatings(){
+	public int getTotalCleanRatings() {
 		return totalCleanRating; 
 	}
 
-	public int getTotalLoudRatings(){
+	public int getTotalLoudRatings() {
 		return totalLoudnessRating; 
 	}
 
-	public int getOpening(){
+	public int getOpening() {
 		return this.openingTime;
 	}
 
-	public int getClosing(){
+	public int getClosing() {
 		return this.closingTime; 
 	}
-	public void setOpening(int opening){
+	public void setOpening(int opening) {
 		this.openingTime = opening; 
 	}
-	public void setClosing(int closing){
+	public void setClosing(int closing) {
 		this.closingTime = closing; 
 	}
-	
 }

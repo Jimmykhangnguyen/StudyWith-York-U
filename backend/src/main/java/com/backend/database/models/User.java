@@ -66,5 +66,4 @@ public class User {
 		favourites[numFavourites] = s;
 		numFavourites++; 
 	}
-	
 }

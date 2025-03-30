@@ -1,18 +1,17 @@
 package com.backend.database.resources;
-import com.backend.database.models.StudyArea; 
 
 public class UserRequest {
 	private String username;
 	private String email;
 	private String password;
-	private StudyArea[] favourites; 
+	private String[] favourites; 
 
 
 	//constructors
 	public UserRequest() {
 
 	}
-	public UserRequest(String username, String email, String password, StudyArea[] favourites) {
+	public UserRequest(String username, String email, String password, String[] favourites) {
 		this.username = username;
 		this.email = email;
 		this.password = password;
@@ -32,7 +31,7 @@ public class UserRequest {
         return password;
     }
 
-	public StudyArea[] favourites(){
+	public String[] getFavourites(){
 		return favourites; 
 	}
 

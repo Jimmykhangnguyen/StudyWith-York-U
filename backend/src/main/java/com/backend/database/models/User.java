@@ -2,6 +2,7 @@
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.repository.query.StringBasedMongoQuery;
 
 @Document(collection = "users")
 public class User {
@@ -11,7 +12,7 @@ public class User {
 	private String username;
 	private String email;
 	private String password; 
-	private StudyArea[] favourites = new StudyArea[10]; 
+	private String[] favourites = new String[10]; 
 	private int numFavourites = 0; 
 
 	//Constructors
@@ -58,12 +59,12 @@ public class User {
 		this.password = password;
 	}
 
-	public StudyArea[] getFavourites(){
+	public String[] getFavourites(){
 		return favourites; 
 	}
 
-	public void addFavourite(StudyArea s){
-		favourites[numFavourites] = s;
+	public void addFavourite(String id){
+		favourites[numFavourites] = id;
 		numFavourites++; 
 	}
 	

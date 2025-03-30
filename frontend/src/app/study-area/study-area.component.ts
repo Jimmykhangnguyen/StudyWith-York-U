@@ -23,9 +23,9 @@ interface filterCaterogy {
 export class StudyAreaComponent implements OnInit {
   studyAreas = [
     { name: 'Example1', chargingOutlets: true, cleanlinessRating: 4, accessible: true, loudness: 3,
-      location: { latitude: -79.50600, longitude: 43.77350,  }, business: 2, opening: 8, closing: 22 },
+      location: { latitude: -79.50600, longitude: 43.77350,  }, busyness: 2, opening: 8, closing: 22 },
     { name: 'Example2', chargingOutlets: false, cleanlinessRating: 3, accessible: false, loudness: 2,
-      location: { latitude: -79.50308, longitude: 43.77161 }, business: 3, opening: 7, closing: 20 },
+      location: { latitude: -79.50308, longitude: 43.77161 }, busyness: 3, opening: 7, closing: 20 },
   ]; // Stub database
   filteredStudyAreas: any[] = [];
   selectedStudyArea: any = null;
@@ -38,7 +38,7 @@ export class StudyAreaComponent implements OnInit {
     { name: 'Cleanliness Rating', value: 5 },
     { name: 'Accessible', value: false },
     { name: 'Loudness', value: 3 },
-    { name: 'Business', value: 0 },
+    { name: 'Busyness', value: 0 },
     { name: 'Opening', value: false }
   ];
 
@@ -106,8 +106,8 @@ export class StudyAreaComponent implements OnInit {
       case "Loudness":
         this.filteredStudyAreas = this.studyAreas.filter(area => area.loudness <= 3);
         break;
-      case "Business":
-        this.filteredStudyAreas = this.studyAreas.filter(area => area.business <= 3);
+      case "Busyness":
+        this.filteredStudyAreas = this.studyAreas.filter(area => area.busyness <= 3);
         break;
       case "Opening":
         this.filteredStudyAreas = this.studyAreas.filter(area => area.opening >= 7 && area.closing <= 20);

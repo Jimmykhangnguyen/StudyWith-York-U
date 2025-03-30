@@ -35,7 +35,7 @@ export class RegisterComponent {
 
     //validate the password in front end so and make user re type password for further validation
     if (!this.validPasswordCheck(this.password)) {
-      this.errorMessage = "Password must be 8-20 characters long, one uppercase letter and at least one number 1-9.";
+      this.errorMessage = "Password must be 8-20 characters long, one uppercase letter and at least one number.";
       this.registerError = true;
       return;
     }

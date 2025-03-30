@@ -11,7 +11,7 @@
   justify-content: center;
   text-align: center;
   min-height: 100vh;
-  background: url("/assets/images/map_image.png") no-repeat;
+  background: url("/assets/images/MapBackground.png") no-repeat;
   background-size: cover;
   padding-top: 100px;
 }

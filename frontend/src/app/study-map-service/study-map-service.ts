@@ -19,7 +19,7 @@ export class StudyMapService {
   currentData = this.dataSource.asObservable();
 
   constructor(private http: HttpClient) {} // Inject HttpClient
-
+  
   getData() {
     this.http.get('http://localhost:8080/study_areas').subscribe((data: any) => {
       this.dataSource.next(data);

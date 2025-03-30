@@ -39,7 +39,18 @@
             </span>
           </div>
         </div>
-        <p class="library-distance">6.2 km away | 10 minutes away</p>
+        <div class="library-distance">
+          <div class="statusLabel">Status:</div> 
+          <div class="status">
+            <span 
+              *ngIf="area.name !== 'First Student Centre' && area.name !== 'Bergeron Sandbox'; else closed"
+              class="status-open"
+            >Open</span>
+            <ng-template #closed>
+              <span class="status-closed">Closed</span>
+            </ng-template>
+          </div>
+        </div>
         <p class="library-hours">
           Hours {{ area.opening }}:00 to {{ area.closing }}:00
         </p>

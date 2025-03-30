@@ -24,9 +24,9 @@ interface filterCaterogy {
 export class StudyAreaComponent implements OnInit {
   studyAreas = [
     { name: 'Example1', averageUserRating: 3, chargingOutlets: true, totalCleanRatings: 4, accessible: true, totalLoudRatings: 3,
-      location: { latitude: -79.50600, longitude: 43.77350,  }, totalBusyRatings: 2, opening: 8, closing: 22 },
+      location: { latitude: -79.50600, longitude: 43.77350,  }, totalBusyRatings: 2, opening: 8, closing: 22, distance: [0, 0] },
     { name: 'Example2', averageUserRating: 3, chargingOutlets: false, totalCleanRatings: 3, accessible: false, totalLoudRatings: 2,
-      location: { latitude: -79.50308, longitude: 43.77161 }, totalBusyRatings: 3, opening: 7, closing: 20 },
+      location: { latitude: -79.50308, longitude: 43.77161 }, totalBusyRatings: 3, opening: 7, closing: 20, distance: [0, 0] },
   ]; // Stub database
   filteredStudyAreas: any[] = [];
   selectedStudyArea: any = null;

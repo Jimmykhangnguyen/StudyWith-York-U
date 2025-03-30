@@ -90,8 +90,8 @@ ul {
 
 .generalStudyInfo {
   display: flex;
-  flex-direction: column;
-  align-items: start;
+  flex-direction: column;;
+  align-items: baseline;
   width: 100%;
 }
 
@@ -103,7 +103,40 @@ ul {
 }
 
 .library-distance {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 5px;
   color: #4a5568;
+}
+
+.status-open {
+  margin-left: 5px;
+  background-color: #00BD00;
+  color: white;
+  font-size: 1.2rem;
+  border-radius: 8px;
+  padding: 2px;
+  margin-right: 5px;
+  border: 2px solid #00BD00;
+}
+
+.status-closed {
+  margin-left: 5px;
+  background-color: #e31836;
+  color: white;
+  font-size: 1.2rem;
+  border-radius: 8px;
+  padding: 2px;
+  margin-right: 5px;
+  border: 2px solid #e31836;
+}
+
+.statusLabel {
+  color:#000000;
+  font-size: 1.2rem;
+  font-weight: bold;
 }
 
 .library-hours {

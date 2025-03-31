@@ -1,6 +1,7 @@
 package com.backend.database.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.backend.database.models.StudyArea;
 import com.backend.database.models.User;
+import com.backend.database.repositories.StudyAreaRepository;
 import com.backend.database.repositories.UserRepository;
 import com.backend.database.resources.UserRequest;
 

@@ -38,7 +38,7 @@
           <h2 class="library-title">{{ area.name }}</h2>
           <div class="stars">
             <span *ngFor="let star of [1, 2, 3, 4, 5]" 
-                  [class.filled]="star <= area.totalRating / (area.totalRatingCount)">
+                  [class.filled]="star <= area.totalRating/(area.totalRatingCount+0.01) + 1">
               ★
             </span>
           </div>
@@ -68,9 +68,9 @@
           <span class="tags" *ngIf="area.totalRating / (area.totalRatingCount) >= 3">Good Ratings</span>
           <span class="tags" *ngIf="area.chargingOutlets">Charging Outlets</span>
           <span class="tags" *ngIf="area.accessible">Accessible</span>
-          <span class="tags" *ngIf="area.totalBusyRating / (area.totalBusyCount) < 3">Empty</span>
-          <span class="tags" *ngIf="area.totalCleanRating / (area.totalCleanCount) >= 3">Clean</span>
-          <span class="tags" *ngIf="area.totalLoudRating / (area.totalLoudCount) < 3">Quiet</span>
+          <span class="tags" *ngIf="area.totalBusyRating < 3">Empty</span>
+          <span class="tags" *ngIf="area.totalCleanRating >= 3">Clean</span>
+          <span class="tags" *ngIf="area.totalLoudRating < 3">Quiet</span>
         </p>
       </div>
     </button>

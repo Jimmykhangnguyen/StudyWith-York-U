@@ -1,7 +1,6 @@
 package com.backend.database.controllers;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -24,13 +23,6 @@ public class StudyAreaController {
 	
 	public StudyAreaController(StudyAreaRepository studyAreaRepository) {
 		this.studyAreaRepository = studyAreaRepository;
-	}
-	
-	//get all the study areas of York University
-	@CrossOrigin(origins = "http://localhost:4200")
-	@GetMapping("/study_areas")
-	public ResponseEntity<List<StudyArea>> getAllStudyAreas(){
-		return ResponseEntity.ok(this.studyAreaRepository.findAll());
 	}
 	
 	//create a new study area object

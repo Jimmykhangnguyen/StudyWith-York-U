@@ -70,11 +70,6 @@ ul {
   background-color: #dedede;
 }
 
-.studyPlacesButton.selected .library-title {
-  color: #e31836;
-  text-decoration: underline;
-}
-
 .nameAndStars {
   width: 100%;
   margin-top: 15px;

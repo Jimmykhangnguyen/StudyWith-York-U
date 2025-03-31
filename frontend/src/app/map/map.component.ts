@@ -24,7 +24,7 @@ export class MapComponent implements OnInit {
     ['end', []]
   ]);
   pointColours = new Map<string, string>([
-    ['start', '#3887be'],
+    ['start', '#27e8e5'],
     ['end', '#e31836']
   ]);
   rating: number = 0;
@@ -38,9 +38,9 @@ export class MapComponent implements OnInit {
     "Thank you for your feedback!"
   ];
   questionLabels: string[][] = [
-    ["Very Busy", "Very Empty"],
+    ["Very Empty", "Very Busy"],
     ["Very Dirty", "Very Clean"],
-    ["Very Noisy", "Very Quiet"],
+    ["Very Quiet", "Very Loud"],
     ["Very Bad", "Awesome!"],
     ["", ""]
   ];
@@ -226,10 +226,10 @@ export class MapComponent implements OnInit {
         if (this.questions == 2) {
           this.studyMapService.rateBusyness(this.studyAreaId, this.rating);
           this.rating = 0;
-        } else if (this.questions == 4) {
+        } else if (this.questions == 3) {
           this.studyMapService.rateCleanliness(this.studyAreaId, this.rating);
           this.rating = 0;
-        } else if (this.questions == 3) {
+        } else if (this.questions == 4) {
           this.studyMapService.rateLoudness(this.studyAreaId, this.rating);
           this.rating = 0;
         } else if (this.questions == 5) {

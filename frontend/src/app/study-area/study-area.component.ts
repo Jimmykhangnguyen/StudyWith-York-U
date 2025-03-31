@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { HttpClientModule } from '@angular/common/http'; // Import HttpClientModule
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
@@ -23,11 +22,11 @@ interface filterCaterogy {
 
 export class StudyAreaComponent implements OnInit {
   studyAreas = [
-    { id: 'E1', name: 'Example 1', address: 'Fake Address 1', chargingOutlets: true, accessible: true, opening: 8, closing: 22,
-      totalRating: 4, totalRatingCount: 1, totalBusyRating: 2, totalBusyCount: 1, totalCleanRating: 5, totalCleanCount: 1, totalLoudRating: 3, totalLoudCount: 1
+    { id: 'E1', name: 'Example 1', address: 'Fake Address 1', chargingOutlets: true, accessible: false, opening: 8, closing: 22,
+      totalRating: 4, totalRatingCount: 1, totalBusyRating: 2, totalBusyCount: 1, totalCleanRating: 2, totalCleanCount: 1, totalLoudRating: 3, totalLoudCount: 1
     },
-    { id: 'E2', name: 'Example 2', address: 'Fake Address 2', chargingOutlets: false, accessible: false, opening: 7, closing: 20,
-      totalRating: 5, totalRatingCount: 2, totalBusyRating: 11, totalBusyCount: 3, totalCleanRating: 3, totalCleanCount: 2, totalLoudRating: 6, totalLoudCount: 2
+    { id: 'E2', name: 'Example 2', address: 'Fake Address 2', chargingOutlets: false, accessible: true, opening: 7, closing: 20,
+      totalRating: 5, totalRatingCount: 2, totalBusyRating: 11, totalBusyCount: 3, totalCleanRating: 9, totalCleanCount: 2, totalLoudRating: 6, totalLoudCount: 2
     },
   ]; // Stub database
   filteredStudyAreas: any[] = [];
@@ -37,13 +36,14 @@ export class StudyAreaComponent implements OnInit {
   ratings: number[] = [0, 0];
 
   categories: filterCaterogy[] = [
+    { name: 'None', value: 0 },
     { name: 'Good Ratings', value: 4 },
+    { name: 'Open', value: false },
     { name: 'Charging Outlets', value: true },
     { name: 'Accessible', value: false },
-    { name: 'Not Busy', value: 0 },
+    { name: 'Empty', value: 0 },
     { name: 'Clean', value: 5 },
-    { name: 'Quiet', value: 3 },
-    { name: 'Opening', value: false }
+    { name: 'Quiet', value: 3 }
   ];
 
   constructor(private http: HttpClient, private studyMapService: StudyMapService) {}
@@ -51,7 +51,7 @@ export class StudyAreaComponent implements OnInit {
   ngOnInit(): void {
     this.studyMapService.getData(); // Fetch data when component initializes
     this.studyMapService.currentData.subscribe(data => {
-      this.studyAreas = data; // Subscribe to the data observable
+      this.studyAreas = data.length == 0 ? this.studyAreas : data; // Subscribe to the data observable
       this.filteredStudyAreas = this.studyAreas; // Initialize filteredStudyAreas with all study areas
     });
   }
@@ -99,26 +99,29 @@ export class StudyAreaComponent implements OnInit {
   
   filterByCategory(category: filterCaterogy): void {
     switch (category.name) {
+      case "None":
+        this.filteredStudyAreas = this.studyAreas.filter(() => true);
+        break;
       case "Good Ratings":
-        this.filteredStudyAreas = this.studyAreas.filter(area => area.totalRating / (area.totalRatingCount + 0.01) + 1 >= 3);
+        this.filteredStudyAreas = this.studyAreas.filter(area => area.totalRating / (area.totalRatingCount) >= 3);
+        break;
+      case "Open":
+        this.filteredStudyAreas = this.studyAreas.filter(area => area.name !== 'First Student Centre' && area.name !== 'Bergeron Sandbox');
         break;
       case "Charging Outlets":
-        this.filteredStudyAreas = this.studyAreas.filter(area => area.chargingOutlets === true);
+        this.filteredStudyAreas = this.studyAreas.filter(area => area.chargingOutlets);
         break;
       case "Accessible":
-        this.filteredStudyAreas = this.studyAreas.filter(area => area.accessible === true);
+        this.filteredStudyAreas = this.studyAreas.filter(area => area.accessible);
         break;
-      case "Not Busy":
-        this.filteredStudyAreas = this.studyAreas.filter(area => area.totalBusyRating / (area.totalBusyCount + 0.01) + 1 < 3);
+      case "Empty":
+        this.filteredStudyAreas = this.studyAreas.filter(area => area.totalBusyRating / (area.totalBusyCount) < 3);
         break;
       case "Clean":
-        this.filteredStudyAreas = this.studyAreas.filter(area => area.totalCleanRating / (area.totalCleanCount + 0.01) + 1 >= 3);
+        this.filteredStudyAreas = this.studyAreas.filter(area => area.totalCleanRating / (area.totalCleanCount) >= 3);
         break;
       case "Quiet":
-        this.filteredStudyAreas = this.studyAreas.filter(area => area.totalLoudRating / (area.totalLoudCount + 0.01) + 1 < 3);
-        break;
-      case "Opening":
-        this.filteredStudyAreas = this.studyAreas.filter(area => area.opening >= 7 && area.closing <= 20);
+        this.filteredStudyAreas = this.studyAreas.filter(area => area.totalLoudRating / (area.totalLoudCount) < 3);
         break;
       default:
         console.warn("Unknown category:", category.name);

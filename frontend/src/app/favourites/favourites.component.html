@@ -3,9 +3,10 @@
         <h2 class="favouritesText">Your Favourites</h2>
     </div>
     <div class="favouritesGrid">
-        <h2 class="noFavourites">You have no favourites. Try adding one!</h2>
+        <h2 *ngIf="!loggedInEmail">To add favourites, log in to your account!</h2>
+        <h2 *ngIf="loggedInEmail">You have no favourites. Try adding one!</h2>
     </div>
-    <div class="favouritesBottomBar">
+    <div *ngIf="loggedInEmail" class="favouritesBottomBar">
         <button class="addFavourite" (click)="togglePopup()">+ Add a Favourite Spot</button>
     </div>
 

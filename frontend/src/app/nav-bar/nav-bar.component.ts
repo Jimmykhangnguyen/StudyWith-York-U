@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
+import { LoginService } from '../login-service/login-service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -12,21 +13,16 @@ import { Router, RouterModule } from '@angular/router';
 
 export class NavBarComponent implements OnInit {
   loggedInEmail: string | null = null;
-  isLoading: boolean = true;
 
-  constructor(private router: Router) {}
+  constructor(private loginService: LoginService) {}
 
   ngOnInit(): void {
-    this.loggedInEmail = localStorage.getItem('loggedInEmail');
-    this.isLoading = false;
+    this.loginService.currentLoggedInEmail.subscribe(email => {
+      this.loggedInEmail = email;
+    });
   }
 
   logout(): void {
-    localStorage.removeItem('loggedInEmail');
-    this.loggedInEmail = null;
-  }
-
-  onStudyAreasClick() {
-    this.router.navigate(['/map']);
+    this.loginService.logout();
   }
 }

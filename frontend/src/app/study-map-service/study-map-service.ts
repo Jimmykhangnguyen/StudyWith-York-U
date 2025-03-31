@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
+
 export class StudyMapService {
   private studyAreaSource = new BehaviorSubject<number[]>([]);
   currentCoords = this.studyAreaSource.asObservable();
@@ -18,28 +19,7 @@ export class StudyMapService {
   private studyDataSource = new BehaviorSubject<any[]>([]);
   currentStudyData = this.studyDataSource.asObservable();
 
-  private userDataSource = new BehaviorSubject<any[]>([]);
-  currentUserData = this.userDataSource.asObservable();
-
-  constructor(private http: HttpClient) {} // Inject HttpClient
-  
-  getStudyAreaData() {
-    this.http.get('http://localhost:8080/study_areas').subscribe((data: any) => {
-      this.studyDataSource.next(data);
-    }, (error) => {
-      console.error('Failed to fetch data:', error.message);
-      alert('Failed to fetch data. Please try again later.');
-    });
-  }
-
-  getUserData() {
-    this.http.get('http://localhost:8080/users').subscribe((data: any) => {
-      this.userDataSource.next(data);
-    }, (error) => {
-      console.error('Failed to fetch data:', error.message);
-      alert('Failed to fetch data. Please try again later.');
-    });
-  }
+  constructor(private http: HttpClient) {}
 
   changeData(studyAreaCoords: number[]) {
     this.studyAreaSource.next(studyAreaCoords);
@@ -53,6 +33,15 @@ export class StudyMapService {
   changeId(studyAreaId: string) {
     console.log('Changing ID state to:', studyAreaId); // Debug log
     this.idSource.next(studyAreaId);
+  }
+  
+  getData() {
+    this.http.get('http://localhost:8080/study_areas').subscribe((data: any) => {
+      this.studyDataSource.next(data);
+    }, (error) => {
+      console.error('Failed to fetch data:', error.message);
+      alert('Failed to fetch data. Please try again later.');
+    });
   }
 
   rateBusyness(studyAreaId: string, rating: number): void {

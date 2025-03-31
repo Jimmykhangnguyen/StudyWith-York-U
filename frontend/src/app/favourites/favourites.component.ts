@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { LoginService } from '../login-service/login-service';
 
 @Component({
   selector: 'app-favourites',
@@ -10,12 +11,15 @@ import { CommonModule } from '@angular/common';
   styleUrl: './favourites.component.css'
 })
 export class FavouritesComponent implements OnInit {
+  loggedInEmail: string | null = null;
   showPopup: boolean = false;
 
-  constructor(private http: HttpClient) {};
+  constructor(private http: HttpClient, private loginService: LoginService) {};
 
   ngOnInit(): void {
-
+    this.loginService.currentLoggedInEmail.subscribe(email => {
+      this.loggedInEmail = email;
+    });
   }
 
   togglePopup(): void {

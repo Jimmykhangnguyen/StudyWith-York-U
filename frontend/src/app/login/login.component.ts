@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { LoginService } from '../login-service/login-service';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +23,7 @@ export class LoginComponent {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  constructor(private router: Router, private http: HttpClient) {}
+  constructor(private router: Router, private http: HttpClient, private loginService: LoginService) {}
 
   // When login button is clicked, move to 'map'
   // map includes (study area, map and navBar components in map-layout component)
@@ -40,7 +41,7 @@ export class LoginComponent {
       next: (response) => {
         console.log('Login successful:', response);
         if (response === 'Login successful') {
-          localStorage.setItem('loggedInEmail', this.email);
+          this.loginService.login(this.email);
           this.router.navigate(['/map']);
         } else {
           this.errorMessage = 'Error';

@@ -46,7 +46,7 @@ Windows
 6. Structure of the source code stayed the same.
 7. New or revised big stories and detailed user stories are updated in the planning document.
 
-Major Changes in Iteration 3
+# Major Changes in Iteration 3
 1. Added more user stories.
 2. View specfic addresses of study areas.
 3. User can now rate the study spaces based on their expience, ""loudness", "cleaniness" and "busyness".

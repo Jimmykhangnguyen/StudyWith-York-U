@@ -1,5 +1,7 @@
 package com.backend.database.controllers;
 
+import java.util.List;
+
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -12,8 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.backend.database.models.User;
 import com.backend.database.repositories.UserRepository;
 import com.backend.database.resources.UserRequest;
-
-import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200") // Allow POST request from front end 
@@ -86,7 +86,7 @@ public class UserController {
                password.matches(".*[0-9].*");
     }
     
- // Email must be unique and include a @ and .com or .ca
+    // Email must be unique and include a @ and .com or .ca
     private boolean isEmailUnique(String email) {
     	  if (!email.matches(".*[@].*") || (!email.matches(".*\\.com$") && !email.matches(".*\\.ca$"))) {
     	        return false;  

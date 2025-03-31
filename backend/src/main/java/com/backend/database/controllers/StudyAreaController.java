@@ -26,30 +26,27 @@ public class StudyAreaController {
 		this.studyAreaRepository = studyAreaRepository;
 	}
 	
-	@CrossOrigin(origins = "http://localhost:4200")
 	//get all the study areas of York University
+	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping("/study_areas")
 	public ResponseEntity<List<StudyArea>> getAllStudyAreas(){
 		return ResponseEntity.ok(this.studyAreaRepository.findAll());
 	}
 	
-	@CrossOrigin(origins = "http://localhost:4200")
 	//create a new study area object
+	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/study_areas")
 	public ResponseEntity<StudyArea> createStudyArea(@RequestBody StudyAreaRequest studyAreaRequest){
 		StudyArea studyArea = new StudyArea(
 				studyAreaRequest.getName(),
+				studyAreaRequest.getAddress(),
 	            studyAreaRequest.getChargingOutlets(),
-	            studyAreaRequest.getCleanlinessRating(),
 	            studyAreaRequest.getAccessible(),
-	            studyAreaRequest.getLoudness(),
-			   new StudyArea.Location(studyAreaRequest.getLocation().getLongitude(), studyAreaRequest.getLocation().getLatitude()),
+				new StudyArea.Location(studyAreaRequest.getLocation().getLongitude(), studyAreaRequest.getLocation().getLatitude()),
 	            studyAreaRequest.getOpening(),
-				studyAreaRequest.getClosing(),
-				studyAreaRequest.getBusyness(),
-				studyAreaRequest.getAddress() 
+				studyAreaRequest.getClosing()
 	        );
-		
+
 		return ResponseEntity.status(201).body(this.studyAreaRepository.save(studyArea));
 	}
 	
@@ -65,7 +62,7 @@ public class StudyAreaController {
 
         if (studyAreaOpt.isPresent()) {
             StudyArea studyArea = studyAreaOpt.get();
-            studyArea.addUserRating(rating); 
+            studyArea.addRating(rating); 
             studyAreaRepository.save(studyArea);
 
             return ResponseEntity.status(201).body("Rating submitted successfully.");
@@ -85,7 +82,7 @@ public class StudyAreaController {
 
 		if (studyAreaOpt.isPresent()) {
 			StudyArea studyArea = studyAreaOpt.get();
-			studyArea.addBusynessRating(rating); 
+			studyArea.addBusyRating(rating);
 			studyAreaRepository.save(studyArea);
 
 			return ResponseEntity.status(201).body("Busyness rating submitted successfully.");
@@ -105,7 +102,7 @@ public class StudyAreaController {
 
 		if (studyAreaOpt.isPresent()) {
 			StudyArea studyArea = studyAreaOpt.get();
-			studyArea.addCleanlinessRating(rating); 
+			studyArea.addCleanRating(rating); 
 			studyAreaRepository.save(studyArea);
 
 			return ResponseEntity.status(201).body("Cleanliness rating submitted successfully.");
@@ -142,22 +139,32 @@ public class StudyAreaController {
 		if (studyAreaOpt.isPresent()) {
 			StudyArea studyArea = studyAreaOpt.get();
 			Map<String, Object> response = new HashMap<>();
-			response.put("totalRatingSum", studyArea.getTotalRatingSum());
+			response.put("totalRating", studyArea.getTotalRating());
 			response.put("totalRatingCount", studyArea.getTotalRatingCount());
-			response.put("avgRating", studyArea.getAverageUserRating()); 
-			response.put("totalBusynessRating", studyArea.getTotalBusyRatings()); 
-			response.put("totalBusynessCount", studyArea.getBusynessCount());
-			response.put("avgBusynessRating", studyArea.getAvgBusynessRating()); 
-			response.put("totalCleanliness", studyArea.getTotalCleanRatings());
-			response.put("totalCleanlinessCount", studyArea.getCleanCount()); 
-			response.put("avgCleanRating", studyArea.getAvgClean());
-			response.put("totalLoudness", studyArea.getTotalLoudRatings());
-			response.put("totalLoudnessCount", studyArea.getLoudCount());
-			response.put("avgLoudRating", studyArea.getAvgLoud()); 
+			response.put("totalBusynessRating", studyArea.getTotalBusyRating());
+			response.put("totalBusynessCount", studyArea.getTotalBusyCount());
+			response.put("totalCleanliness", studyArea.getTotalCleanRating());
+			response.put("totalCleanlinessCount", studyArea.getTotalCleanCount());
+			response.put("totalLoudness", studyArea.getTotalLoudRating());
+			response.put("totalLoudnessCount", studyArea.getTotalLoudCount());
 			return ResponseEntity.ok(response);
 		}
 		return ResponseEntity.status(404).body(Map.of("error", "Study area not found."));
 	}
 
-	
+	// Reset ratings for study areas
+	@CrossOrigin(origins = "http://localhost:4200")
+	@PostMapping("/ratings/reset")
+	public ResponseEntity<String> resetRatings(@RequestParam String id) {
+		Optional<StudyArea> studyAreaOpt = studyAreaRepository.findById(id);
+		if (studyAreaOpt.isPresent()) {
+			StudyArea studyArea = studyAreaOpt.get();
+			studyArea.resetRatings(); 
+			studyAreaRepository.save(studyArea);
+
+			return ResponseEntity.status(201).body("Loudness rating submitted successfully.");
+		}
+
+		return ResponseEntity.status(404).body("Study area not found.");
+	}
 }

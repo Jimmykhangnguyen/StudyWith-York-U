@@ -16,7 +16,7 @@
 #pageTitle {
   padding-left: 18px;
   margin-top: 18px;
-  color: #ffffff;
+  color: white;
   font-weight: bold;
   text-align: left;
   font-size: 2.60ch;
@@ -25,8 +25,8 @@
 #searchBar {
   height: 30px;
   width: 92%;
-  background-color: #ffffff;
-  color: #000000;
+  background-color: white;
+  color: black;
   font-size: 18px;
   border-radius: 30px;
   margin-top: 1%;
@@ -51,9 +51,9 @@ ul {
 }
 
 .studyPlacesButton {
-  background: #ffffff;
+  background-color: white;
   margin-top: 5%;
-  color: #000000;
+  color: black;
   font-size: 20px;
   cursor: pointer;
   border-radius: 10px;
@@ -63,10 +63,16 @@ ul {
   text-align: center;
   padding-left: 18px;
   transition: background-color 0.3s;
+  position: relative;
 }
 
 .studyPlacesButton:hover {
   background-color: #dedede;
+}
+
+.studyPlacesButton.selected .library-title {
+  color: #e31836;
+  text-decoration: underline;
 }
 
 .nameAndStars {
@@ -77,7 +83,6 @@ ul {
   align-items: baseline;
   text-align: center;
 }
-
 
 .lowerStudyCard {
   display: flex;
@@ -113,13 +118,13 @@ ul {
 
 .status-open {
   margin-left: 5px;
-  background-color: #00BD00;
+  background-color: #00bd00;
   color: white;
   font-size: 1.2rem;
   border-radius: 8px;
   padding: 2px;
   margin-right: 5px;
-  border: 2px solid #00BD00;
+  border: 2px solid #00bd00;
 }
 
 .status-closed {
@@ -134,7 +139,7 @@ ul {
 }
 
 .statusLabel {
-  color:#000000;
+  color:black;
   font-size: 1.2rem;
   font-weight: bold;
 }
@@ -154,7 +159,7 @@ ul {
   display: flex;
   flex-direction: row;
   color: lightgray;
-  }
+}
 
 .star-filled {
   color: #e31836;
@@ -175,6 +180,9 @@ ul {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 5px;
 }
 
 .tags {
@@ -183,6 +191,7 @@ ul {
   font-size: 1.2rem;
   border-radius: 8px;
   padding: 7px;
-  margin-right: 5px;
+  margin-right: 0;
+  margin-bottom: 5px;
   border: 2px solid #e31836;
 }

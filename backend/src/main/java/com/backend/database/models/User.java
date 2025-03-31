@@ -10,9 +10,7 @@ public class User {
 	private String id;
 	private String username;
 	private String email;
-	private String password; 
-	private StudyArea[] favourites = new StudyArea[10]; 
-	private int numFavourites = 0; 
+	private String password;
 
 	//Constructors
 	public User() {
@@ -57,14 +55,4 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-	public StudyArea[] getFavourites(){
-		return favourites; 
-	}
-
-	public void addFavourite(StudyArea s){
-		favourites[numFavourites] = s;
-		numFavourites++; 
-	}
-	
 }

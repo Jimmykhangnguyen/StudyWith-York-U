@@ -100,7 +100,7 @@ export class StudyAreaComponent implements OnInit {
         this.filteredStudyAreas = this.studyAreas.filter((area: any) => area.totalRating / (area.totalRatingCount + 0.01) + 1 >= 3);
         break;
       case "Open":
-        this.filteredStudyAreas = this.studyAreas.filter((area: any) => area.name !== 'First Student Centre' && area.name !== 'Bergeron Sandbox');
+        this.filteredStudyAreas = this.studyAreas.filter(() => true);
         break;
       case "Charging Outlets":
         this.filteredStudyAreas = this.studyAreas.filter((area: any) => area.chargingOutlets);
@@ -109,13 +109,13 @@ export class StudyAreaComponent implements OnInit {
         this.filteredStudyAreas = this.studyAreas.filter((area: any) => area.accessible);
         break;
       case "Empty":
-        this.filteredStudyAreas = this.studyAreas.filter((area: any) => area.totalBusyRating / (area.totalBusyCount + 0.01) + 1 < 3);
+        this.filteredStudyAreas = this.studyAreas.filter((area: any) => area.totalBusyRating < 3);
         break;
       case "Clean":
-        this.filteredStudyAreas = this.studyAreas.filter((area: any) => area.totalCleanRating / (area.totalCleanCount + 0.01) + 1 >= 3);
+        this.filteredStudyAreas = this.studyAreas.filter((area: any) => area.totalCleanRating >= 3);
         break;
       case "Quiet":
-        this.filteredStudyAreas = this.studyAreas.filter((area: any) => area.totalLoudRating / (area.totalLoudCount + 0.01) + 1 < 3);
+        this.filteredStudyAreas = this.studyAreas.filter((area: any) => area.totalLoudRating < 3);
         break;
       default:
         console.warn("Unknown category:", category.name);

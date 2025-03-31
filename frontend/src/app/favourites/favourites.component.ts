@@ -17,7 +17,7 @@ export class FavouritesComponent implements OnInit {
   userEmail: string | null = null;
   userFavourites: string[] = [];
   userNumFavourites: number = 0;
-  studyAreas: any = stubDatabase;
+  studyAreas: any = stubDatabase.studyAreas;
   nonFavouriteStudyAreas: any[] = [];
   showPopup: boolean = false;
 

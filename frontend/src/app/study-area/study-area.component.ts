@@ -22,7 +22,7 @@ interface filterCaterogy {
 })
 
 export class StudyAreaComponent implements OnInit {
-  studyAreas: any = stubDatabase;
+  studyAreas: any = stubDatabase.studyAreas;
   filteredStudyAreas: any[] = [];
   selectedStudyArea: any = null;
   searchTerm: string = '';

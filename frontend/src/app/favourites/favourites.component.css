@@ -30,6 +30,10 @@
   overflow: hidden;
 }
 
+.noFavourites {
+  margin-bottom: 0;
+}
+
 .favouritesBottomBar {
   display: flex;
   justify-content: center;
@@ -85,13 +89,23 @@
 .favouritesList {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  padding: 10px 0;
+  width: 85.0%;
+  max-height: 100.0%;
+  overflow: auto;
 }
 
 .favouriteStudyArea {
-  padding: 10px 20px;
-  margin: 5px 0;
-  font-size: 16px;
-  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5.0%;
+  color: white;
+  font-size: 20px;
+  border-radius: 10px;
+  border: 2px solid black;
+  width: 98.0%;
+  height: 300px;
+  text-align: center;
+  background-color: #e31836;
+  transition: background-color 0.3s;
 }

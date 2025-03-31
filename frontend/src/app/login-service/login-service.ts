@@ -7,7 +7,7 @@ import { BehaviorSubject } from 'rxjs';
 
 export class LoginService {
   private userEmailSource = new BehaviorSubject<string | null>(localStorage.getItem('userEmail'));
-  currentuserEmail = this.userEmailSource.asObservable();
+  currentUserEmail = this.userEmailSource.asObservable();
   
   login(email: string): void {
     localStorage.setItem('userEmail', email);

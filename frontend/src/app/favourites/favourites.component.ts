@@ -20,7 +20,7 @@ export class FavouritesComponent implements OnInit {
   constructor(private http: HttpClient, private loginService: LoginService) {};
 
   ngOnInit(): void {
-    this.loginService.currentuserEmail.subscribe(email => {
+    this.loginService.currentUserEmail.subscribe(email => {
       this.userEmail = email;
     });
     this.getUserFavourites();

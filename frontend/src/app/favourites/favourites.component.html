@@ -1,13 +1,13 @@
 <div class="favourites">
     <div class="favouritesTopBar">
-        <h2 class="favouritesText" (click)="resetFavourites()">Your Favourites</h2>
+        <h2 class="favouritesText" (click)="resetFavourites()">Your Favourites (click here to reset)</h2>
     </div>
     <div class="favouritesMiddle">
         <h2 *ngIf="!userEmail">To add favourites, log in to your account!</h2>
-        <h2 *ngIf="userEmail && userNumFavourites == 0">You have no favourites. Try adding one!</h2>
-        <div class="favouritesList">
+        <h2 class="noFavourites" *ngIf="userEmail && userNumFavourites == 0">You have no favourites. Try adding one!</h2>
+        <div class="favouritesList" *ngIf="userEmail && userNumFavourites > 0">
             <div *ngFor="let area of userFavourites">
-                <button *ngIf="area !== null" class="favouriteStudyArea">{{ area }}</button>
+                <div class="favouriteStudyArea" *ngIf="area !== null">{{ area }}</div>
             </div>
         </div>
     </div>

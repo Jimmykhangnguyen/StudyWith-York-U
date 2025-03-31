@@ -63,7 +63,6 @@ ul {
   text-align: center;
   padding-left: 18px;
   transition: background-color 0.3s;
-  position: relative;
 }
 
 .studyPlacesButton:hover {

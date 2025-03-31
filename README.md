@@ -44,7 +44,18 @@ Windows
 4. Added more locations to the database.
 5. Changed the GUI for displaying study areas and filtering.
 6. Structure of the source code stayed the same.
-7. New or revised big stories and detailed user stories are updated in the planning document. 
+7. New or revised big stories and detailed user stories are updated in the planning document.
+
+Major Changes in Iteration 3
+1. Added more user stories.
+2. View specfic addresses of study areas.
+3. User can now rate the study spaces based on their expience, ""loudness", "cleaniness" and "busyness".
+4. Navigation bar was added to help user easily navigate throught the website.
+5. Impmented login and register pages with secure authentification.
+6. Narrow down the study areas based on their name using the search bar or their different catergories using the drop down menu.
+7. Real time update for study areas "loudness", "cleaniness" and "busyness".
+8. Minor fixes for study area locations.
+
 
 # Architecture
 
@@ -53,5 +64,11 @@ Windows
 # UML Class Diagram
 <img width="710" alt="Screenshot 2025-03-07 at 10 29 27 PM" src="https://github.com/user-attachments/assets/f616be4b-7d45-4d05-bf8b-b2abc04bb0a2" />
 
+# MOCKUPS
+![IMG_6C74C525F2B1-1](https://github.com/user-attachments/assets/81c8f28a-93f0-4225-b9c0-1628c01d4646)
+
+![IMG_F55A9E3054D0-1](https://github.com/user-attachments/assets/9a99dcee-a557-48a1-93ff-b1aa2d7a86ac)
+
+![IMG_E3C46AC460C4-1](https://github.com/user-attachments/assets/d6420c23-aca7-4e8c-a748-13b6a880c866)
 
 

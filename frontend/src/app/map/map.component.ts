@@ -234,9 +234,9 @@ export class MapComponent implements OnInit {
           this.rating = 0;
         } else if (this.questions == 5) {
           this.studyMapService.rateStudyArea(this.studyAreaId, this.rating);
-          this.studyMapService.getData();
           this.rating = 5;
         }
+        setTimeout(() => {this.studyMapService.getData()}, 100);
       }, 500);
     }
   }

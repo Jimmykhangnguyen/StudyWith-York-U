@@ -38,6 +38,7 @@ export class StudyMapService {
   getData() {
     this.http.get('http://localhost:8080/study_areas').subscribe((data: any) => {
       this.studyDataSource.next(data);
+      console.log('Fetched data', data);
     }, (error) => {
       console.error('Failed to fetch data:', error.message);
       alert('Failed to fetch data. Please try again later.');

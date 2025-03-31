@@ -1,16 +1,21 @@
 <div class="favourites">
     <div class="favouritesTopBar">
-        <h2 class="favouritesText">Your Favourites</h2>
+        <h2 class="favouritesText" (click)="resetFavourites()">Your Favourites</h2>
     </div>
-    <div class="favouritesGrid">
-        <h2 *ngIf="!loggedInEmail">To add favourites, log in to your account!</h2>
-        <h2 *ngIf="loggedInEmail">You have no favourites. Try adding one!</h2>
+    <div class="favouritesMiddle">
+        <h2 *ngIf="!userEmail">To add favourites, log in to your account!</h2>
+        <h2 *ngIf="userEmail && userNumFavourites == 0">You have no favourites. Try adding one!</h2>
+        <div class="favouritesList">
+            <div *ngFor="let area of userFavourites">
+                <button *ngIf="area !== null" class="favouriteStudyArea">{{ area }}</button>
+            </div>
+        </div>
     </div>
-    <div *ngIf="loggedInEmail" class="favouritesBottomBar">
-        <button class="addFavourite" (click)="togglePopup()">+ Add a Favourite Spot</button>
+    <div class="favouritesBottomBar" *ngIf="userEmail">
+        <button class="addFavourite" (click)="addFavourite('67abba96928a2d21d8d307bb')">+ Add a Favourite Spot</button>
     </div>
 
-    <div *ngIf="showPopup" class="popupOverlay" (click)="togglePopup()">
+    <div class="popupOverlay" *ngIf="showPopup" (click)="togglePopup()">
         <div class="selectNewFavourite">
             <h2>Add a Favourite Spot</h2>
             <!-- Add form or content for the popup here -->

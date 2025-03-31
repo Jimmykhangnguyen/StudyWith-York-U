@@ -80,8 +80,8 @@ export class StudyAreaComponent implements OnInit {
   rateStudyArea(studyAreaId: string, rating: number): void {
     this.http.post(`http://localhost:8080/ratings?id=${studyAreaId}&rating=${rating}`, null)
       .subscribe(response => {
-        console.log('Successfully rated study area:', response);
         this.getRatings(studyAreaId);
+        console.log('Successfully rated study area:', response);
       }, error => {
         console.error('Failed to rate study area:', error);
       });
@@ -90,7 +90,7 @@ export class StudyAreaComponent implements OnInit {
   getRatings(studyAreaId: string): void {
     this.http.get<number[]>(`http://localhost:8080/ratings?id=${studyAreaId}`)
       .subscribe(response => {
-        this.ratings = response; 
+        this.ratings = response;
         console.log('Fetched ratings:', this.ratings);
       }, error => {
         console.error('Failed to fetch ratings:', error);
@@ -129,8 +129,8 @@ export class StudyAreaComponent implements OnInit {
     }
   }
 
-  hardReset(studyAreas: any): void {
-    studyAreas.forEach((area: any) => {
+  resetStudyAreasRatings(): void {
+    this.studyAreas.forEach((area: any) => {
       this.studyMapService.resetRatings(area.id);
     });
   }

@@ -8,14 +8,14 @@
     <li><a routerLink="/favourites" routerLinkActive="active-link">Favourites</a></li>    
     <li><a href="https://github.com/Jimmykhangnguyen/StudyWith-York-U">GitHub Repo</a></li>
 
-    <li *ngIf="loggedInEmail">
+    <li *ngIf="userEmail">
       <div class="logged-in-container">
-        <h2>Welcome, {{ loggedInEmail }}</h2>
+        <h2>Welcome, {{ userEmail }}</h2>
         <button (click)="logout()">Log Out</button>
       </div>
     </li>
 
-    <li *ngIf="!loggedInEmail">
+    <li *ngIf="!userEmail">
       <button routerLink="/login">Login</button>
     </li>
   </ul>

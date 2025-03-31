@@ -97,29 +97,49 @@ public class UserController {
     
     // Email must be unique and include a @ and .com or .ca
     private boolean isEmailUnique(String email) {
-    	  if (!email.matches(".*[@].*") || (!email.matches(".*\\.com$") && !email.matches(".*\\.ca$"))) {
-    	        return false;  
-    	    }
-    	  User userExist = userRepository.findByEmail(email);
+        if (!email.matches(".*[@].*") || (!email.matches(".*\\.com$") && !email.matches(".*\\.ca$"))) {
+            return false;  
+        }
+        User userExist = userRepository.findByEmail(email);
 		return userExist == null; 
-        
     }
     
     @GetMapping("/favourites")
-    public String[] getFavourites(@RequestParam User user) {
-        return user.getFavourites() ;
+    public String[] getFavourites(@RequestParam String email) {
+        return userRepository.findByEmail(email).getFavourites();
+    }
+
+    @GetMapping("/numFavourites")
+    public int getNumFavourites(@RequestParam String email) {
+        return userRepository.findByEmail(email).getNumFavourites();
     }
 
     @PostMapping("/favourites")
-    public ResponseEntity<String> addFavourite(@RequestParam String id, @RequestParam User user) {
+    public ResponseEntity<String> addFavourite(@RequestParam String id, @RequestParam String email) {
         Optional<StudyArea> studyAreaOpt = studyAreaRepository.findById(id);
-        if (studyAreaOpt.isPresent()) {
+        User user = userRepository.findByEmail(email);
+
+        if (studyAreaOpt.isPresent() && user != null) {
             user.addFavourite(id);
             userRepository.save(user);
             
-            return ResponseEntity.status(201).body("Favourite added.");
+            return ResponseEntity.status(200).body("Favourite added.");
         }
         
-        return ResponseEntity.status(404).body("Study area not found.");
+        return ResponseEntity.status(404).body("Favourite not added.");
+    }
+
+    @PostMapping("/favourites/reset")
+    public ResponseEntity<String> resetFavourites(@RequestParam String email) {
+        User user = userRepository.findByEmail(email);
+
+        if (user != null) {
+            user.resetFavourites();
+            userRepository.save(user);
+            
+            return ResponseEntity.status(200).body("Favourites reset.");
+        }
+        
+        return ResponseEntity.status(404).body("Favourites not reset.");
     }
 }

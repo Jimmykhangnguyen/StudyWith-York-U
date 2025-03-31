@@ -6,20 +6,16 @@ import { BehaviorSubject } from 'rxjs';
 })
 
 export class LoginService {
-  private loggedInEmailSource = new BehaviorSubject<string | null>(localStorage.getItem('loggedInEmail'));
-  currentLoggedInEmail = this.loggedInEmailSource.asObservable();
+  private userEmailSource = new BehaviorSubject<string | null>(localStorage.getItem('userEmail'));
+  currentuserEmail = this.userEmailSource.asObservable();
   
   login(email: string): void {
-    localStorage.setItem('loggedInEmail', email);
-    this.loggedInEmailSource.next(email);
+    localStorage.setItem('userEmail', email);
+    this.userEmailSource.next(email);
   }
 
   logout(): void {
-    localStorage.removeItem('loggedInEmail');
-    this.loggedInEmailSource.next(null);
-  }
-
-  isLoggedIn(): boolean {
-    return localStorage.getItem('loggedInEmail') !== null;
+    localStorage.removeItem('userEmail');
+    this.userEmailSource.next(null);
   }
 }

@@ -4,7 +4,8 @@ public class UserRequest {
 	private String username;
 	private String email;
 	private String password;
-	private String[] favourites; 
+	private String[] favourites;
+	private int numFavourites = 0;
 
 	//constructors
 	public UserRequest() {
@@ -33,9 +34,18 @@ public class UserRequest {
 	public String[] getFavourites(){
 		return favourites; 
 	}
+
+	public int getNumFavourites() {
+		return numFavourites;
+	}
   
-  @Override
-  public String toString() {
+	public void addFavourite(String id) {
+		favourites[numFavourites] = id;
+		numFavourites++; 
+	}
+  
+  	@Override
+  	public String toString() {
       return "UserRequest{email='" + email + "password= ****";
 	}
 }

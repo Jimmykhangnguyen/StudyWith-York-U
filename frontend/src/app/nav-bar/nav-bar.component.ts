@@ -12,13 +12,13 @@ import { LoginService } from '../login-service/login-service';
 })
 
 export class NavBarComponent implements OnInit {
-  loggedInEmail: string | null = null;
+  userEmail: string | null = null;
 
   constructor(private loginService: LoginService) {}
 
   ngOnInit(): void {
-    this.loginService.currentLoggedInEmail.subscribe(email => {
-      this.loggedInEmail = email;
+    this.loginService.currentuserEmail.subscribe(email => {
+      this.userEmail = email;
     });
   }
 

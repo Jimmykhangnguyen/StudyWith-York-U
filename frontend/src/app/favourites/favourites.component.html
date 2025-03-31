@@ -7,7 +7,7 @@
         <h2 class="noFavourites" *ngIf="userEmail && userNumFavourites == 0">You have no favourites. Try adding one!</h2>
         <div class="favouritesList" *ngIf="userEmail && userNumFavourites > 0">
             <div *ngFor="let studyAreaId of userFavourites">
-                <div class="favouriteStudyArea" *ngIf="studyAreaId !== null">{{ areaFromId(studyAreaId).name }}</div>
+                <div class="favouriteStudyArea" *ngIf="studyAreaId !== null">{{ areaFromId(studyAreaId).name }} ❤</div>
             </div>
         </div>
     </div>
@@ -24,7 +24,7 @@
                     *ngFor="let area of nonFavouriteStudyAreas"
                     (click)="addFavourite(area.id)"
                     (click)="togglePopup()"
-                > {{ area.name }}
+                >{{ area.name }}
                 </button>
             </div>
             <button class="cancel" (click)="togglePopup()">Close</button>

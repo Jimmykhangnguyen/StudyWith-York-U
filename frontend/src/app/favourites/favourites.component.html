@@ -1,11 +1,33 @@
 <div class="favourites">
     <div class="favouritesTopBar">
-        <h2 class="favouritesText">Your Favourites</h2>
+        <h2 class="favouritesText" (click)="resetFavourites()">Your Favourites (click here to reset)</h2>
     </div>
-    <div class="favouritesGrid">
-        <h2 class="noFavourites">You have no favourites. Try adding one!</h2>
+    <div class="favouritesMiddle">
+        <h2 *ngIf="!userEmail">To add favourites, log in to your account!</h2>
+        <h2 class="noFavourites" *ngIf="userEmail && userNumFavourites == 0">You have no favourites. Try adding one!</h2>
+        <div class="favouritesList" *ngIf="userEmail && userNumFavourites > 0">
+            <div *ngFor="let studyAreaId of userFavourites">
+                <div class="favouriteStudyArea" *ngIf="studyAreaId !== null">{{ areaFromId(studyAreaId).name }}</div>
+            </div>
+        </div>
     </div>
-    <div class="favouritesBottomBar">
-        <button class="addFavourite">+ Add a Favourite Spot</button>
+    <div class="favouritesBottomBar" *ngIf="userEmail">
+        <button class="addFavourite" (click)="togglePopup()">+ Add a Favourite Spot</button>
+    </div>
+
+    <div class="popupOverlay" *ngIf="showPopup" (click)="togglePopup()">
+        <div class="selectNewFavourite">
+            <h2>Add a Favourite Spot</h2>
+            <div class="possibleFavourites">
+                <button
+                    class="studyPlacesButton"
+                    *ngFor="let area of nonFavouriteStudyAreas"
+                    (click)="addFavourite(area.id)"
+                    (click)="togglePopup()"
+                > {{ area.name }}
+                </button>
+            </div>
+            <button class="cancel" (click)="togglePopup()">Close</button>
+        </div>
     </div>
 </div>

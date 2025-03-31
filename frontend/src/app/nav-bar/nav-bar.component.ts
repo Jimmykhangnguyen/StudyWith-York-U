@@ -1,20 +1,28 @@
-import { Component } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { LoginService } from '../login-service/login-service';
 
 @Component({
   selector: 'app-nav-bar',
   standalone: true,
-  imports: [RouterModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './nav-bar.component.html',
-  styleUrl: './nav-bar.component.css'
+  styleUrls: ['./nav-bar.component.css']
 })
 
-export class NavBarComponent {
-  constructor(private router: Router) {}
+export class NavBarComponent implements OnInit {
+  userEmail: string | null = null;
 
-  onStudyAreasClick() {
-    this.router.navigate(['/map']).then(() => {
-      location.reload();
+  constructor(private loginService: LoginService) {}
+
+  ngOnInit(): void {
+    this.loginService.currentUserEmail.subscribe(email => {
+      this.userEmail = email;
     });
+  }
+
+  logout(): void {
+    this.loginService.logout();
   }
 }

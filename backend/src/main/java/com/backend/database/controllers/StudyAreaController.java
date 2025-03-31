@@ -154,9 +154,9 @@ public class StudyAreaController {
 			studyArea.resetRatings(); 
 			studyAreaRepository.save(studyArea);
 
-			return ResponseEntity.status(201).body("Loudness rating submitted successfully.");
+			return ResponseEntity.status(200).body("Study areas ratings successfully reset.");
 		}
 
-		return ResponseEntity.status(404).body("Study area not found.");
+		return ResponseEntity.status(404).body("Failed to reset study areas ratings.");
 	}
 }

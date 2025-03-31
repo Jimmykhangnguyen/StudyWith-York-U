@@ -20,7 +20,7 @@
   font-size: 30px;
 }
 
-.favouritesGrid {
+.favouritesMiddle {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -28,6 +28,10 @@
   margin: 0 auto;
   height: 76.5%;
   overflow: hidden;
+}
+
+.noFavourites {
+  margin-bottom: 0;
 }
 
 .favouritesBottomBar {
@@ -56,3 +60,52 @@
   background-color: #8a0e20;
 }
 
+.popupOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.selectNewFavourite {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 300px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.cancel {
+  margin-top: 10px;
+}
+
+.favouritesList {
+  display: flex;
+  flex-direction: column;
+  width: 85.0%;
+  max-height: 100.0%;
+  overflow: auto;
+}
+
+.favouriteStudyArea {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5.0%;
+  color: white;
+  font-size: 20px;
+  border-radius: 10px;
+  border: 2px solid black;
+  width: 98.0%;
+  height: 300px;
+  text-align: center;
+  background-color: #e31836;
+  transition: background-color 0.3s;
+}

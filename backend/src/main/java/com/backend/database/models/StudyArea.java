@@ -143,7 +143,7 @@ public class StudyArea {
 	
 	public void addRating(int rating) {
 		if (rating >= 1 && rating <= 5) {
-			this.totalRating += rating;
+			this.totalRating = rating;
 	        this.totalRatingCount++;
 		}
 	}
@@ -158,7 +158,7 @@ public class StudyArea {
 
 	public void addBusyRating(int rating) {
 		if (rating >= 1 && rating <= 5) {
-			this.totalBusyRating += rating;
+			this.totalBusyRating = rating;
 			this.totalBusyCount++;
 		}
 	}
@@ -173,7 +173,7 @@ public class StudyArea {
 
 	public void addCleanRating(int rating) {
 		if (rating >= 1 && rating <= 5) {
-			this.totalCleanRating += rating;
+			this.totalCleanRating = rating;
 	        this.totalCleanCount++;
 		}
 	}

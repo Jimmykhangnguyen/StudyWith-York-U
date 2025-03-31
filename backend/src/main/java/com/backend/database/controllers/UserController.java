@@ -20,15 +20,23 @@ import com.backend.database.resources.UserRequest;
 public class UserController {
 
     private final UserRepository userRepository;
+    private final StudyAreaRepository studyAreaRepository;
 
-    public UserController(UserRepository userRepository) {
+    public UserController(UserRepository userRepository, StudyAreaRepository studyAreaRepository) {
         this.userRepository = userRepository;
+        this.studyAreaRepository = studyAreaRepository; 
     }
 
     @GetMapping("/users")
     public ResponseEntity<List<User>> getAllUsers() {
         return ResponseEntity.ok(this.userRepository.findAll());
     }
+
+    @GetMapping("/study_areas")
+    public ResponseEntity<List<StudyArea>> getAllStudyAreas() {
+		    return ResponseEntity.ok(this.studyAreaRepository.findAll());
+    }
+    
 
     @PostMapping("/register")
     public ResponseEntity<User> registerUser(@RequestBody UserRequest userRequest) {
@@ -50,7 +58,7 @@ public class UserController {
 
         return ResponseEntity.status(201).body(this.userRepository.save(user));
     }
-
+    
     // Login user will check if password matches the hashed password
     @PostMapping("/login")
     public ResponseEntity<String> loginUser(@RequestBody UserRequest userRequest) {
@@ -77,7 +85,7 @@ public class UserController {
     public ResponseEntity<Boolean> checkEmail(@RequestParam String email) {
         return ResponseEntity.ok(isEmailUnique(email));
     }
-
+    
     // Password must be 8 - 20 chars long, one capital, and at least one number.
     private boolean isPasswordValid(String password) {
         return password.length() >= 8 &&
@@ -94,5 +102,25 @@ public class UserController {
     	  User userExist = userRepository.findByEmail(email);
 		return userExist == null; 
         
+    }
+    
+    @GetMapping("/favourites")
+    public String[] getFavourites(@RequestParam User user) {
+        return user.getFavourites() ;
+    }
+    
+    @PostMapping("/favourites")
+    public ResponseEntity<String> addFavourite(@RequestParam String id, @RequestParam User user) {
+        Optional<StudyArea> studyAreaOpt = studyAreaRepository.findById(id);
+        if (studyAreaOpt.isPresent()) {
+            StudyArea studyArea = studyAreaOpt.get();
+            user.addFavourite(id);
+            userRepository.save(user);
+            studyAreaRepository.save(studyArea);
+            
+            return ResponseEntity.status(201).body("Favourite added. ");
+        }
+        
+        return ResponseEntity.status(404).body("Study area not found.");
     }
 }

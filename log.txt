@@ -1,61 +1,50 @@
 LOG
 
 February 3, 9:30 - 10:40, 50 minutes, 2025
-
 - We allocated a user story to each member.
 - We decided on the technology stack: Frontend: Angular, Backend: Java Spring Boot, Database: MongoDB.
 - Made a list of all the study spaces in York-U we plan to include in It1.
 - Discussed more details about each user story and how they interconnect with each other.
 
 February 3, X:XX - X:XX, XX minutes, 2025
-
 - Configured codebase boilerplates for both front and backend.
 
 Feburary 5, X:XX - X:XX, XX minutes, 2025
-
 - Set up database for future usage.
 
 February 10, 9:30 - 10:40, 50 minutes, 2025
-
 - Began learning framework and began coding the project
 - Completed front end and back end of map
 
 February 11, X:XX - X:XX, XX minutes, 2025
-
 - Began working on StudyAreas class
 - Added amenities, longitude and latitude (location).
 
 February 12, X:XX - 23:59, XX minutes, 2025
-
 - Continued work on business logic for StudyAreas backend
 - Added business ratings, opening and closing time. 
 - Began adding directions to the map (front end and back end)
 
 February 13, 0:00 - 1:30, 90 minutes, 2025
-
 - Finished adding directions to the map
 - Began working on the rating system back end
 - Added the front end for the amenities and the business ratings
 
 February 14, 23:59, 2025
-
 - ITR1 is due 
 - Committed final updates for ITR1 to GitHub and tagged the files
 
 February 24, 9:30 - 10:40, 50 minutes, 2025
-
 - First meeting since Reading Week
 - Discussed the beginning of ITR2, rubric for Deliverable 1
 - Tied up some remaining loose ends from ITR1
 
 March 3, 9:30 - 10:40, 50 minutes, 2025
-
 - Discussed plans for ITR2
 - Began working on an improved user interface
 - Added some J-Unit Tests for ITR1
 
 March 4,  X:XX - X:XX, XX minutes, 2025
-
 - Updated the ReadMe to include how to run the program and the app features from ITR1
 - Added more J-Unit tests
 - Began working on an improved user interface for filtering and map displays
@@ -63,17 +52,47 @@ March 4,  X:XX - X:XX, XX minutes, 2025
 - Added some J-Unit Tests for ITR1
 
 March 4, 13:00 - 14:30, 90 minutes, 2025
-
 - Updated the ReadMe/Wiki to include how to run the program and the app features from ITR1
 - Added more J-Unit tests
 - Added J-Unit tests for study areas backend for its amenities, and busyness
 
 March 5, 21:30 - 23:30, 120 minutes, 2025
-
 - Added functional directions based on study areas
 - Improved directions UI/UX
 - Refactored and cleaned up map code
 
 March 6, 9:00 - 9:30, 30 minutes, 2025
- -Added more locations to database
- - Added Arcitecture to readme/wiki
+- Added more locations to database
+- Added Arcitecture to readme/wiki
+
+March 6, 20:30 - 23:30, 180 minutes, 2025
+- Implemented proper directions system
+- Created frontend for login page
+- Used testing for the frontend
+- Filtering system for study areas
+
+March 7, 23:59, 2025
+- ITR2 is due 
+- Committed final updates for ITR2 to GitHub and tagged the files
+
+March 13, 22:00 - 23:30, 90 minutes, 2025
+- Login page developments
+
+March 17, 10:00 - 10:30, 30 minutes, 2025
+- Simple nav bar template
+
+March 19, 17:30 - 18:00, 30 minutes, 2025
+- Created user model in backend
+- Formatted user files on database
+
+March 22, 15:00 - 15:30, 30 minutes, 2025
+- Finished nav bar visuals
+
+March 23, 16:00 - 17:00, 60 minutes, 2025
+- Constructors and general framework for various ratings
+
+---
+
+March 31, 23:59, 2025
+- ITR3 is due
+- Committed final updates for ITR3 to GitHub and tagged the files

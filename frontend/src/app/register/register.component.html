@@ -1,6 +1,5 @@
-
 <div class = "body">
-    <div class ="wrapper">
+  <div class ="wrapper">
     <h1>Register</h1>
     <form (ngSubmit)="onRegisterSubmit()">
 
@@ -21,7 +20,7 @@
 
       <div>
         <label for="enterPassword">Re-Enter Password:</label>
-        <input type="enterPassword" id="enterPassword" placeholder="Re-Enter Password" [(ngModel)]="enterPassword" name="enterPassword" required />
+        <input type="password" id="enterPassword" placeholder="Re-Enter Password" [(ngModel)]="enterPassword" name="enterPassword" required />
       </div>
     
       <button type="submit">Register</button>
@@ -35,5 +34,5 @@
     <div *ngIf="errorMessage" class="error-message">
       {{ errorMessage }}
     </div>
-    </div>
-    </div>
+  </div>
+</div>

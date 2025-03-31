@@ -26,8 +26,8 @@ Mac
 brew install mongodb-community@7.0
 
 Windows
-1. follow the link: https://www.mongodb.com/try/download/community
-2. Open backend in eclipse or VSCode or any prefered IDE
+1. Follow the link: https://www.mongodb.com/try/download/community
+2. Open backend in Eclipse or VSCode or any prefered IDE
 3. If working in Eclipse, install Spring Tools in Eclipse MarketPlace
 4. Provide email to group so that we can invite to MongoDB project
 5. Right click on project and run as Spring Boot App
@@ -40,21 +40,23 @@ Windows
 # Major Changes in Iteration 2
 1. Able to get walking directions when a study Area was clicked on. Shows how to get there from the location a user clicks on to the study area location. 
 2. Changed the design of filtering process using drop down menu instead of buttons.
-3. Junit tests were done for backend components: Busyness, locations, studyarea
+3. Junit tests were done for backend components: busyness, locations, studyarea
 4. Added more locations to the database.
 5. Changed the GUI for displaying study areas and filtering.
 6. Structure of the source code stayed the same.
 7. New or revised big stories and detailed user stories are updated in the planning document.
 
-Major Changes in Iteration 3
+# Major Changes in Iteration 3
 1. Added more user stories.
 2. View specfic addresses of study areas.
 3. User can now rate the study spaces based on their expience, ""loudness", "cleaniness" and "busyness".
 4. Navigation bar was added to help user easily navigate throught the website.
-5. Impmented login and register pages with secure authentification.
+5. Implemented login and register pages with secure authentification.
 6. Narrow down the study areas based on their name using the search bar or their different catergories using the drop down menu.
 7. Real time update for study areas "loudness", "cleaniness" and "busyness".
-8. Minor fixes for study area locations.
+8. Added addresses for study areas to better track location
+9. Overhaul for GUI, added more pages to the site
+10. Minor fixes for study area locations.
 
 
 # Architecture

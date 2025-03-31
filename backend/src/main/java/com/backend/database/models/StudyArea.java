@@ -143,7 +143,7 @@ public class StudyArea {
 	
 	public void addRating(int rating) {
 		if (rating >= 1 && rating <= 5) {
-			this.totalRating = rating;
+			this.totalRating += rating;
 	        this.totalRatingCount++;
 		}
 	}
@@ -188,7 +188,7 @@ public class StudyArea {
 
 	public void addLoudRating(int rating) {
 		if (rating >= 1 && rating <= 5) {
-			this.totalLoudRating += rating;
+			this.totalLoudRating = rating;
 	        this.totalLoudCount++; 
 		}
 	}

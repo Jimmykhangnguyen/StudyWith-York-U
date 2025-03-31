@@ -6,6 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { StudyMapService } from '../study-map-service/study-map-service';
+import { stubDatabase } from '../stub-database/stub-database';
 
 interface filterCaterogy {
   name: string;
@@ -21,14 +22,7 @@ interface filterCaterogy {
 })
 
 export class StudyAreaComponent implements OnInit {
-  studyAreas = [
-    { id: 'E1', name: 'Example 1', address: 'Fake Address 1', chargingOutlets: true, accessible: false, opening: 8, closing: 22, location: {latitude: 43.774083422304955, longitude: -79.50830508399685},
-      totalRating: 4, totalRatingCount: 1, totalBusyRating: 2, totalBusyCount: 1, totalCleanRating: 2, totalCleanCount: 1, totalLoudRating: 3, totalLoudCount: 1
-    },
-    { id: 'E2', name: 'Example 2', address: 'Fake Address 2', chargingOutlets: false, accessible: true, opening: 7, closing: 20, location: {latitude: 43.77360571189061, longitude: -79.5050649986188},
-      totalRating: 5, totalRatingCount: 2, totalBusyRating: 11, totalBusyCount: 3, totalCleanRating: 9, totalCleanCount: 2, totalLoudRating: 6, totalLoudCount: 2
-    },
-  ]; // Stub database
+  studyAreas: any = stubDatabase;
   filteredStudyAreas: any[] = [];
   selectedStudyArea: any = null;
   searchTerm: string = '';
@@ -103,25 +97,25 @@ export class StudyAreaComponent implements OnInit {
         this.filteredStudyAreas = this.studyAreas.filter(() => true);
         break;
       case "Good Ratings":
-        this.filteredStudyAreas = this.studyAreas.filter(area => area.totalRating / (area.totalRatingCount) >= 3);
+        this.filteredStudyAreas = this.studyAreas.filter((area: any) => area.totalRating / (area.totalRatingCount + 0.01) + 1 >= 3);
         break;
       case "Open":
-        this.filteredStudyAreas = this.studyAreas.filter(area => area.name !== 'First Student Centre' && area.name !== 'Bergeron Sandbox');
+        this.filteredStudyAreas = this.studyAreas.filter((area: any) => area.name !== 'First Student Centre' && area.name !== 'Bergeron Sandbox');
         break;
       case "Charging Outlets":
-        this.filteredStudyAreas = this.studyAreas.filter(area => area.chargingOutlets);
+        this.filteredStudyAreas = this.studyAreas.filter((area: any) => area.chargingOutlets);
         break;
       case "Accessible":
-        this.filteredStudyAreas = this.studyAreas.filter(area => area.accessible);
+        this.filteredStudyAreas = this.studyAreas.filter((area: any) => area.accessible);
         break;
       case "Empty":
-        this.filteredStudyAreas = this.studyAreas.filter(area => area.totalBusyRating / (area.totalBusyCount) < 3);
+        this.filteredStudyAreas = this.studyAreas.filter((area: any) => area.totalBusyRating / (area.totalBusyCount + 0.01) + 1 < 3);
         break;
       case "Clean":
-        this.filteredStudyAreas = this.studyAreas.filter(area => area.totalCleanRating / (area.totalCleanCount) >= 3);
+        this.filteredStudyAreas = this.studyAreas.filter((area: any) => area.totalCleanRating / (area.totalCleanCount + 0.01) + 1 >= 3);
         break;
       case "Quiet":
-        this.filteredStudyAreas = this.studyAreas.filter(area => area.totalLoudRating / (area.totalLoudCount) < 3);
+        this.filteredStudyAreas = this.studyAreas.filter((area: any) => area.totalLoudRating / (area.totalLoudCount + 0.01) + 1 < 3);
         break;
       default:
         console.warn("Unknown category:", category.name);

@@ -65,7 +65,7 @@
           {{ area.address }}
         </p>
         <p class="library-tags">
-          <span class="tags" *ngIf="area.totalRating / (area.totalRatingCount) >= 3">Good Ratings</span>
+          <span class="tags" *ngIf="area.totalRating / (area.totalRatingCount + 0.01) + 1 >= 3">Good Ratings</span>
           <span class="tags" *ngIf="area.chargingOutlets">Charging Outlets</span>
           <span class="tags" *ngIf="area.accessible">Accessible</span>
           <span class="tags" *ngIf="area.totalBusyRating < 3">Empty</span>

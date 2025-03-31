@@ -10,14 +10,19 @@
     <div class="segment" [class.filled]="questions >= 1"></div>
     <div class="segment" [class.filled]="questions >= 2"></div>
     <div class="segment" [class.filled]="questions >= 3"></div>
+    <div class="segment" [class.filled]="questions >= 4"></div>
   </div>
   
   <p class="question">{{ questionTexts[questions-1] }}</p>
 
   <div class="stars">
     <span *ngFor="let star of [1, 2, 3, 4, 5]" 
-          (click)="setRating(star)" 
-          [class.filled]="star <= rating">
+          [class.filled]="star <= rating"
+          [class.hovered]="star <= hoverRating && !rating"
+          (mouseenter)="onMouseEnter(star)"
+          (mouseleave)="onMouseLeave()"
+          (click)="setRating(star)"
+        >
       ★
     </span>
   </div>

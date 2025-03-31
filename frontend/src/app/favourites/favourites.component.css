@@ -1,0 +1,58 @@
+.favourites {
+  position: absolute;
+  top: 15.0%;
+  width: 100.0%;
+  height: 85.0%;
+}
+
+.favouritesTopBar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 98.5%;
+  margin: 0 auto;
+  height: 11.75%;
+  overflow: hidden;
+}
+
+.favouritesText {
+  margin-bottom: 0;
+  font-size: 30px;
+}
+
+.favouritesGrid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 98.5%;
+  margin: 0 auto;
+  height: 76.5%;
+  overflow: hidden;
+}
+
+.favouritesBottomBar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 98.5%;
+  margin: 0 auto;
+  height: 11.75%;
+  overflow: hidden;
+}
+
+.addFavourite {
+  padding: 15px 30px;
+  width: 20.0%;
+  font-size: 20px;
+  background-color: #e31836;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.addFavourite:hover {
+  background-color: #8a0e20;
+}
+

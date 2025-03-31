@@ -30,12 +30,11 @@ export class RegisterComponent {
   }
 
   // When register button on login is clicked, move to 'register'
-  //map includes (study area, mao and navBar compoennts in msp-layout component)
+  // map includes (study area, mao and navBar compoennts in msp-layout component)
   async onRegisterSubmit() {
-
     //validate the password in front end so and make user re type password for further validation
     if (!this.validPasswordCheck(this.password)) {
-      this.errorMessage = "Password must be 8-20 characters long, one uppercase letter and at least one number 1-9.";
+      this.errorMessage = "Password must be 8-20 characters long, one uppercase letter and at least one number.";
       this.registerError = true;
       return;
     }
@@ -67,21 +66,20 @@ export class RegisterComponent {
     };
 
     this.http.post('http://localhost:8080/register', registerData, {
-  headers: this.httpOptions.headers,
-  responseType: 'text' 
-}).subscribe({
-  next: (response) => {
-    console.log('Register successful:', response);
-    this.errorMessage = "Registration succseful. Please Log in.";
-  },
-  error: (error) => {
-    console.error('Register error:', error);
-    this.errorMessage = error.error || 'Registration failed. Please try again.';
-    this.registerError = true;
+      headers: this.httpOptions.headers,
+      responseType: 'text' 
+    }).subscribe({
+      next: (response) => {
+        console.log('Register successful:', response);
+        this.errorMessage = "Registration succseful. Please Log in.";
+      },
+      error: (error) => {
+        console.error('Register error:', error);
+        this.errorMessage = error.error || 'Registration failed. Please try again.';
+        this.registerError = true;
+      }
+    });
   }
-});
-  }
-
 
   //password validation
   validPasswordCheck(password: string): boolean {

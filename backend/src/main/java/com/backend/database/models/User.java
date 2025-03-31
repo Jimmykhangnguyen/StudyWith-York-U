@@ -14,18 +14,18 @@ public class User {
 	private String password; 
 	private String[] favourites = new String[10]; 
 	private int numFavourites = 0; 
-
+  
 	//Constructors
 	public User() {
-
+    
 	}
-
+  
 	public User(String username, String email, String password) {
 		this.username = username;
 		this.email = email;
 		this.password = password;
 	}
-
+  
 	//getters and setters
 	public String getID() {
 		return id;
@@ -54,46 +54,17 @@ public class User {
 	public String getPassword() {
 		return password;
 	}
-
+  
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
+  
 	public String[] getFavourites(){
 		return favourites; 
 	}
-
+  
 	public void addFavourite(String id){
 		favourites[numFavourites] = id;
 		numFavourites++; 
 	}
-	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

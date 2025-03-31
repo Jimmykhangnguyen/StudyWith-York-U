@@ -6,7 +6,7 @@
   top: 15.0%;
   bottom: 1.75%;
   border-radius: 12px;
-  background-color: #E31837;
+  background-color: #e31836;
   font-size: 20px;
   display: flex;
   flex-direction: column;
@@ -16,7 +16,7 @@
 #pageTitle {
   padding-left: 18px;
   margin-top: 18px;
-  color: #ffffff;
+  color: white;
   font-weight: bold;
   text-align: left;
   font-size: 2.60ch;
@@ -25,8 +25,8 @@
 #searchBar {
   height: 30px;
   width: 92%;
-  background-color: #ffffff;
-  color: #000000;
+  background-color: white;
+  color: black;
   font-size: 18px;
   border-radius: 30px;
   margin-top: 1%;
@@ -51,9 +51,9 @@ ul {
 }
 
 .studyPlacesButton {
-  background: #ffffff;
+  background-color: white;
   margin-top: 5%;
-  color: #000000;
+  color: black;
   font-size: 20px;
   cursor: pointer;
   border-radius: 10px;
@@ -62,23 +62,31 @@ ul {
   height: auto;
   text-align: center;
   padding-left: 18px;
+  transition: background-color 0.3s;
+  position: relative;
+}
+
+.studyPlacesButton:hover {
+  background-color: #dedede;
+}
+
+.studyPlacesButton.selected .library-title {
+  color: #e31836;
+  text-decoration: underline;
 }
 
 .nameAndStars {
-  width: 95%;
+  width: 100%;
   margin-top: 15px;
   line-height: 10px;
-  display:flex;
-  flex-direction: row;
+  display: flex;
   align-items: baseline;
   text-align: center;
 }
 
-
 .lowerStudyCard {
   display: flex;
   margin-top: 30px;
-  margin-bottom: 10px;
   flex-direction: column;
   align-items: start;
   text-align: left;
@@ -87,20 +95,53 @@ ul {
 
 .generalStudyInfo {
   display: flex;
-  flex-direction: column;
-  align-items: start;
+  flex-direction: column;;
+  align-items: baseline;
   width: 100%;
 }
 
 .library-title {
-  width: 12vw;
-  font-size: 1.1vw;
+  width: 100%;
+  font-size: 1.2vw;
   font-weight: bold;
   color: black;
 }
 
 .library-distance {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 5px;
   color: #4a5568;
+}
+
+.status-open {
+  margin-left: 5px;
+  background-color: #00bd00;
+  color: white;
+  font-size: 1.2rem;
+  border-radius: 8px;
+  padding: 2px;
+  margin-right: 5px;
+  border: 2px solid #00bd00;
+}
+
+.status-closed {
+  margin-left: 5px;
+  background-color: #e31836;
+  color: white;
+  font-size: 1.2rem;
+  border-radius: 8px;
+  padding: 2px;
+  margin-right: 5px;
+  border: 2px solid #e31836;
+}
+
+.statusLabel {
+  color:black;
+  font-size: 1.2rem;
+  font-weight: bold;
 }
 
 .library-hours {
@@ -110,29 +151,47 @@ ul {
 
 .library-address {
   color: #2d3748;
-  font-size: 1.2rem;
+  font-size: 1.05rem;
 }
 
-.library-rating {
+.stars {
+  font-size: 30px;
   display: flex;
   flex-direction: row;
-  align-items: center;
-  text-align: center;
-  justify-content: center;
-  margin-left: 17%;
+  color: lightgray;
 }
 
 .star-filled {
-  color: #e53e3e;
+  color: #e31836;
   font-size: 2.3rem;
 }
 
-.star-empty {
-  color: #a0aec0;
-  font-size: 2.3rem;
+.stars span {
+  padding: 5px;
+}
+
+.stars .filled {
+  color: red;
 }
 
 .library-tags {
-  color: #e53e3e;
+  color: #e31836;
   margin-top: 8px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.tags {
+  background-color: #e31836;
+  color: white;
+  font-size: 1.2rem;
+  border-radius: 8px;
+  padding: 7px;
+  margin-right: 0;
+  margin-bottom: 5px;
+  border: 2px solid #e31836;
 }

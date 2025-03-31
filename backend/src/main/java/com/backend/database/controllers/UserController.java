@@ -1,5 +1,7 @@
 package com.backend.database.controllers;
 
+import java.util.List;
+
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -8,12 +10,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import com.backend.database.models.*;
-import com.backend.database.repositories.*;
-import com.backend.database.resources.UserRequest;
 
-import java.util.List;
-import java.util.Optional;
+import com.backend.database.models.User;
+import com.backend.database.repositories.UserRepository;
+import com.backend.database.resources.UserRequest;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200") // Allow POST request from front end 
@@ -33,9 +33,9 @@ public class UserController {
     }
 
     @GetMapping("/study_areas")
-    public ResponseEntity<List<StudyArea>> getAllStudyAreas(){
-		return ResponseEntity.ok(this.studyAreaRepository.findAll());
-	}
+    public ResponseEntity<List<StudyArea>> getAllStudyAreas() {
+		    return ResponseEntity.ok(this.studyAreaRepository.findAll());
+    }
     
 
     @PostMapping("/register")
@@ -58,7 +58,7 @@ public class UserController {
 
         return ResponseEntity.status(201).body(this.userRepository.save(user));
     }
-
+    
     // Login user will check if password matches the hashed password
     @PostMapping("/login")
     public ResponseEntity<String> loginUser(@RequestBody UserRequest userRequest) {
@@ -85,7 +85,7 @@ public class UserController {
     public ResponseEntity<Boolean> checkEmail(@RequestParam String email) {
         return ResponseEntity.ok(isEmailUnique(email));
     }
-
+    
     // Password must be 8 - 20 chars long, one capital, and at least one number.
     private boolean isPasswordValid(String password) {
         return password.length() >= 8 &&
@@ -94,7 +94,7 @@ public class UserController {
                password.matches(".*[0-9].*");
     }
     
- // Email must be unique and include a @ and .com or .ca
+    // Email must be unique and include a @ and .com or .ca
     private boolean isEmailUnique(String email) {
     	  if (!email.matches(".*[@].*") || (!email.matches(".*\\.com$") && !email.matches(".*\\.ca$"))) {
     	        return false;  
@@ -103,30 +103,24 @@ public class UserController {
 		return userExist == null; 
         
     }
-
+    
     @GetMapping("/favourites")
     public String[] getFavourites(@RequestParam User user) {
         return user.getFavourites() ;
     }
-
+    
     @PostMapping("/favourites")
-    public  ResponseEntity<String> addFavourite(@RequestParam String id, @RequestParam User user) {
+    public ResponseEntity<String> addFavourite(@RequestParam String id, @RequestParam User user) {
         Optional<StudyArea> studyAreaOpt = studyAreaRepository.findById(id);
-
         if (studyAreaOpt.isPresent()) {
-            StudyArea studyArea = studyAreaOpt.get(); 
+            StudyArea studyArea = studyAreaOpt.get();
             user.addFavourite(id);
             userRepository.save(user);
-            studyAreaRepository.save(studyArea); 
-
+            studyAreaRepository.save(studyArea);
+            
             return ResponseEntity.status(201).body("Favourite added. ");
         }
-
+        
         return ResponseEntity.status(404).body("Study area not found.");
     }
-
-
-    }
-    
-    
-
+}

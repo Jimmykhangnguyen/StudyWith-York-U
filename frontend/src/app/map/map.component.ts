@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { environment } from './../../environments/environment';
 import { StudyMapService } from '../study-map-service/study-map-service';
+import { HttpClientModule } from '@angular/common/http';
 import * as mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 @Component({
   selector: 'app-map',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, HttpClientModule],
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css'],
 })
@@ -17,48 +18,33 @@ export class MapComponent implements OnInit {
   map: any;
   showDirections = false;
   showFeedback = false;
+  studyAreaId = '';
   points = new Map<string, any>([
     ['start', []],
     ['end', []]
   ]);
   pointColours = new Map<string, string>([
-    ['start', '#3887be'],
-    ['end', '#f30']
+    ['start', '#27e8e5'],
+    ['end', '#e31836']
   ]);
   rating: number = 0;
+  hoverRating: number = 0;
   questions: number = 1;
   questionTexts: string[] = [
-    "How clean is the space?",
-    "How quiet is the space?",
     "How busy is the space?",
+    "How clean is the space?",
+    "How loud is the space?",
+    "Overall, how do you feel about the space?",
     "Thank you for your feedback!"
   ];
   questionLabels: string[][] = [
+    ["Very Empty", "Very Busy"],
     ["Very Dirty", "Very Clean"],
-    ["Very Noisy", "Very Quiet"],
-    ["Very Busy", "Very Empty"],
+    ["Very Quiet", "Very Loud"],
+    ["Very Bad", "Awesome!"],
     ["", ""]
   ];
   fadeOut: boolean = false;
-
-  setRating(value: number) {
-    if (this.questions < 4) {
-      this.rating = value;
-      this.fadeOut = true;
-
-      setTimeout(() => {
-        if (this.questions < 4) {
-          this.questions++;
-        }
-        this.fadeOut = false;
-        if (this.questions == 4) {
-          this.rating = 5;
-        } else {
-          this.rating = 0;
-        }
-      }, 500);
-    }
-  }
 
   constructor(private studyMapService: StudyMapService) {}
 
@@ -87,6 +73,11 @@ export class MapComponent implements OnInit {
         this.questions = 1;
         this.rating = 0;
       }
+    });
+
+    this.studyMapService.currentId.subscribe(id => {
+      this.studyAreaId = id;
+      console.log('Study Area ID:', this.studyAreaId);
     });
 
     this.map.on('mousemove', 'start', (event: any) => {
@@ -194,9 +185,8 @@ export class MapComponent implements OnInit {
           'line-cap': 'round'
         },
         paint: {
-          'line-color': '#3887be',
-          'line-width': 5,
-          'line-opacity': 0.75
+          'line-color': '#e31836',
+          'line-width': 5
         }
       });
     }
@@ -211,6 +201,43 @@ export class MapComponent implements OnInit {
       instructions.innerHTML = `<p><strong>Walking Time 🚶: ${Math.floor(
         data.duration / 60
       )} min</strong></p><ol>${tripInstructions}</ol>`;
+    }
+  }
+
+  onMouseEnter(star: number) {
+    this.hoverRating = star;
+  }
+
+  onMouseLeave() {
+    this.hoverRating = 0;
+  }
+
+  setRating(star: number) {
+    if (this.questions < 5) {
+      this.rating = star;
+      this.fadeOut = true;
+
+      setTimeout(() => {
+        if (this.questions < 5) {
+          this.questions++;
+        }
+        this.fadeOut = false;
+
+        if (this.questions == 2) {
+          this.studyMapService.rateBusyness(this.studyAreaId, this.rating);
+          this.rating = 0;
+        } else if (this.questions == 3) {
+          this.studyMapService.rateCleanliness(this.studyAreaId, this.rating);
+          this.rating = 0;
+        } else if (this.questions == 4) {
+          this.studyMapService.rateLoudness(this.studyAreaId, this.rating);
+          this.rating = 0;
+        } else if (this.questions == 5) {
+          this.studyMapService.rateStudyArea(this.studyAreaId, this.rating);
+          this.studyMapService.getData();
+          this.rating = 5;
+        }
+      }, 500);
     }
   }
 }

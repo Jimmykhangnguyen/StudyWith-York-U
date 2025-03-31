@@ -1,0 +1,49 @@
+.reviews {
+  position: absolute;
+  top: 15.0%;
+  width: 100.0%;
+  height: 85.0%;
+}
+
+.reviewsBar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 98.5%;
+  margin: 0 auto;
+  height: 11.75%;
+  overflow: hidden;
+}
+
+.recentReviews {
+  margin-left: 2.5%;
+  margin-bottom: 0;
+  font-size: 30px;
+}
+
+.writeReview {
+  margin-right: 2.5%;
+  padding: 15px 30px;
+  font-size: 24px;
+  background-color: #e31836;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.writeReview:hover {
+  background-color: #8a0e20;
+}
+
+.reviewsGrid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 98.5%;
+  margin: 0 auto;
+  height: 88.25%;
+  overflow: hidden;
+}

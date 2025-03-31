@@ -6,9 +6,9 @@
   width: 100.0%;
   height: 15.0%;
   top: 0px;
-  background-color: #ffffff;
-  color: #000000;
-  font: 500 20px/32px Roboto, "Helvetica Neue", sans-serif;
+  background-color: white;
+  color: black;
+  font: 500 20px/32px Roboto;
 }
 
 .logo_container {
@@ -19,7 +19,6 @@
   text-align: center;
   align-items: center;
 }
-
 
 img {
   height: 70.0%;
@@ -43,22 +42,22 @@ li {
 }
 
 a {
-  color: #000000;
+  color: black;
   text-decoration: none;
   font-size: 1.5rem;
 }
 
 .active-link {
-  color: #E31837;
+  color: #e31836;
 }
 
 .active-link a {
-  color: #E31837;
+  color: #e31836;
 }
 
 button {
   display: block;
-  background-color: #E31837;
+  background-color: #e31836;
   border-radius: 10px;
   border-width: 0px;
   color: white;
@@ -66,4 +65,9 @@ button {
   padding-left: 5px;
   padding: 10px 20px;
   cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #8a0e20;
 }

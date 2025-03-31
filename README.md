@@ -9,29 +9,53 @@ Jericho Marc Mendoza,
 Ngoc Nguyen,
 Ashley Thong
 
+# Overview
+The Student Study Areas System (SSA) is designed to help York University students efficiently find the most suitable study areas on campus.
+Features include:
+- View information about study areas (cleanliness, outlets, etc.)
+- Displays a map with directions to desired destination
+- Ability to rate study spaces and view other students’ ratings
+- Allow students to save and view their favourite study spots
+
+
 # Starting the Project
 1. Download the project zip file and open in IDE
 2. Run backend folder as Spring Boot project
 3. Run frontend through your terminal as an Angular project using the following commands: npm install, then ng serve --open
 
 # Implementation requirements
-Frontend - Angular
-Backend - Java Spring Boot
-Database - MongoDB
+**Frontend: Angular**
+
+**Backend: Java Spring Boot**  
+
+**Database: MongoDB**
+
 ---------------------
 Our Group choose to use MongoDB a non-SQL Database. Reason: Easier to implement using the Spring framework. MongoDB's connectors allow us to perform database operations like GET, POST, and DELETE with ease. MongoDB is also much more flexible in handling structured or semi structured data, which allowed us to add or modify the schema with ease (like adding busyness or locations). Also, JSON structure works much easier with Angular. 
 
-Mac
-1. brew tap MongoDB/brew
+**Mac**
+```bash
+brew tap MongoDB/brew
 brew install mongodb-community@7.0
+```
 
-Windows
+**Windows**
 1. Follow the link: https://www.mongodb.com/try/download/community
-2. Open backend in Eclipse or VSCode or any prefered IDE
-3. If working in Eclipse, install Spring Tools in Eclipse MarketPlace
-4. Provide email to group so that we can invite to MongoDB project
-5. Right click on project and run as Spring Boot App
 
+
+**Backend Setup:**
+1. Open `backend` folder in Eclipse or VSCode or any prefered IDE
+2. If working in Eclipse, install Spring Tools in Eclipse MarketPlace
+3. Provide email to group so that we can invite to MongoDB project
+4. Right click on project and run as Spring Boot App
+
+ 
+**Frontend Setup:**
+1. Open `Frontend` folder in your terminal.
+2. Run the following commands:
+   ```bash
+     npm install
+     ng serve --open
 # App Features
 1. Study Space Information: Get information about each study space on campus. Includes details such as charging outlet availability, loudness level, busyness level, opening/closing time and more!
 2. Map of Campus with Directions:  Find the nearest study space to you and find out how to walk there.

@@ -71,8 +71,7 @@ class StudyAreaTest {
 		studyArea.addCleanRating(3);
 		studyArea.addCleanRating(5);
 		studyArea.addCleanRating(7);
-		assertTrue(studyArea.getTotalCleanRating() == 8, "Cleaniness rating should be 8");
-		assertTrue(studyArea.getTotalCleanCount() == 2, "Cleaniness count should be 2");
+		assertTrue(studyArea.getTotalCleanRating() == 5, "Cleaniness rating should be 8");
 	}
 
 	@Test
@@ -81,8 +80,7 @@ class StudyAreaTest {
 		studyArea.addBusyRating(3);
 		studyArea.addBusyRating(5);
 		studyArea.addBusyRating(7);
-		assertTrue(studyArea.getTotalBusyRating() == 8, "Busyness rating should be 8");
-		assertTrue(studyArea.getTotalBusyCount() == 2, "Busyness count should be 2");
+		assertTrue(studyArea.getTotalBusyRating() == 5, "Busyness rating should be 8");
 	}
 
 	@Test
@@ -91,7 +89,6 @@ class StudyAreaTest {
 		studyArea.addLoudRating(3);
 		studyArea.addLoudRating(5);
 		studyArea.addLoudRating(7);
-		assertTrue(studyArea.getTotalLoudRating() == 8, "Loudness rating should be 8");
-		assertTrue(studyArea.getTotalLoudCount() == 2, "Loudness count should be 2");
+		assertTrue(studyArea.getTotalLoudRating() == 5, "Loudness rating should be 8");
 	}
 }

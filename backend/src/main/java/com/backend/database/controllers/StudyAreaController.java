@@ -134,11 +134,8 @@ public class StudyAreaController {
 			response.put("totalRating", studyArea.getTotalRating());
 			response.put("totalRatingCount", studyArea.getTotalRatingCount());
 			response.put("totalBusynessRating", studyArea.getTotalBusyRating());
-			response.put("totalBusynessCount", studyArea.getTotalBusyCount());
 			response.put("totalCleanliness", studyArea.getTotalCleanRating());
-			response.put("totalCleanlinessCount", studyArea.getTotalCleanCount());
 			response.put("totalLoudness", studyArea.getTotalLoudRating());
-			response.put("totalLoudnessCount", studyArea.getTotalLoudCount());
 			return ResponseEntity.ok(response);
 		}
 		return ResponseEntity.status(404).body(Map.of("error", "Study area not found."));

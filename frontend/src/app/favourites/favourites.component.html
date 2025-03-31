@@ -6,6 +6,14 @@
         <h2 class="noFavourites">You have no favourites. Try adding one!</h2>
     </div>
     <div class="favouritesBottomBar">
-        <button class="addFavourite">+ Add a Favourite Spot</button>
+        <button class="addFavourite" (click)="togglePopup()">+ Add a Favourite Spot</button>
+    </div>
+
+    <div *ngIf="showPopup" class="popupOverlay" (click)="togglePopup()">
+        <div class="selectNewFavourite">
+            <h2>Add a Favourite Spot</h2>
+            <!-- Add form or content for the popup here -->
+            <button class="cancel" (click)="togglePopup()">Close</button>
+        </div>
     </div>
 </div>

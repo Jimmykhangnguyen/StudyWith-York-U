@@ -40,9 +40,8 @@ export class LoginComponent {
       next: (response) => {
         console.log('Login successful:', response);
         if (response === 'Login successful') {
-          this.router.navigate(['/map']).then(() => {
-            location.reload(); 
-          });
+          localStorage.setItem('loggedInEmail', this.email);
+          this.router.navigate(['/map']);
         } else {
           this.errorMessage = 'Error';
           this.loginError = true;

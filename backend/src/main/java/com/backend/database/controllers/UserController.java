@@ -21,7 +21,6 @@ import com.backend.database.resources.UserRequest;
 @RestController
 @CrossOrigin(origins = "http://localhost:4200") // Allow POST request from front end 
 public class UserController {
-
     private final UserRepository userRepository;
     private final StudyAreaRepository studyAreaRepository;
 
@@ -40,7 +39,6 @@ public class UserController {
 		    return ResponseEntity.ok(this.studyAreaRepository.findAll());
     }
     
-
     @PostMapping("/register")
     public ResponseEntity<User> registerUser(@RequestBody UserRequest userRequest) {
         String password = userRequest.getPassword();
@@ -83,7 +81,7 @@ public class UserController {
         }
     }
     
-    //end-point to check for email uniqueness
+    // end-point to check for email uniqueness
     @GetMapping("/check-email")
     public ResponseEntity<Boolean> checkEmail(@RequestParam String email) {
         return ResponseEntity.ok(isEmailUnique(email));
@@ -111,17 +109,15 @@ public class UserController {
     public String[] getFavourites(@RequestParam User user) {
         return user.getFavourites() ;
     }
-    
+
     @PostMapping("/favourites")
     public ResponseEntity<String> addFavourite(@RequestParam String id, @RequestParam User user) {
         Optional<StudyArea> studyAreaOpt = studyAreaRepository.findById(id);
         if (studyAreaOpt.isPresent()) {
-            StudyArea studyArea = studyAreaOpt.get();
             user.addFavourite(id);
             userRepository.save(user);
-            studyAreaRepository.save(studyArea);
             
-            return ResponseEntity.status(201).body("Favourite added. ");
+            return ResponseEntity.status(201).body("Favourite added.");
         }
         
         return ResponseEntity.status(404).body("Study area not found.");

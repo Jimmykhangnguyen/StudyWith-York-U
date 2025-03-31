@@ -15,14 +15,26 @@ export class StudyMapService {
   private idSource = new BehaviorSubject<string>("");
   currentId = this.idSource.asObservable();
 
-  private dataSource = new BehaviorSubject<any[]>([]);
-  currentData = this.dataSource.asObservable();
+  private studyDataSource = new BehaviorSubject<any[]>([]);
+  currentStudyData = this.studyDataSource.asObservable();
+
+  private userDataSource = new BehaviorSubject<any[]>([]);
+  currentUserData = this.userDataSource.asObservable();
 
   constructor(private http: HttpClient) {} // Inject HttpClient
   
-  getData() {
+  getStudyAreaData() {
     this.http.get('http://localhost:8080/study_areas').subscribe((data: any) => {
-      this.dataSource.next(data);
+      this.studyDataSource.next(data);
+    }, (error) => {
+      console.error('Failed to fetch data:', error.message);
+      alert('Failed to fetch data. Please try again later.');
+    });
+  }
+
+  getUserData() {
+    this.http.get('http://localhost:8080/users').subscribe((data: any) => {
+      this.userDataSource.next(data);
     }, (error) => {
       console.error('Failed to fetch data:', error.message);
       alert('Failed to fetch data. Please try again later.');

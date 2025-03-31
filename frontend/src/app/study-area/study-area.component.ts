@@ -49,8 +49,8 @@ export class StudyAreaComponent implements OnInit {
   constructor(private http: HttpClient, private studyMapService: StudyMapService) {}
   
   ngOnInit(): void {
-    this.studyMapService.getData(); // Fetch data when component initializes
-    this.studyMapService.currentData.subscribe(data => {
+    this.studyMapService.getStudyAreaData(); // Fetch data when component initializes
+    this.studyMapService.currentStudyData.subscribe(data => {
       this.studyAreas = data.length == 0 ? this.studyAreas : data; // Subscribe to the data observable
       this.filteredStudyAreas = this.studyAreas; // Initialize filteredStudyAreas with all study areas
     });

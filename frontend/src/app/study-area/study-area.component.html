@@ -47,7 +47,7 @@
           <div class="statusLabel">Status:</div> 
           <div class="status">
             <span 
-              *ngIf="area.name !== 'First Student Centre' && area.name !== 'Bergeron Sandbox'; else closed"
+              *ngIf="true; else closed"
               class="status-open"
             >Open</span>
             <ng-template #closed>

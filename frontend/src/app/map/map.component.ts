@@ -68,7 +68,7 @@ export class MapComponent implements OnInit {
 
     this.studyMapService.currentFeedback.subscribe(showFeedback => {
       this.showFeedback = showFeedback;
-      console.log('Map Visibility:', this.showFeedback);
+      console.log('Feedback Visibility:', this.showFeedback);
       if (this.showFeedback) {
         this.questions = 1;
         this.rating = 0;

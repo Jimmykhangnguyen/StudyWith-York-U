@@ -13,11 +13,8 @@ public class StudyAreaRequest {
 	private int totalRating;
     private int totalRatingCount;
 	private int totalBusyRating;
-	private int totalBusyCount;
 	private int totalCleanRating;
-	private int totalCleanCount;
 	private int totalLoudRating;
-	private int totalLoudCount;
 
 	//Location static nested class for longitude and latitude request
 	public static class Location {
@@ -95,28 +92,16 @@ public class StudyAreaRequest {
 	public int getTotalRatingCount() {
 		return totalRatingCount;
 	}
-
+	
 	public int getTotalBusyRatings() {
 		return totalBusyRating;
-	}
-
-	public int getTotalBusyCount() {
-		return totalBusyCount; 
 	}
 
 	public int getTotalCleanRatings() {
 		return totalCleanRating;
 	}
 
-	public int getTotalCleanCount() {
-		return totalCleanCount; 
-	}
-
 	public int getTotalLoudRatings() {
 		return totalLoudRating; 
 	}
-
-	public int getTotalLoudCount() {
-		return totalLoudCount; 
-	}
-}
+}	

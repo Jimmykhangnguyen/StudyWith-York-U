@@ -18,11 +18,8 @@ public class StudyArea {
 	private int totalRating;
     private int totalRatingCount;
 	private int totalBusyRating;
-	private int totalBusyCount;
 	private int totalCleanRating;
-	private int totalCleanCount;
 	private int totalLoudRating;
-	private int totalLoudCount;
 
 	//Nested static class for location, to access the location  longitude and latitude to avoid creating an instance of location class
 	public static class Location {
@@ -57,7 +54,7 @@ public class StudyArea {
 	public StudyArea() {
 		
 	}
-
+	
 	public StudyArea(String name, String address, boolean chargingOutlets, boolean accessible, Location location, int openingTime, int closingTime) {
 		this.name = name;
 		this.address = address;
@@ -76,7 +73,7 @@ public class StudyArea {
 	public void setId(String id) {
 		this.id = id;
 	}
-
+	
 	public String getName() {
 		return name;
 	}
@@ -84,11 +81,11 @@ public class StudyArea {
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	
 	public String getAddress() {
 		return address;
 	}
-
+	
 	public void setAddress(String address) {
 		this.address = address;
 	}
@@ -116,15 +113,15 @@ public class StudyArea {
 	public void setLocation(Location location) {
 		this.location = location;
 	}
-
+	
 	public int getOpening() {
 		return openingTime;
 	}
-
+	
 	public void setOpening(int opening) {
 		this.openingTime = opening;
 	}
-
+	
 	public int getClosing() {
 		return closingTime;
 	}
@@ -136,7 +133,7 @@ public class StudyArea {
 	public int getTotalRating() {
 		return totalRating;
 	}
-
+	
 	public int getTotalRatingCount() {
 		return totalRatingCount;
 	}
@@ -147,60 +144,42 @@ public class StudyArea {
 	        this.totalRatingCount++;
 		}
 	}
-
+	
 	public int getTotalBusyRating() {
 		return totalBusyRating;
 	}
-
-	public int getTotalBusyCount() {
-		return totalBusyCount;
-	}
-
+	
 	public void addBusyRating(int rating) {
 		if (rating >= 1 && rating <= 5) {
 			this.totalBusyRating = rating;
-			this.totalBusyCount++;
 		}
 	}
-
+	
 	public int getTotalCleanRating() {
 		return totalCleanRating;
-	}
-
-	public int getTotalCleanCount() {
-		return totalCleanCount;
 	}
 
 	public void addCleanRating(int rating) {
 		if (rating >= 1 && rating <= 5) {
 			this.totalCleanRating = rating;
-	        this.totalCleanCount++;
 		}
 	}
-
+	
 	public int getTotalLoudRating() {
 		return totalLoudRating;
 	}
-
-	public int getTotalLoudCount() {
-		return totalLoudCount;
-	}
-
+	
 	public void addLoudRating(int rating) {
 		if (rating >= 1 && rating <= 5) {
 			this.totalLoudRating = rating;
-	        this.totalLoudCount++; 
 		}
 	}
-
+	
 	public void resetRatings() {
 		totalRating = 0;
     	totalRatingCount = 0;
 		totalBusyRating = 0;
-		totalBusyCount = 0;
 		totalCleanRating = 0;
-		totalCleanCount = 0;
 		totalLoudRating = 0;
-		totalLoudCount = 0;
 	}
 }

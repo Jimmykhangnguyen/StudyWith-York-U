@@ -7,7 +7,11 @@
         <h2 class="noFavourites" *ngIf="userEmail && userNumFavourites == 0">You have no favourites. Try adding one!</h2>
         <div class="favouritesList" *ngIf="userEmail && userNumFavourites > 0">
             <div *ngFor="let studyAreaId of userFavourites">
-                <div class="favouriteStudyArea" *ngIf="studyAreaId !== null">{{ areaFromId(studyAreaId).name }} ❤</div>
+                <div class="favouriteStudyArea" *ngIf="studyAreaId !== null">
+                    <h2>{{ areaFromId(studyAreaId).name }} ❤</h2>
+                    <h2>{{ areaFromId(studyAreaId).opening }}:00 - {{ areaFromId(studyAreaId).closing }}:00</h2>
+                    <h2>{{ areaFromId(studyAreaId).address }}</h2>
+                </div>
             </div>
         </div>
     </div>
